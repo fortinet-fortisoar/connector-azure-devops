@@ -1,0 +1,2038 @@
+{
+  "name": "azure-devops",
+  "label": "Azure DevOps",
+  "version": "1.0.0",
+  "description": "Azure DevOps is a cloud-based service for managing software development projects. The Azure DevOps FortiSOAR connector integrates with Azure DevOps to automate the management of repositories, pipelines, work items, and more within FortiSOAR, enabling streamlined DevOps workflows and incident response.",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "DevOps",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "help_online": "",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "type": "text",
+        "name": "server_url",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "value": "https://dev.azure.com",
+        "tooltip": "IP address or hostname of the Azure DevOps server to which you will connect and perform automated operations.",
+        "description": "IP address or hostname of the Azure DevOps server to which you will connect and perform automated operations."
+      },
+      {
+        "title": "Organization Name",
+        "name": "organization",
+        "visible": true,
+        "required": true,
+        "editable": true,
+        "type": "text",
+        "tooltip": "Specify the name of the organization on Azure DevOps.",
+        "description": "Specify the name of the organization on Azure DevOps."
+      },
+      {
+        "title": "Auth Type",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "select",
+        "options": [
+          "On behalf of User - Delegate Permission",
+          "Access Token"
+        ],
+        "name": "auth_type",
+        "value": "Access Token",
+        "description": "Select the method using which you will get authentication tokens used to access the security graph APIs. You can choose between On behalf of User - Delegate Permission or Without a User - Application Permission.",
+        "tooltip": "Select the method using which you will get authentication tokens used to access the security graph APIs.",
+        "onchange": {
+          "On behalf of User - Delegate Permission": [
+            {
+              "title": "Tenant ID",
+              "description": "Specify the ID of the tenant assigned to you by the Azure application registration portal.",
+              "tooltip": "Specify the ID of the tenant assigned to you by the Azure application registration portal.",
+              "required": false,
+              "editable": true,
+              "visible": false,
+              "type": "text",
+              "name": "tenant"
+            },
+            {
+              "title": "Client ID",
+              "description": "Specify the Unique Application ID of the Azure Active Directory application to create an authentication token required to access the API. For information on getting authentication tokens, see the Getting Authentication Tokens section.",
+              "required": true,
+              "editable": true,
+              "visible": true,
+              "type": "text",
+              "name": "client_id",
+              "tooltip": "Specify the Unique Application ID of the Azure Active Directory application to create an authentication token required to access the API. For information on getting authentication tokens, see the Getting Authentication Tokens section."
+            },
+            {
+              "title": "Client Secret",
+              "description": "Specify the Unique Client Secret of the Azure Active Directory application that is used to create an authentication token required to access the API. For information on how to get the secret key, see https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/exposed-apis-create-app-webapp.",
+              "required": true,
+              "editable": true,
+              "visible": true,
+              "type": "password",
+              "name": "client_secret",
+              "tooltip": "Specify the Unique Client Secret of the Azure Active Directory application that is used to create an authentication token required to access the API."
+            },
+            {
+              "title": "Authorization Code",
+              "required": true,
+              "editable": true,
+              "visible": true,
+              "type": "password",
+              "name": "code",
+              "tooltip": "Specify the authorization code that you acquired during the authorization step",
+              "description": "Specify the authorization code that you acquired during the authorization step. For more information, see the Getting Access Tokens using the Delegate Permissions method section."
+            },
+            {
+              "title": "Redirect URL",
+              "tooltip": "The redirect_uri of your app, where authentication responses can be sent and received by your app. It must exactly match one of the redirect_uri's you registered in the app registration portal.",
+              "required": false,
+              "editable": true,
+              "visible": true,
+              "type": "text",
+              "name": "redirect_url",
+              "placeholder": "e.g. https://localhost/myapp",
+              "description": "The redirect_uri of your app, where authentication responses can be sent and received by your app. The redirect URL that you specify here must exactly match one of the redirect_uri's you have registered in your app registration portal."
+            }
+          ],
+          "Access Token": [
+            {
+              "title": "Access Token",
+              "type": "password",
+              "name": "api_key",
+              "required": true,
+              "editable": true,
+              "visible": true,
+              "tooltip": "Access Token that is provided to you by a Azure DevOps administrator that you will use to access the Azure DevOps REST API.",
+              "description": "Access Token that is provided to you by a Azure DevOps administrator that you will use to access the Azure DevOps REST API. For information on generating access tokens, refer https://docs.Azure DevOps.com/ee/user/profile/personal_access_tokens.html."
+            }
+          ]
+        }
+      },
+      {
+        "title": "API Version",
+        "name": "api_version",
+        "visible": true,
+        "required": false,
+        "editable": true,
+        "type": "text",
+        "value": "7.1",
+        "tooltip": "Specify the API version to use.",
+        "description": "Specify the API version to use. By default it uses 7.1 api-version."
+      },
+      {
+        "title": "Verify SSL",
+        "name": "verify_ssl",
+        "type": "checkbox",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "value": true,
+        "description": "Specifies whether the SSL certificate for the server is to be verified. By default, this option is set to True.",
+        "tooltip": "Specifies whether the SSL certificate for the server is to be verified or not."
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "list_pipelines",
+      "title": "List Pipelines",
+      "description": "Retrieves list of all pipelines within a project.",
+      "category": "investigation",
+      "annotation": "list_pipelines",
+      "enabled": true,
+      "output_schema": {
+        "count": "",
+        "value": [
+          {
+            "id": "",
+            "url": "",
+            "name": "",
+            "_links": {
+              "web": {
+                "href": ""
+              },
+              "self": {
+                "href": ""
+              }
+            },
+            "folder": "",
+            "revision": ""
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "title": "Project Name",
+          "name": "project",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name of the project on Azure DevOps, whose pipelines is to be retrieved.",
+          "description": "Specify the name of the project on Azure DevOps, whose pipelines is to be retrieved."
+        },
+        {
+          "title": "Sort Field",
+          "name": "field",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "value": "name",
+          "tooltip": "Specify the name of the based on which results is to be sorted.",
+          "description": "Specify the name of the based on which results is to be sorted. By default it is set to name."
+        },
+        {
+          "title": "Sort Order",
+          "name": "order",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "select",
+          "value": "Asc",
+          "tooltip": "Select the sort order in which result is to be sorted.",
+          "description": "Select the sort order in which result is to be sorted. You can choose from ASC or DESC.",
+          "options": [
+            "Asc",
+            "Desc"
+          ]
+        },
+        {
+          "title": "Continuation Token",
+          "name": "continuationToken",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the continuation token from a previous request, to retrieve the next page of results.",
+          "description": "Specify the continuation token from a previous request, to retrieve the next page of results."
+        },
+        {
+          "title": "Limit",
+          "name": "$top",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "tooltip": "Specify the maximum number of records, to be retrieved in this operation.",
+          "description": "Specify the maximum number of records, to be retrieved in this operation."
+        }
+      ]
+    },
+    {
+      "operation": "list_pipeline_runs",
+      "title": "List Pipeline Runs",
+      "description": "Retrieves top 10000 runs for a specified pipeline.",
+      "category": "investigation",
+      "annotation": "list_pipeline_runs",
+      "enabled": true,
+      "output_schema": {
+        "count": "",
+        "value": [
+          {
+            "id": "",
+            "url": "",
+            "name": "",
+            "state": "",
+            "_links": {
+              "web": {
+                "href": ""
+              },
+              "self": {
+                "href": ""
+              },
+              "pipeline": {
+                "href": ""
+              },
+              "pipeline.web": {
+                "href": ""
+              }
+            },
+            "result": "",
+            "pipeline": {
+              "id": "",
+              "url": "",
+              "name": "",
+              "folder": "",
+              "revision": ""
+            },
+            "createdDate": "",
+            "finishedDate": "",
+            "templateParameters": {}
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "title": "Project Name",
+          "name": "project",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name of the project on Azure DevOps, whose pipeline runs are to be retrieved.",
+          "description": "Specify the name of the project on Azure DevOps, whose pipeline runs are to be retrieved."
+        },
+        {
+          "title": "Pipeline ID",
+          "name": "pipelineId",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "integer",
+          "tooltip": "Specify the ID of the pipeline whose runs are to be retrieved.",
+          "description": "Specify the ID of the pipeline whose runs are to be retrieved."
+        }
+      ]
+    },
+    {
+      "operation": "get_pipeline_run",
+      "title": "Get Pipeline Run Details",
+      "description": "Retrieve details of a specific pipeline run.",
+      "category": "investigation",
+      "annotation": "get_pipeline_run",
+      "enabled": true,
+      "output_schema": {
+        "id": "",
+        "url": "",
+        "name": "",
+        "state": "",
+        "_links": {
+          "web": {
+            "href": ""
+          },
+          "self": {
+            "href": ""
+          },
+          "pipeline": {
+            "href": ""
+          },
+          "pipeline.web": {
+            "href": ""
+          }
+        },
+        "result": "",
+        "pipeline": {
+          "id": "",
+          "url": "",
+          "name": "",
+          "folder": "",
+          "revision": ""
+        },
+        "resources": {
+          "repositories": {
+            "self": {
+              "refName": "",
+              "version": "",
+              "repository": {
+                "id": "",
+                "type": ""
+              }
+            }
+          }
+        },
+        "createdDate": "",
+        "yamlDetails": {
+          "rootYamlFile": {
+            "ref": "",
+            "yamlFile": "",
+            "repoAlias": ""
+          },
+          "expandedYamlUrl": ""
+        },
+        "finishedDate": "",
+        "templateParameters": {}
+      },
+      "parameters": [
+        {
+          "title": "Project Name",
+          "name": "project",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name of the project on Azure DevOps, whose pipeline runs are to be retrieved.",
+          "description": "Specify the name of the project on Azure DevOps, whose pipeline runs are to be retrieved."
+        },
+        {
+          "title": "Pipeline ID",
+          "name": "pipelineId",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "integer",
+          "tooltip": "Specify the ID of the pipeline whose runs are to be retrieved.",
+          "description": "Specify the ID of the pipeline whose runs are to be retrieved."
+        },
+        {
+          "title": "Run ID",
+          "name": "runId",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the ID of the pipeline whose runs are to be retrieved.",
+          "description": "Specify the ID of the pipeline whose runs are to be retrieved."
+        }
+      ]
+    },
+    {
+      "operation": "list_projects",
+      "title": "List Projects",
+      "description": "Retrieve a list of all projects within the Azure DevOps organization.",
+      "category": "investigation",
+      "annotation": "list_projects",
+      "enabled": true,
+      "output_schema": {
+        "count": "",
+        "value": [
+          {
+            "id": "",
+            "url": "",
+            "name": "",
+            "state": "",
+            "revision": "",
+            "visibility": "",
+            "lastUpdateTime": ""
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "title": "State",
+          "name": "stateFilter",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "select",
+          "tooltip": "Select the state of the project to be retrieved from Azure DevOps.",
+          "description": "Select the state of the project to be retrieved from Azure DevOps. By default it is set to \"Well Formed\". You can choose from \"All\",\"Create Pending\", \"Deleted\", \"Deleting\", \"New\", \"Unchanged\", \"Well Formed\"",
+          "value": "Well Formed",
+          "options": [
+            "All",
+            "Create Pending",
+            "Deleted",
+            "Deleting",
+            "New",
+            "Unchanged",
+            "Well Formed"
+          ]
+        },
+        {
+          "title": "Continuation Token",
+          "name": "continuationToken",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the continuation token from a previous request, to retrieve the next page of results.",
+          "description": "Specify the continuation token from a previous request, to retrieve the next page of results."
+        },
+        {
+          "title": "Offset",
+          "name": "$skip",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "tooltip": "Specify the number of records, to be skipped in this operation.",
+          "description": "Specify the number of records, to be skipped retrieved in this operation."
+        },
+        {
+          "title": "Limit",
+          "name": "$top",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "tooltip": "Specify the maximum number of records, to be retrieved in this operation.",
+          "description": "Specify the maximum number of records, to be retrieved in this operation."
+        }
+      ]
+    },
+    {
+      "operation": "list_repositories",
+      "title": "List Repositories",
+      "description": "Retrieve a list of all repositories within a project.",
+      "category": "investigation",
+      "annotation": "list_repositories",
+      "enabled": true,
+      "output_schema": {
+        "count": "",
+        "value": [
+          {
+            "id": "",
+            "url": "",
+            "name": "",
+            "size": "",
+            "sshUrl": "",
+            "webUrl": "",
+            "project": {
+              "id": "",
+              "url": "",
+              "name": "",
+              "state": "",
+              "revision": "",
+              "visibility": "",
+              "description": "",
+              "lastUpdateTime": ""
+            },
+            "remoteUrl": "",
+            "isDisabled": "",
+            "defaultBranch": "",
+            "isInMaintenance": ""
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "title": "Project Name",
+          "name": "project",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name of the project on Azure DevOps, whose repositories are to be retrieved.",
+          "description": "Specify the name of the project on Azure DevOps, whose repositories are to be retrieved."
+        },
+        {
+          "title": "Include Hidden Repositories",
+          "name": "includeHidden",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "tooltip": "Select to include hidden repositories in the response. The default value is false.",
+          "description": "Select to include hidden repositories in the response. The default value is false."
+        },
+        {
+          "title": "Include All URLs",
+          "name": "includeAllUrls",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "tooltip": "Select to include all remote URLs in the response. The default value is false.",
+          "description": "Select to include all remote URLs in the response. The default value is false."
+        },
+        {
+          "title": "Include Reference Links",
+          "name": "includeLinks",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "tooltip": "Select to include reference links in the response. The default value is false.",
+          "description": "Select to include reference links in the response. The default value is false."
+        }
+      ]
+    },
+    {
+      "operation": "list_branches",
+      "title": "List Branches",
+      "description": "Retrieves list of all branches within a specified repository.",
+      "category": "investigation",
+      "annotation": "list_branches",
+      "enabled": true,
+      "output_schema": {
+        "count": "",
+        "value": [
+          {
+            "url": "",
+            "name": "",
+            "_links": {
+              "self": {
+                "href": ""
+              },
+              "repository": {
+                "href": ""
+              }
+            },
+            "creator": {
+              "id": "",
+              "url": "",
+              "_links": {
+                "avatar": {
+                  "href": ""
+                }
+              },
+              "imageUrl": "",
+              "descriptor": "",
+              "uniqueName": "",
+              "displayName": ""
+            },
+            "objectId": "",
+            "statuses": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "title": "Project Name",
+          "name": "project",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name of the project from which to retrieve the repository branches.",
+          "description": "Specify the name of the project from which to retrieve the repository branches."
+        },
+        {
+          "title": "Repository",
+          "name": "repository",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the ID or name of the repository which is to be retrieved.",
+          "description": "Specify the ID or name of the repository which is to be retrieved."
+        },
+        {
+          "title": "Branch Name Filter (Contains)",
+          "name": "filterContains",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify a substring to filter branch names that include this value.",
+          "description": "Specify a substring to filter branch names that include this value."
+        },
+        {
+          "title": "Branch Name Filter (Starts With)",
+          "name": "filter",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "placeholder": "heads",
+          "tooltip": "Specify a prefix to filter branch names that begin with the given value. For example, heads/ma will return branches such as refs/heads/main and refs/heads/master. Use this filter to narrow down results based on the starting characters of branch names.",
+          "description": "Specify a prefix to filter branch names that begin with the given value. For example, heads/ma will return branches such as refs/heads/main and refs/heads/master. Use this filter to narrow down results based on the starting characters of branch names."
+        },
+        {
+          "title": "Include My Branches",
+          "name": "includeMyBranches",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "tooltip": "Include only branches that the user owns, favorites, and the default branch. Default is false.",
+          "description": "Include only branches that the user owns, favorites, and the default branch. Default is false."
+        },
+        {
+          "title": "Include Statuses",
+          "name": "includeStatuses",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "tooltip": "Include up to the first 1000 commit statuses for each ref. Default is false.",
+          "description": "Include up to the first 1000 commit statuses for each ref. Default is false."
+        },
+        {
+          "title": "Include Links",
+          "name": "includeLinks",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "tooltip": "Specify whether referenceLinks should be included in the result. Default is false.",
+          "description": "Specify whether referenceLinks should be included in the result. Default is false."
+        },
+        {
+          "title": "Latest Statuses Only",
+          "name": "latestStatusesOnly",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "tooltip": "Include only the tip commit status for each ref. Requires includeStatuses to be true. Default is false.",
+          "description": "Include only the tip commit status for each ref. Requires includeStatuses to be true. Default is false."
+        },
+        {
+          "title": "Peel Tags",
+          "name": "peelTags",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "tooltip": "Specify if annotated tags should populate the PeeledObjectId property. Default is false.",
+          "description": "Specify if annotated tags should populate the PeeledObjectId property. Default is false."
+        },
+        {
+          "title": "Continuation Token",
+          "name": "continuationToken",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the continuation token used for pagination.",
+          "description": "Specify the continuation token used for pagination."
+        },
+        {
+          "title": "Limit",
+          "name": "$top",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the maximum number of refs to return. It cannot be bigger than 1000.",
+          "description": "Specify the maximum number of refs to return. It cannot be bigger than 1000."
+        }
+      ]
+    },
+    {
+      "operation": "get_commit",
+      "title": "Get Commit Details",
+      "description": "Retrieve details of a specific commit.",
+      "category": "investigation",
+      "annotation": "get_commit",
+      "enabled": true,
+      "output_schema": {
+        "url": "",
+        "push": {
+          "date": "",
+          "pushId": "",
+          "pushedBy": {
+            "id": "",
+            "url": "",
+            "_links": {
+              "avatar": {
+                "href": ""
+              }
+            },
+            "imageUrl": "",
+            "descriptor": "",
+            "uniqueName": "",
+            "displayName": ""
+          }
+        },
+        "_links": {
+          "web": {
+            "href": ""
+          },
+          "self": {
+            "href": ""
+          },
+          "changes": {
+            "href": ""
+          },
+          "repository": {
+            "href": ""
+          }
+        },
+        "author": {
+          "date": "",
+          "name": "",
+          "email": "",
+          "imageUrl": ""
+        },
+        "treeId": "",
+        "comment": "",
+        "parents": [],
+        "commitId": "",
+        "committer": {
+          "date": "",
+          "name": "",
+          "email": "",
+          "imageUrl": ""
+        },
+        "remoteUrl": ""
+      },
+      "parameters": [
+        {
+          "title": "Project Name",
+          "name": "project",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name of the project from which to retrieve the repository branches.",
+          "description": "Specify the name of the project from which to retrieve the repository branches."
+        },
+        {
+          "title": "Repository",
+          "name": "repositoryId",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the ID or name of the repository whose commit is to be retrieved.",
+          "description": "Specify the ID or name of the repository whose commit is to be retrieved."
+        },
+        {
+          "title": "Commit ID",
+          "name": "commitId",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the ID of the commit which is to be retrieved.",
+          "description": "Specify the ID of the commit which is to be retrieved."
+        },
+        {
+          "title": "Change Count",
+          "name": "changeCount",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "tooltip": "Specify the number of changes to include in the result.",
+          "description": "Specify the number of changes to include in the result."
+        }
+      ]
+    },
+    {
+      "operation": "list_pull_requests",
+      "title": "List Pull Requests",
+      "description": "List all pull requests for a given repository or project.",
+      "category": "investigation",
+      "annotation": "list_pull_requests",
+      "enabled": true,
+      "output_schema": {
+        "count": "",
+        "value": [
+          {
+            "url": "",
+            "title": "",
+            "status": "",
+            "isDraft": "",
+            "mergeId": "",
+            "createdBy": {
+              "id": "",
+              "url": "",
+              "_links": {
+                "avatar": {
+                  "href": ""
+                }
+              },
+              "imageUrl": "",
+              "descriptor": "",
+              "uniqueName": "",
+              "displayName": ""
+            },
+            "reviewers": [
+              {
+                "id": "",
+                "url": "",
+                "vote": "",
+                "_links": {
+                  "avatar": {
+                    "href": ""
+                  }
+                },
+                "imageUrl": "",
+                "isFlagged": "",
+                "uniqueName": "",
+                "displayName": "",
+                "hasDeclined": "",
+                "reviewerUrl": ""
+              }
+            ],
+            "closedDate": "",
+            "repository": {
+              "id": "",
+              "url": "",
+              "name": "",
+              "project": {
+                "id": "",
+                "name": "",
+                "state": "",
+                "visibility": "",
+                "lastUpdateTime": ""
+              }
+            },
+            "mergeStatus": "",
+            "codeReviewId": "",
+            "creationDate": "",
+            "pullRequestId": "",
+            "sourceRefName": "",
+            "targetRefName": "",
+            "lastMergeCommit": {
+              "url": "",
+              "commitId": ""
+            },
+            "completionOptions": {
+              "mergeStrategy": "",
+              "mergeCommitMessage": "",
+              "transitionWorkItems": "",
+              "autoCompleteIgnoreConfigIds": []
+            },
+            "supportsIterations": "",
+            "completionQueueTime": "",
+            "lastMergeSourceCommit": {
+              "url": "",
+              "commitId": ""
+            },
+            "lastMergeTargetCommit": {
+              "url": "",
+              "commitId": ""
+            }
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "title": "Project Name",
+          "name": "project",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name of the project on Azure DevOps, whose pipeline runs are to be retrieved.",
+          "description": "Specify the name of the project on Azure DevOps, whose pipeline runs are to be retrieved."
+        },
+        {
+          "title": "Repository",
+          "name": "repositoryId",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the ID or name of the repository whose commit is to be retrieved.",
+          "description": "Specify the ID or name of the repository whose commit is to be retrieved."
+        },
+        {
+          "title": "Status",
+          "name": "searchCriteria.status",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "select",
+          "tooltip": "Select the status of the pull requests to be retrieved from Azure DevOps.",
+          "description": "Select the status of the pull requests to be retrieved from Azure DevOps. By default it is set to \"Not Set\". You can choose from \"All\", \"Active\", \"Abandoned\", \"Completed\", \"Not Set\"",
+          "value": "Not Set",
+          "options": [
+            "All",
+            "Active",
+            "Abandoned",
+            "Completed",
+            "Not Set"
+          ]
+        },
+        {
+          "title": "Search Criteria",
+          "name": "searchCriteria",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "json",
+          "tooltip": "Specify the search criteria to retrieve the pull requests from Azure DevOps.",
+          "description": "Specify the search criteria to retrieve the pull requests from Azure DevOps. For example, ",
+          "value": {
+            "repositoryId": "",
+            "sourceRepositoryId": "",
+            "creatorId": "",
+            "reviewerId": "",
+            "sourceRefName": "",
+            "targetRefName": "",
+            "queryTimeRangeType": "",
+            "minTime": "",
+            "maxTime": "",
+            "includeLinks": ""
+          }
+        },
+        {
+          "title": "Offset",
+          "name": "$skip",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "tooltip": "Specify the number of records, to be skipped in this operation.",
+          "description": "Specify the number of records, to be skipped retrieved in this operation."
+        },
+        {
+          "title": "Limit",
+          "name": "$top",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "tooltip": "Specify the maximum number of records, to be retrieved in this operation.",
+          "description": "Specify the maximum number of records, to be retrieved in this operation."
+        }
+      ]
+    },
+    {
+      "operation": "get_pull_requests_by_id",
+      "title": "Get Pull Request Details",
+      "description": "Retrieves details of a specific pull request.",
+      "category": "investigation",
+      "annotation": "get_pull_requests_by_id",
+      "enabled": true,
+      "output_schema": {
+        "url": "",
+        "title": "",
+        "status": "",
+        "isDraft": "",
+        "mergeId": "",
+        "createdBy": {
+          "id": "",
+          "url": "",
+          "_links": {
+            "avatar": {
+              "href": ""
+            }
+          },
+          "imageUrl": "",
+          "descriptor": "",
+          "uniqueName": "",
+          "displayName": ""
+        },
+        "reviewers": [
+          {
+            "id": "",
+            "url": "",
+            "vote": "",
+            "_links": {
+              "avatar": {
+                "href": ""
+              }
+            },
+            "imageUrl": "",
+            "isFlagged": "",
+            "uniqueName": "",
+            "displayName": "",
+            "hasDeclined": "",
+            "reviewerUrl": ""
+          }
+        ],
+        "artifactId": "",
+        "repository": {
+          "id": "",
+          "url": "",
+          "name": "",
+          "size": "",
+          "sshUrl": "",
+          "webUrl": "",
+          "project": {
+            "id": "",
+            "url": "",
+            "name": "",
+            "state": "",
+            "revision": "",
+            "visibility": "",
+            "description": "",
+            "lastUpdateTime": ""
+          },
+          "remoteUrl": "",
+          "isDisabled": "",
+          "isInMaintenance": ""
+        },
+        "mergeStatus": "",
+        "codeReviewId": "",
+        "creationDate": "",
+        "pullRequestId": "",
+        "sourceRefName": "",
+        "targetRefName": "",
+        "lastMergeCommit": {
+          "url": "",
+          "author": {
+            "date": "",
+            "name": "",
+            "email": ""
+          },
+          "comment": "",
+          "commitId": "",
+          "committer": {
+            "date": "",
+            "name": "",
+            "email": ""
+          }
+        },
+        "lastMergeSourceCommit": {
+          "url": "",
+          "commitId": ""
+        },
+        "lastMergeTargetCommit": {
+          "url": "",
+          "commitId": ""
+        }
+      },
+      "parameters": [
+        {
+          "title": "Project Name",
+          "name": "project",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name of the project on Azure DevOps, whose pipeline runs are to be retrieved.",
+          "description": "Specify the name of the project on Azure DevOps, whose pipeline runs are to be retrieved."
+        },
+        {
+          "title": "Pull Request ID",
+          "name": "pullRequestId",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "integer",
+          "tooltip": "Specify the ID of the pull request which is to be retrieved for the specified project.",
+          "description": "Specify the ID of the pull request which is to be retrieved for the specified project."
+        }
+      ]
+    },
+    {
+      "operation": "create_pull_request",
+      "title": "Create Pull Request",
+      "description": "Creates a new pull request for code changes to be reviewed and merged.",
+      "category": "investigation",
+      "annotation": "create_pull_request",
+      "enabled": true,
+      "output_schema": {
+        "url": "",
+        "title": "",
+        "_links": {
+          "self": {
+            "href": ""
+          },
+          "statuses": {
+            "href": ""
+          },
+          "createdBy": {
+            "href": ""
+          },
+          "workItems": {
+            "href": ""
+          },
+          "repository": {
+            "href": ""
+          },
+          "sourceBranch": {
+            "href": ""
+          },
+          "sourceCommit": {
+            "href": ""
+          },
+          "targetBranch": {
+            "href": ""
+          },
+          "targetCommit": {
+            "href": ""
+          }
+        },
+        "labels": [],
+        "status": "",
+        "isDraft": "",
+        "mergeId": "",
+        "createdBy": {
+          "id": "",
+          "url": "",
+          "_links": {
+            "avatar": {
+              "href": ""
+            }
+          },
+          "imageUrl": "",
+          "descriptor": "",
+          "uniqueName": "",
+          "displayName": ""
+        },
+        "reviewers": [],
+        "artifactId": "",
+        "repository": {
+          "id": "",
+          "url": "",
+          "name": "",
+          "size": "",
+          "sshUrl": "",
+          "webUrl": "",
+          "project": {
+            "id": "",
+            "url": "",
+            "name": "",
+            "state": "",
+            "revision": "",
+            "visibility": "",
+            "description": "",
+            "lastUpdateTime": ""
+          },
+          "remoteUrl": "",
+          "isDisabled": "",
+          "isInMaintenance": ""
+        },
+        "mergeStatus": "",
+        "codeReviewId": "",
+        "creationDate": "",
+        "pullRequestId": "",
+        "sourceRefName": "",
+        "targetRefName": "",
+        "lastMergeSourceCommit": {
+          "url": "",
+          "commitId": ""
+        },
+        "lastMergeTargetCommit": {
+          "url": "",
+          "commitId": ""
+        }
+      },
+      "parameters": [
+        {
+          "title": "Project Name",
+          "name": "project",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the Azure DevOps project associated with the repository.",
+          "description": "Specify the Azure DevOps project associated with the repository."
+        },
+        {
+          "title": "Repository",
+          "name": "repositoryId",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Select the ID or name of the repository where the pull request will be created.",
+          "description": "Select the ID or name of the repository where the pull request will be created."
+        },
+        {
+          "title": "Pull Request Title",
+          "name": "title",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify a title for the pull request.",
+          "description": "Specify a title for the pull request."
+        },
+        {
+          "title": "Source Branch Name",
+          "name": "sourceRefName",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name of the source branch.",
+          "description": "Specify the name of the source branch."
+        },
+        {
+          "title": "Target Branch Name",
+          "name": "targetRefName",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name of the target branch.",
+          "description": "Specify the name of the target branch."
+        },
+        {
+          "title": "Pull Request Description",
+          "name": "pr_description",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "textarea",
+          "tooltip": "Specify a description for the pull request.",
+          "description": "Specify a description for the pull request."
+        },
+        {
+          "title": "Reviewers",
+          "name": "reviewers",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the reviewers for this pull request in CSV format.",
+          "description": "Specify the reviewers for this pull request in CSV format."
+        },
+        {
+          "title": "Supports Iterations",
+          "name": "supportsIterations",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "value": false,
+          "tooltip": "Specify whether to enable reviewing of subsequent pushes individually.",
+          "description": "Specify whether to enable reviewing of subsequent pushes individually."
+        },
+        {
+          "title": "Additional Inputs",
+          "name": "additional_input",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "json",
+          "tooltip": "Specify other parameters of pull request to be created in json format.",
+          "description": "Specify other parameters of pull request to be created in json format. For example, { \"isDraft\": true }"
+        }
+      ]
+    },
+    {
+      "operation": "update_pull_request",
+      "title": "Update Pull Request",
+      "description": "Updates an existing pull request with new information such as status, title, description, and merge options.",
+      "category": "investigation",
+      "annotation": "update_pull_request",
+      "enabled": true,
+      "output_schema": {
+        "url": "",
+        "title": "",
+        "_links": {
+          "self": {
+            "href": ""
+          },
+          "statuses": {
+            "href": ""
+          },
+          "createdBy": {
+            "href": ""
+          },
+          "workItems": {
+            "href": ""
+          },
+          "repository": {
+            "href": ""
+          },
+          "sourceBranch": {
+            "href": ""
+          },
+          "sourceCommit": {
+            "href": ""
+          },
+          "targetBranch": {
+            "href": ""
+          },
+          "targetCommit": {
+            "href": ""
+          }
+        },
+        "status": "",
+        "isDraft": "",
+        "mergeId": "",
+        "createdBy": {
+          "id": "",
+          "url": "",
+          "_links": {
+            "avatar": {
+              "href": ""
+            }
+          },
+          "imageUrl": "",
+          "descriptor": "",
+          "uniqueName": "",
+          "displayName": ""
+        },
+        "reviewers": [],
+        "artifactId": "",
+        "repository": {
+          "id": "",
+          "url": "",
+          "name": "",
+          "size": "",
+          "sshUrl": "",
+          "webUrl": "",
+          "project": {
+            "id": "",
+            "url": "",
+            "name": "",
+            "state": "",
+            "revision": "",
+            "visibility": "",
+            "description": "",
+            "lastUpdateTime": ""
+          },
+          "remoteUrl": "",
+          "isDisabled": "",
+          "isInMaintenance": ""
+        },
+        "mergeStatus": "",
+        "codeReviewId": "",
+        "creationDate": "",
+        "pullRequestId": "",
+        "sourceRefName": "",
+        "targetRefName": "",
+        "lastMergeCommit": {
+          "url": "",
+          "author": {
+            "date": "",
+            "name": "",
+            "email": ""
+          },
+          "comment": "",
+          "commitId": "",
+          "committer": {
+            "date": "",
+            "name": "",
+            "email": ""
+          }
+        },
+        "lastMergeSourceCommit": {
+          "url": "",
+          "commitId": ""
+        },
+        "lastMergeTargetCommit": {
+          "url": "",
+          "commitId": ""
+        }
+      },
+      "parameters": [
+        {
+          "title": "Project Name",
+          "name": "project",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the Azure DevOps project associated with the repository.",
+          "description": "Specify the Azure DevOps project associated with the repository."
+        },
+        {
+          "title": "Repository",
+          "name": "repositoryId",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Select the ID or name of the repository where the pull request exists.",
+          "description": "Select the ID or name of the repository where the pull request exists."
+        },
+        {
+          "title": "Pull Request ID",
+          "name": "pullRequestId",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the ID of the pull request to update.",
+          "description": "Specify the ID of the pull request to update."
+        },
+        {
+          "title": "Pull Request Title",
+          "name": "pr_title",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify a new title for the pull request.",
+          "description": "Specify a new title for the pull request."
+        },
+        {
+          "title": "Pull Request Description",
+          "name": "description",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "textarea",
+          "tooltip": "Specify a new description for the pull request (up to 4000 characters).",
+          "description": "Specify a new description for the pull request (up to 4000 characters)."
+        },
+        {
+          "title": "Pull Request Status",
+          "name": "status",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "select",
+          "tooltip": "Specify the new status of the pull request.",
+          "description": "Specify the new status of the pull request. You can choose from \"Active\",\n            \"Abandoned\",\n            \"Completed\",\n            \"Not Set\"",
+          "options": [
+            "Active",
+            "Abandoned",
+            "Completed",
+            "Not Set"
+          ]
+        },
+        {
+          "title": "Target Branch Name",
+          "name": "targetRefName",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name of the new target branch if retargeting the pull request.",
+          "description": "Specify the name of the new target branch if retargeting the pull request."
+        },
+        {
+          "title": "Additional Inputs",
+          "name": "additional_input",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "json",
+          "tooltip": "Specify other parameters of pull request to be updated in json format.",
+          "description": "Specify other parameters of pull request to be updated in json format."
+        }
+      ]
+    },
+    {
+      "operation": "list_pull_request_reviewers",
+      "title": "List Pull Request Reviewers",
+      "description": "Retrieve the list of reviewers for a specific pull request.",
+      "category": "investigation",
+      "annotation": "list_pull_request_reviewers",
+      "enabled": true,
+      "output_schema": {
+        "count": "",
+        "value": [
+          {
+            "id": "",
+            "url": "",
+            "vote": "",
+            "_links": {
+              "avatar": {
+                "href": ""
+              }
+            },
+            "imageUrl": "",
+            "isFlagged": "",
+            "uniqueName": "",
+            "displayName": "",
+            "hasDeclined": "",
+            "reviewerUrl": ""
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "title": "Project Name",
+          "name": "project",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name of the Azure DevOps project associated with the repository.",
+          "description": "Specify the name of the Azure DevOps project associated with the repository."
+        },
+        {
+          "title": "Repository",
+          "name": "repositoryId",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the ID or name of the repository where the pull request exists.",
+          "description": "Specify the ID or name of the repository where the pull request exists."
+        },
+        {
+          "title": "Pull Request ID",
+          "name": "pullRequestId",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the ID of the pull request whose reviewers you want to retrieve.",
+          "description": "Specify the ID of the pull request whose reviewers you want to retrieve."
+        }
+      ]
+    },
+    {
+      "operation": "add_pull_request_reviewer",
+      "title": "Add Pull Request Reviewer",
+      "description": "Add a reviewer to a pull request or cast a vote on a pull request in Azure DevOps.",
+      "category": "investigation",
+      "annotation": "add_pull_request_reviewer",
+      "enabled": true,
+      "output_schema": {
+        "count": "",
+        "value": [
+          {
+            "id": "",
+            "url": "",
+            "vote": "",
+            "_links": {
+              "avatar": {
+                "href": ""
+              }
+            },
+            "imageUrl": "",
+            "isFlagged": "",
+            "uniqueName": "",
+            "displayName": "",
+            "hasDeclined": "",
+            "reviewerUrl": ""
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "title": "Project Name",
+          "name": "project",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name of the Azure DevOps project associated with the repository.",
+          "description": "Specify the name of the Azure DevOps project associated with the repository."
+        },
+        {
+          "title": "Repository",
+          "name": "repositoryId",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the ID or name of the repository where the pull request exists.",
+          "description": "Specify the ID or name of the repository where the pull request exists."
+        },
+        {
+          "title": "Pull Request ID",
+          "name": "pullRequestId",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the ID of the pull request to which the reviewer will be added.",
+          "description": "Specify the ID of the pull request to which the reviewer will be added."
+        },
+        {
+          "title": "Reviewer ID",
+          "name": "reviewerId",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the ID of the reviewer to be added to the pull request.",
+          "description": "Specify the ID of the reviewer to be added to the pull request."
+        }
+      ]
+    },
+    {
+      "operation": "list_pull_request_commits",
+      "title": "List Pull Request Commits",
+      "description": "Retrieve the commits associated with a specific pull request in Azure DevOps.",
+      "category": "investigation",
+      "annotation": "list_pull_request_commits",
+      "enabled": true,
+      "output_schema": {
+        "count": "",
+        "value": [
+          {
+            "url": "",
+            "author": {
+              "date": "",
+              "name": "",
+              "email": ""
+            },
+            "comment": "",
+            "commitId": "",
+            "committer": {
+              "date": "",
+              "name": "",
+              "email": ""
+            }
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "title": "Project Name",
+          "name": "project",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name of the Azure DevOps project associated with the repository.",
+          "description": "Specify the name of the Azure DevOps project associated with the repository."
+        },
+        {
+          "title": "Repository",
+          "name": "repositoryId",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the ID or name of the repository where the pull request exists.",
+          "description": "Specify the ID or name of the repository where the pull request exists."
+        },
+        {
+          "title": "Pull Request ID",
+          "name": "pullRequestId",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the ID of the pull request for which the commits are to be listed.",
+          "description": "Specify the ID of the pull request for which the commits are to be listed."
+        },
+        {
+          "title": "Limit",
+          "name": "$top",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "tooltip": "Specify the maximum number of commits to return.",
+          "description": "(Optional) Specify the maximum number of commits to return."
+        },
+        {
+          "title": "Continuation Token",
+          "name": "continuationToken",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the continuation token used for pagination.",
+          "description": "(Optional) Specify the continuation token used for pagination."
+        }
+      ]
+    },
+    {
+      "operation": "list_commits",
+      "title": "List Commits",
+      "description": "Retrieve the commits for a specific repository in Azure DevOps.",
+      "category": "investigation",
+      "annotation": "list_commits",
+      "enabled": true,
+      "output_schema": {
+        "count": "",
+        "value": [
+          {
+            "url": "",
+            "author": {
+              "date": "",
+              "name": "",
+              "email": ""
+            },
+            "comment": "",
+            "commitId": "",
+            "committer": {
+              "date": "",
+              "name": "",
+              "email": ""
+            },
+            "remoteUrl": "",
+            "changeCounts": {
+              "Add": "",
+              "Edit": "",
+              "Delete": ""
+            },
+            "commentTruncated": ""
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "title": "Project Name",
+          "name": "project",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name of the Azure DevOps project.",
+          "description": "(Optional) Specify the name of the Azure DevOps project."
+        },
+        {
+          "title": "Repository",
+          "name": "repositoryId",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the ID or name of the repository.",
+          "description": "Specify the ID or name of the repository."
+        },
+        {
+          "title": "Commit IDs",
+          "name": "searchCriteria.ids",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify exact commit IDs to retrieve in CSV format.",
+          "description": "(Optional) Specify exact commit IDs to retrieve in CSV format."
+        },
+        {
+          "title": "Committer",
+          "name": "searchCriteria.user",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the alias or display name of the committer.",
+          "description": "(Optional) Specify the alias or display name of the committer."
+        },
+        {
+          "title": "From Commit ID",
+          "name": "searchCriteria.fromCommitId",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the lower bound commit ID for filtering commits.",
+          "description": "(Optional) Specify the lower bound commit ID for filtering commits."
+        },
+        {
+          "title": "To Commit ID",
+          "name": "searchCriteria.toCommitId",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the upper bound commit ID for filtering commits.",
+          "description": "(Optional) Specify the upper bound commit ID for filtering commits."
+        },
+        {
+          "title": "From Date",
+          "name": "searchCriteria.fromDate",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "datetime",
+          "tooltip": "Specify the start date to include history entries created after this date.",
+          "description": "(Optional) Specify the start date to include history entries created after this date."
+        },
+        {
+          "title": "To Date",
+          "name": "searchCriteria.toDate",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "datetime",
+          "tooltip": "Specify the end date to include history entries created before this date.",
+          "description": "(Optional) Specify the end date to include history entries created before this date."
+        },
+        {
+          "title": "Commit Author",
+          "name": "searchCriteria.author",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the alias or display name of the author.",
+          "description": "(Optional) Specify the alias or display name of the author."
+        },
+        {
+          "title": "Exclude Deletes",
+          "name": "searchCriteria.excludeDeletes",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "value": false,
+          "tooltip": "Specify whether to exclude delete entries for the specified path.",
+          "description": "(Optional) Specify whether to exclude delete entries for the specified path."
+        },
+        {
+          "title": "History Mode",
+          "name": "searchCriteria.historyMode",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the Git history mode to use.",
+          "description": "(Optional) Specify the Git history mode to use."
+        },
+        {
+          "title": "Include Push Data",
+          "name": "searchCriteria.includePushData",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "value": false,
+          "tooltip": "Specify whether to include push information.",
+          "description": "(Optional) Specify whether to include push information."
+        },
+        {
+          "title": "Show Oldest Commits First",
+          "name": "searchCriteria.showOldestCommitsFirst",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "value": false,
+          "tooltip": "Specify whether to show the oldest commits first.",
+          "description": "(Optional) Specify whether to show the oldest commits first."
+        },
+        {
+          "title": "Search Criteria",
+          "name": "searchCriteria",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "json",
+          "tooltip": "Specify the search criteria to retrieve the commits from Azure DevOps.",
+          "description": "Specify the search criteria to retrieve the commits from Azure DevOps. For example, you can include parameters like `fromCommitId`, `toCommitId`, `author`, and `fromDate`.",
+          "value": {
+            "author": "",
+            "compareVersion.version": "",
+            "fromCommitId": "",
+            "fromDate": "",
+            "toCommitId": "",
+            "toDate": "",
+            "user": ""
+          }
+        },
+        {
+          "title": "Offset",
+          "name": "$skip",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "tooltip": "Specify the number of records to skip.",
+          "description": "(Optional) Specify the number of records to skip."
+        },
+        {
+          "title": "Limit",
+          "name": "$top",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "tooltip": "Specify the maximum number of commits to retrieve.",
+          "description": "(Optional) Specify the maximum number of commits to retrieve."
+        }
+      ]
+    },
+    {
+      "operation": "run_pipeline",
+      "title": "Run Pipeline",
+      "description": "Triggers a new run for a specified pipeline.",
+      "category": "investigation",
+      "annotation": "run_pipeline",
+      "enabled": true,
+      "conditional_output_schema": [
+        {
+          "condition": "{{previewRun == false}}",
+          "output_schema": {
+            "id": "",
+            "url": "",
+            "name": "",
+            "state": "",
+            "_links": {
+              "web": {
+                "href": ""
+              },
+              "self": {
+                "href": ""
+              },
+              "pipeline": {
+                "href": ""
+              },
+              "pipeline.web": {
+                "href": ""
+              }
+            },
+            "pipeline": {
+              "id": "",
+              "url": "",
+              "name": "",
+              "folder": "",
+              "revision": ""
+            },
+            "resources": {
+              "repositories": {
+                "self": {
+                  "refName": "",
+                  "version": "",
+                  "repository": {
+                    "id": "",
+                    "type": ""
+                  }
+                }
+              }
+            },
+            "createdDate": "",
+            "templateParameters": {}
+          }
+        },
+        {
+          "condition": "previewRun == true",
+          "output_schema": {
+            "id": "",
+            "url": "",
+            "name": "",
+            "state": "",
+            "_links": {
+              "web": {
+                "href": ""
+              },
+              "self": {
+                "href": ""
+              },
+              "pipeline": {
+                "href": ""
+              },
+              "pipeline.web": {
+                "href": ""
+              }
+            },
+            "pipeline": {
+              "id": "",
+              "url": "",
+              "name": "",
+              "folder": "",
+              "revision": ""
+            },
+            "finalYaml": "",
+            "templateParameters": {}
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "title": "Project Name",
+          "name": "project",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name of the project on Azure DevOps, whose pipeline runs are to be retrieved.",
+          "description": "Specify the name of the project on Azure DevOps, whose pipeline runs are to be retrieved."
+        },
+        {
+          "title": "Pipeline ID",
+          "name": "pipelineId",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "integer",
+          "tooltip": "Specify the ID of the pipeline to run.",
+          "description": "Specify the ID of the pipeline to run."
+        },
+        {
+          "title": "Stages to Skip",
+          "name": "stagesToSkip",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the names of the pipeline stages in CSV format that should be skipped during execution.",
+          "description": "(Optional) Specify the names of the pipeline stages in CSV format that should be skipped during execution."
+        },
+        {
+          "title": "Pipeline Version",
+          "name": "pipelineVersion",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "tooltip": "Specify the pipeline version.",
+          "description": "(Optional) Specify the pipeline version."
+        },
+        {
+          "title": "Preview Run",
+          "name": "previewRun",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "value": false,
+          "tooltip": "If true, don't actually create a new run. Instead, return the final YAML document after parsing templates.",
+          "description": "(Optional) If true, don't actually create a new run. Instead, return the final YAML document after parsing templates."
+        },
+        {
+          "title": "Resources",
+          "name": "resources",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "json",
+          "tooltip": "Specify the resources required for the run.",
+          "description": "(Optional) Specify the resources required for the run."
+        }
+      ]
+    }
+  ]
+}

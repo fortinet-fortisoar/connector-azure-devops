@@ -1,0 +1,211 @@
+{
+    "config": [
+        {
+            "server_url": "https://dev.azure.com",
+            "organization": "",
+            "auth_type": "Access Token",
+            "api_key": "",
+            "api_version": "7.1",
+            "verify_ssl": true
+        },
+        {
+            "config_id": "",
+            "server_url": "https://dev.azure.com",
+            "organization": "",
+            "auth_type": "On behalf of User - Delegate Permission",
+            "client_id": "",
+            "client_secret": "",
+            "code": "",
+            "redirect_url": "https://localhost/myApp",
+            "api_version": "7.1",
+            "verify_ssl": true,
+            "connector_info": {
+                "connector_name": "azure-devops",
+                "connector_version": "1.0.0"
+            }
+        }
+    ],
+    "list_pipelines": [
+        {
+            "project": "project 1",
+            "field": "name",
+            "order": "Asc",
+            "continuationToken": null,
+            "$top": null
+        }
+    ],
+    "list_pipeline_runs": [
+        {
+            "project": "test",
+            "pipelineId": 1
+        }
+    ],
+    "get_pipeline_run": [
+        {
+            "project": "test",
+            "pipelineId": 3,
+            "runId": 3
+        }
+    ],
+    "list_projects": [
+        {
+            "stateFilter": "Well Formed",
+            "continuationToken": null,
+            "$skip": null,
+            "$top": null
+        }
+    ],
+    "list_repositories": [
+        {
+            "project": "project 1",
+            "includeHidden": true,
+            "includeAllUrls": true,
+            "includeLinks": true
+        }
+    ],
+    "list_branches": [
+        {
+            "project": "project 1",
+            "repository": "new repo",
+            "filterContains": null,
+            "filter": null,
+            "includeMyBranches": true,
+            "includeStatuses": true,
+            "includeLinks": true,
+            "latestStatusesOnly": true,
+            "peelTags": true,
+            "continuationToken": null,
+            "$top": null
+        }
+    ],
+    "get_commit": [
+        {
+            "project": "project 1",
+            "repositoryId": "new repo",
+            "commitId": "a3fa40aec18d0146e8b0a661efa1d68d1e95738f",
+            "changeCount": null
+        }
+    ],
+    "list_pull_requests": [
+        {
+            "project": "project 1",
+            "repositoryId": "new repo",
+            "searchCriteria.status": "Not Set",
+            "searchCriteria": {
+                "repositoryId": "",
+                "sourceRepositoryId": "",
+                "creatorId": "",
+                "reviewerId": "",
+                "sourceRefName": "",
+                "targetRefName": "",
+                "queryTimeRangeType": "",
+                "minTime": "",
+                "maxTime": "",
+                "includeLinks": ""
+            },
+            "$skip": null,
+            "$top": null
+        }
+    ],
+    "get_pull_requests_by_id": [
+        {
+            "project": "project 1",
+            "pullRequestId": 11
+        }
+    ],
+    "create_pull_request": [
+        {
+            "project": "project 1",
+            "repositoryId": "new repo",
+            "title": "New PR from PyTest",
+            "sourceRefName": "refs/heads/develop",
+            "targetRefName": "refs/heads/main",
+            "pr_description": null,
+            "reviewers": null,
+            "supportsIterations": false,
+            "additional_input": null
+        }
+    ],
+    "update_pull_request": [
+        {
+            "project": "project 1",
+            "repositoryId": "new repo",
+            "pullRequestId":11,
+            "pr_title": null,
+            "description": null,
+            "status": "Active",
+            "targetRefName": null,
+            "additional_input": null
+        }
+    ],
+    "list_pull_request_reviewers": [
+        {
+            "project": "project 1",
+            "repositoryId": "new repo",
+            "pullRequestId": 11
+        }
+    ],
+    "add_pull_request_reviewer": [
+        {
+            "project": "project 1",
+            "repositoryId": "new repo",
+            "pullRequestId":11,
+            "reviewerId": "275af9fc-f75c-6259-8ec5-a579192ca0eb"
+        }
+    ],
+    "list_pull_request_commits": [
+        {
+            "project": "project 1",
+            "repositoryId": "new repo",
+            "pullRequestId":11,
+            "$top": null,
+            "continuationToken": null
+        }
+    ],
+    "list_commits": [
+        {
+            "project": "project 1",
+            "repositoryId": "new repo",
+            "searchCriteria.ids": null,
+            "searchCriteria.user": null,
+            "searchCriteria.fromCommitId": null,
+            "searchCriteria.toCommitId": null,
+            "searchCriteria.fromDate": "2024-08-29T09:48:15.604Z",
+            "searchCriteria.toDate": "2024-08-29T09:48:15.605Z",
+            "searchCriteria.author": null,
+            "searchCriteria.excludeDeletes": false,
+            "searchCriteria.historyMode": null,
+            "searchCriteria.includePushData": false,
+            "searchCriteria.showOldestCommitsFirst": false,
+            "searchCriteria": {
+                "author": "",
+                "compareVersion.version": "",
+                "fromCommitId": "",
+                "fromDate": "",
+                "toCommitId": "",
+                "toDate": "",
+                "user": ""
+            },
+            "$skip": null,
+            "$top": null
+        }
+    ],
+    "run_pipeline": [
+        {
+            "project": "project 1",
+            "pipelineId": 3,
+            "stagesToSkip": null,
+            "pipelineVersion": null,
+            "previewRun": false,
+            "resources": null
+        }
+    ],
+    "invalid_params": {
+        "text": "qwertyuioplkjhgfdsazxcvbnm",
+        "password": "*******",
+        "integer": -123,
+        "json": {
+            "status": "val,mdnsue"
+        }
+    }
+}
