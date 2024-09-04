@@ -1,0 +1,1233 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "uuid": "4c95e9f3-3b01-4f98-b729-cb257317c472",
+      "@type": "WorkflowCollection",
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "uuid": "3785d316-04ff-415f-b411-f14fceb56e0c",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
+          "steps": [
+            {
+              "uuid": "601dd8e5-8852-4dda-98db-47ebc4071e84",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "00d59e9b-d488-4c2c-94c8-fdf8b27ebe4a",
+              "@type": "WorkflowStep",
+              "name": "Get Pipeline List",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure DevOps",
+                "config": "''",
+                "params": {
+                  "project": "",
+                  "field": "name",
+                  "order": "Asc",
+                  "continuationToken": "",
+                  "$top": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-devops",
+                "operation": "list_pipelines",
+                "operationTitle": "Get Pipeline List"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves list of all pipelines within a project.",
+          "name": "Get Pipeline List",
+          "tag": "#Azure DevOps",
+          "recordTags": [
+            "Microsoft",
+            "azure-devops"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/601dd8e5-8852-4dda-98db-47ebc4071e84",
+          "routes": [
+            {
+              "uuid": "f673f67d-ed0c-4b9e-98ae-9dcbdb43c73c",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Pipeline List",
+              "sourceStep": "/api/3/workflow_steps/601dd8e5-8852-4dda-98db-47ebc4071e84",
+              "targetStep": "/api/3/workflow_steps/00d59e9b-d488-4c2c-94c8-fdf8b27ebe4a"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "b63a4153-7fb5-43cd-8af7-29b25bcd4afa",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
+          "steps": [
+            {
+              "uuid": "ed3edca4-eb6a-4409-a175-88eb3fb2284c",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "38b4b6b4-3cc0-49e1-b14f-c169cf9a2f4b",
+              "@type": "WorkflowStep",
+              "name": "Get Pipeline Run List",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure DevOps",
+                "config": "''",
+                "params": {
+                  "project": "",
+                  "pipelineId": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-devops",
+                "operation": "list_pipeline_runs",
+                "operationTitle": "Get Pipeline Run List"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves top 10000 runs for a specified pipeline.",
+          "name": "Get Pipeline Run List",
+          "tag": "#Azure DevOps",
+          "recordTags": [
+            "Microsoft",
+            "azure-devops"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/ed3edca4-eb6a-4409-a175-88eb3fb2284c",
+          "routes": [
+            {
+              "uuid": "6c5ea29b-2cb1-42c2-a865-ec9c2fe551b7",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Pipeline Run List",
+              "sourceStep": "/api/3/workflow_steps/ed3edca4-eb6a-4409-a175-88eb3fb2284c",
+              "targetStep": "/api/3/workflow_steps/38b4b6b4-3cc0-49e1-b14f-c169cf9a2f4b"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "e927d6b5-7561-4860-94a6-d2c327590a13",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
+          "steps": [
+            {
+              "uuid": "e147c16f-515b-4f7f-907b-0c49a4707e03",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "ae3e390a-5f8d-4a07-bf6d-2c1d985a2fda",
+              "@type": "WorkflowStep",
+              "name": "Get Pipeline Run Details",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure DevOps",
+                "config": "''",
+                "params": {
+                  "project": "",
+                  "pipelineId": "",
+                  "runId": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-devops",
+                "operation": "get_pipeline_run",
+                "operationTitle": "Get Pipeline Run Details"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieve details of a specific pipeline run.",
+          "name": "Get Pipeline Run Details",
+          "tag": "#Azure DevOps",
+          "recordTags": [
+            "Microsoft",
+            "azure-devops"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/e147c16f-515b-4f7f-907b-0c49a4707e03",
+          "routes": [
+            {
+              "uuid": "dda5c265-9074-4a5d-8537-f67f51ccf0d5",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Pipeline Run Details",
+              "sourceStep": "/api/3/workflow_steps/e147c16f-515b-4f7f-907b-0c49a4707e03",
+              "targetStep": "/api/3/workflow_steps/ae3e390a-5f8d-4a07-bf6d-2c1d985a2fda"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "595eed49-0647-4a30-b82f-270e42651985",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
+          "steps": [
+            {
+              "uuid": "72846324-f2b2-4ff0-8d46-35e364169aca",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "d1853025-1a32-455c-b2d8-d270c23dc071",
+              "@type": "WorkflowStep",
+              "name": "Get Project List",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure DevOps",
+                "config": "''",
+                "params": {
+                  "stateFilter": "Well Formed",
+                  "continuationToken": "",
+                  "$skip": "",
+                  "$top": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-devops",
+                "operation": "list_projects",
+                "operationTitle": "Get Project List"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieve a list of all projects within the Azure DevOps organization.",
+          "name": "Get Project List",
+          "tag": "#Azure DevOps",
+          "recordTags": [
+            "Microsoft",
+            "azure-devops"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/72846324-f2b2-4ff0-8d46-35e364169aca",
+          "routes": [
+            {
+              "uuid": "3a1ad2ad-5962-47fc-bc3f-48b7f6683af0",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Project List",
+              "sourceStep": "/api/3/workflow_steps/72846324-f2b2-4ff0-8d46-35e364169aca",
+              "targetStep": "/api/3/workflow_steps/d1853025-1a32-455c-b2d8-d270c23dc071"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "19854c9f-e9e3-45aa-a994-185de0faf70e",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
+          "steps": [
+            {
+              "uuid": "5d26f09d-d27a-4e83-9aca-f875f13f7841",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "fa573898-a31e-4169-b70b-62cc069a52f4",
+              "@type": "WorkflowStep",
+              "name": "Get Repository List",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure DevOps",
+                "config": "''",
+                "params": {
+                  "project": "",
+                  "includeHidden": "",
+                  "includeAllUrls": "",
+                  "includeLinks": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-devops",
+                "operation": "list_repositories",
+                "operationTitle": "Get Repository List"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieve a list of all repositories within a project.",
+          "name": "Get Repository List",
+          "tag": "#Azure DevOps",
+          "recordTags": [
+            "Microsoft",
+            "azure-devops"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/5d26f09d-d27a-4e83-9aca-f875f13f7841",
+          "routes": [
+            {
+              "uuid": "d522648b-979f-42a6-9165-175b70397ea5",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Repository List",
+              "sourceStep": "/api/3/workflow_steps/5d26f09d-d27a-4e83-9aca-f875f13f7841",
+              "targetStep": "/api/3/workflow_steps/fa573898-a31e-4169-b70b-62cc069a52f4"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "db830bd6-9a0e-4ac6-8268-369048f16c0b",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
+          "steps": [
+            {
+              "uuid": "dafd74f4-718a-4500-8710-f8fc81df10ff",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "47bf2ca6-9089-4b82-8437-c62e040654e4",
+              "@type": "WorkflowStep",
+              "name": "Get Branch List",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure DevOps",
+                "config": "''",
+                "params": {
+                  "project": "",
+                  "repository": "",
+                  "filterContains": "",
+                  "filter": "",
+                  "includeMyBranches": "",
+                  "includeStatuses": "",
+                  "includeLinks": "",
+                  "latestStatusesOnly": "",
+                  "peelTags": "",
+                  "continuationToken": "",
+                  "$top": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-devops",
+                "operation": "list_branches",
+                "operationTitle": "Get Branch List"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves list of all branches within a specified repository.",
+          "name": "Get Branch List",
+          "tag": "#Azure DevOps",
+          "recordTags": [
+            "Microsoft",
+            "azure-devops"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/dafd74f4-718a-4500-8710-f8fc81df10ff",
+          "routes": [
+            {
+              "uuid": "53545239-5c1f-41e0-ac6d-3588b668cf41",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Branch List",
+              "sourceStep": "/api/3/workflow_steps/dafd74f4-718a-4500-8710-f8fc81df10ff",
+              "targetStep": "/api/3/workflow_steps/47bf2ca6-9089-4b82-8437-c62e040654e4"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "fb162019-6e6b-4649-bb2f-4affd77d8ad9",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
+          "steps": [
+            {
+              "uuid": "91cea347-83e9-45b7-9021-afaf3c5ed436",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "38cfa5a6-ffe0-4527-8e7f-ae8674803d61",
+              "@type": "WorkflowStep",
+              "name": "Get Commit Details",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure DevOps",
+                "config": "''",
+                "params": {
+                  "project": "",
+                  "repositoryId": "",
+                  "commitId": "",
+                  "changeCount": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-devops",
+                "operation": "get_commit",
+                "operationTitle": "Get Commit Details"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieve details of a specific commit.",
+          "name": "Get Commit Details",
+          "tag": "#Azure DevOps",
+          "recordTags": [
+            "Microsoft",
+            "azure-devops"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/91cea347-83e9-45b7-9021-afaf3c5ed436",
+          "routes": [
+            {
+              "uuid": "43a34036-e8d9-4034-b3a2-b0cbde96c8d5",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Commit Details",
+              "sourceStep": "/api/3/workflow_steps/91cea347-83e9-45b7-9021-afaf3c5ed436",
+              "targetStep": "/api/3/workflow_steps/38cfa5a6-ffe0-4527-8e7f-ae8674803d61"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "44bd71c4-c1d9-4251-9765-9cd2a868fb25",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
+          "steps": [
+            {
+              "uuid": "1b10186e-930e-4b46-bcdc-05e15a9112d0",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "73ca8ab1-c47e-4696-a499-373e8d5034a8",
+              "@type": "WorkflowStep",
+              "name": "Get Pull Request List",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure DevOps",
+                "config": "''",
+                "params": {
+                  "project": "",
+                  "repositoryId": "",
+                  "searchCriteria.status": "Not Set",
+                  "searchCriteria": {
+                    "repositoryId": "",
+                    "sourceRepositoryId": "",
+                    "creatorId": "",
+                    "reviewerId": "",
+                    "sourceRefName": "",
+                    "targetRefName": "",
+                    "queryTimeRangeType": "",
+                    "minTime": "",
+                    "maxTime": "",
+                    "includeLinks": ""
+                  },
+                  "$skip": "",
+                  "$top": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-devops",
+                "operation": "list_pull_requests",
+                "operationTitle": "Get Pull Request List"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "List all pull requests for a given repository or project.",
+          "name": "Get Pull Request List",
+          "tag": "#Azure DevOps",
+          "recordTags": [
+            "Microsoft",
+            "azure-devops"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/1b10186e-930e-4b46-bcdc-05e15a9112d0",
+          "routes": [
+            {
+              "uuid": "139f973b-5367-42bc-be47-b964ec9a3887",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Pull Request List",
+              "sourceStep": "/api/3/workflow_steps/1b10186e-930e-4b46-bcdc-05e15a9112d0",
+              "targetStep": "/api/3/workflow_steps/73ca8ab1-c47e-4696-a499-373e8d5034a8"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "fa17d688-f6fa-4409-b23b-5d7935e822e9",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
+          "steps": [
+            {
+              "uuid": "a26730cf-aed1-48de-a33c-044bcf003dc0",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "09fc66b8-e7a1-4adc-bafd-86eff5e639d8",
+              "@type": "WorkflowStep",
+              "name": "Get Pull Request Details",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure DevOps",
+                "config": "''",
+                "params": {
+                  "project": "",
+                  "pullRequestId": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-devops",
+                "operation": "get_pull_requests_by_id",
+                "operationTitle": "Get Pull Request Details"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves details of a specific pull request.",
+          "name": "Get Pull Request Details",
+          "tag": "#Azure DevOps",
+          "recordTags": [
+            "Microsoft",
+            "azure-devops"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/a26730cf-aed1-48de-a33c-044bcf003dc0",
+          "routes": [
+            {
+              "uuid": "6795a84c-ee18-4fa9-88ab-47d41715c2b2",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Pull Request Details",
+              "sourceStep": "/api/3/workflow_steps/a26730cf-aed1-48de-a33c-044bcf003dc0",
+              "targetStep": "/api/3/workflow_steps/09fc66b8-e7a1-4adc-bafd-86eff5e639d8"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "ff785232-b1b1-419e-928b-6b4ae3c2a7e9",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
+          "steps": [
+            {
+              "uuid": "ccb49ad4-22b3-405e-a607-0ed9c14ac713",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "7ff604a0-5e37-48f6-b747-126f09d7b4aa",
+              "@type": "WorkflowStep",
+              "name": "Create Pull Request",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure DevOps",
+                "config": "''",
+                "params": {
+                  "project": "",
+                  "repositoryId": "",
+                  "title": "",
+                  "sourceRefName": "",
+                  "targetRefName": "",
+                  "pr_description": "",
+                  "reviewers": "",
+                  "supportsIterations": "",
+                  "additional_input": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-devops",
+                "operation": "create_pull_request",
+                "operationTitle": "Create Pull Request"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Creates a new pull request for code changes to be reviewed and merged.",
+          "name": "Create Pull Request",
+          "tag": "#Azure DevOps",
+          "recordTags": [
+            "Microsoft",
+            "azure-devops"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/ccb49ad4-22b3-405e-a607-0ed9c14ac713",
+          "routes": [
+            {
+              "uuid": "57d099d0-c0f8-4066-a258-f3143fb839d3",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Create Pull Request",
+              "sourceStep": "/api/3/workflow_steps/ccb49ad4-22b3-405e-a607-0ed9c14ac713",
+              "targetStep": "/api/3/workflow_steps/7ff604a0-5e37-48f6-b747-126f09d7b4aa"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "c6694127-cba0-49d6-9eb3-8797e03d6d84",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
+          "steps": [
+            {
+              "uuid": "7e32f8cf-af69-4b8d-8e15-3bb3ad6640b7",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "c1cbf879-88f0-4a27-b18c-91a7fc80c481",
+              "@type": "WorkflowStep",
+              "name": "Update Pull Request",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure DevOps",
+                "config": "''",
+                "params": {
+                  "project": "",
+                  "repositoryId": "",
+                  "pullRequestId": "",
+                  "pr_title": "",
+                  "description": "",
+                  "status": "",
+                  "targetRefName": "",
+                  "additional_input": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-devops",
+                "operation": "update_pull_request",
+                "operationTitle": "Update Pull Request"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Updates an existing pull request with new information such as status, title, description, and merge options.",
+          "name": "Update Pull Request",
+          "tag": "#Azure DevOps",
+          "recordTags": [
+            "Microsoft",
+            "azure-devops"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/7e32f8cf-af69-4b8d-8e15-3bb3ad6640b7",
+          "routes": [
+            {
+              "uuid": "8658ec56-fe5e-4e6a-98ee-e0febdee4e1f",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Update Pull Request",
+              "sourceStep": "/api/3/workflow_steps/7e32f8cf-af69-4b8d-8e15-3bb3ad6640b7",
+              "targetStep": "/api/3/workflow_steps/c1cbf879-88f0-4a27-b18c-91a7fc80c481"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "f18c62b2-f6cf-446d-8e56-a958c3604bfc",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
+          "steps": [
+            {
+              "uuid": "e37d36d3-d2e9-4827-bc98-e04aad45ee36",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "57d44229-441b-4ac7-951f-4b8062e6db36",
+              "@type": "WorkflowStep",
+              "name": "Get Pull Request Reviewer List",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure DevOps",
+                "config": "''",
+                "params": {
+                  "project": "",
+                  "repositoryId": "",
+                  "pullRequestId": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-devops",
+                "operation": "list_pull_request_reviewers",
+                "operationTitle": "Get Pull Request Reviewer List"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieve the list of reviewers for a specific pull request.",
+          "name": "Get Pull Request Reviewer List",
+          "tag": "#Azure DevOps",
+          "recordTags": [
+            "Microsoft",
+            "azure-devops"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/e37d36d3-d2e9-4827-bc98-e04aad45ee36",
+          "routes": [
+            {
+              "uuid": "a2e39191-10ba-4ad5-826e-7159888a7b55",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Pull Request Reviewer List",
+              "sourceStep": "/api/3/workflow_steps/e37d36d3-d2e9-4827-bc98-e04aad45ee36",
+              "targetStep": "/api/3/workflow_steps/57d44229-441b-4ac7-951f-4b8062e6db36"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "5011ca0b-9424-431f-ad94-d1b6ef2c8def",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
+          "steps": [
+            {
+              "uuid": "33dc227a-db91-4ccf-ba7d-b7450a934fd9",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "c6822189-abaf-488b-887f-1a2033128657",
+              "@type": "WorkflowStep",
+              "name": "Add Pull Request Reviewer",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure DevOps",
+                "config": "''",
+                "params": {
+                  "project": "",
+                  "repositoryId": "",
+                  "pullRequestId": "",
+                  "reviewerId": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-devops",
+                "operation": "add_pull_request_reviewer",
+                "operationTitle": "Add Pull Request Reviewer"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Add a reviewer to a pull request or cast a vote on a pull request in Azure DevOps.",
+          "name": "Add Pull Request Reviewer",
+          "tag": "#Azure DevOps",
+          "recordTags": [
+            "Microsoft",
+            "azure-devops"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/33dc227a-db91-4ccf-ba7d-b7450a934fd9",
+          "routes": [
+            {
+              "uuid": "d37508f6-670f-4385-82d4-8c31954a7ab8",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Add Pull Request Reviewer",
+              "sourceStep": "/api/3/workflow_steps/33dc227a-db91-4ccf-ba7d-b7450a934fd9",
+              "targetStep": "/api/3/workflow_steps/c6822189-abaf-488b-887f-1a2033128657"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "c5a1726d-cc8f-44df-8a4b-4902aee84c32",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
+          "steps": [
+            {
+              "uuid": "2d4dff56-19d5-405a-bccc-331e2b058aa5",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "a82dd0b9-4aa2-48a8-8797-dd6cb98eca4d",
+              "@type": "WorkflowStep",
+              "name": "Get Pull Request Commit List",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure DevOps",
+                "config": "''",
+                "params": {
+                  "project": "",
+                  "repositoryId": "",
+                  "pullRequestId": "",
+                  "$top": "",
+                  "continuationToken": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-devops",
+                "operation": "list_pull_request_commits",
+                "operationTitle": "Get Pull Request Commit List"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieve the commits associated with a specific pull request in Azure DevOps.",
+          "name": "Get Pull Request Commit List",
+          "tag": "#Azure DevOps",
+          "recordTags": [
+            "Microsoft",
+            "azure-devops"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/2d4dff56-19d5-405a-bccc-331e2b058aa5",
+          "routes": [
+            {
+              "uuid": "d186dba6-0baa-4801-af3b-e655c21c91ca",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Pull Request Commit List",
+              "sourceStep": "/api/3/workflow_steps/2d4dff56-19d5-405a-bccc-331e2b058aa5",
+              "targetStep": "/api/3/workflow_steps/a82dd0b9-4aa2-48a8-8797-dd6cb98eca4d"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "f8f1ee8b-d0e5-4050-ae65-ff45d4eecc51",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
+          "steps": [
+            {
+              "uuid": "2764d729-0210-4214-8fc9-01d7b10fab35",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "1795b949-81d0-4eb3-b606-e11b71b56013",
+              "@type": "WorkflowStep",
+              "name": "Get Commit List",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure DevOps",
+                "config": "''",
+                "params": {
+                  "project": "",
+                  "repositoryId": "",
+                  "searchCriteria.ids": "",
+                  "searchCriteria.user": "",
+                  "searchCriteria.fromCommitId": "",
+                  "searchCriteria.toCommitId": "",
+                  "searchCriteria.fromDate": "",
+                  "searchCriteria.toDate": "",
+                  "searchCriteria.author": "",
+                  "searchCriteria.excludeDeletes": "",
+                  "searchCriteria.historyMode": "",
+                  "searchCriteria.includePushData": "",
+                  "searchCriteria.showOldestCommitsFirst": "",
+                  "searchCriteria": {
+                    "author": "",
+                    "compareVersion.version": "",
+                    "fromCommitId": "",
+                    "fromDate": "",
+                    "toCommitId": "",
+                    "toDate": "",
+                    "user": ""
+                  },
+                  "$skip": "",
+                  "$top": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-devops",
+                "operation": "list_commits",
+                "operationTitle": "Get Commit List"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieve the commits for a specific repository in Azure DevOps.",
+          "name": "Get Commit List",
+          "tag": "#Azure DevOps",
+          "recordTags": [
+            "Microsoft",
+            "azure-devops"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/2764d729-0210-4214-8fc9-01d7b10fab35",
+          "routes": [
+            {
+              "uuid": "a63160aa-948a-4e07-ab00-5e5f283789e2",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Commit List",
+              "sourceStep": "/api/3/workflow_steps/2764d729-0210-4214-8fc9-01d7b10fab35",
+              "targetStep": "/api/3/workflow_steps/1795b949-81d0-4eb3-b606-e11b71b56013"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "64bec98f-6380-4492-9ae3-946d4781f035",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
+          "steps": [
+            {
+              "uuid": "6ad4a4c2-89cf-4d5a-b987-f756ab04e833",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "48ac7608-1c5c-4e20-8c77-810ce3d943fa",
+              "@type": "WorkflowStep",
+              "name": "Run Pipeline",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure DevOps",
+                "config": "''",
+                "params": {
+                  "project": "",
+                  "pipelineId": "",
+                  "stagesToSkip": "",
+                  "pipelineVersion": "",
+                  "previewRun": "",
+                  "resources": ""
+                },
+                "version": "1.0.0",
+                "connector": "azure-devops",
+                "operation": "run_pipeline",
+                "operationTitle": "Run Pipeline"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Triggers a new run for a specified pipeline.",
+          "name": "Run Pipeline",
+          "tag": "#Azure DevOps",
+          "recordTags": [
+            "Microsoft",
+            "azure-devops"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/6ad4a4c2-89cf-4d5a-b987-f756ab04e833",
+          "routes": [
+            {
+              "uuid": "dd1c7166-49b7-4190-8760-258fb4cae1d3",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Run Pipeline",
+              "sourceStep": "/api/3/workflow_steps/6ad4a4c2-89cf-4d5a-b987-f756ab04e833",
+              "targetStep": "/api/3/workflow_steps/48ac7608-1c5c-4e20-8c77-810ce3d943fa"
+            }
+          ]
+        }
+      ],
+      "name": "Sample - Azure DevOps - 1.0.0",
+      "description": "Azure DevOps is a cloud-based service for managing software development projects. The Azure DevOps FortiSOAR connector integrates with Azure DevOps to automate the management of repositories, pipelines, work items, and more within FortiSOAR, enabling streamlined DevOps workflows and incident response.",
+      "visible": true,
+      "recordTags": [
+        "Microsoft",
+        "azure-devops"
+      ]
+    }
+  ]
+}
