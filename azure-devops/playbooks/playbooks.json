@@ -2,16 +2,16 @@
   "type": "workflow_collections",
   "data": [
     {
-      "uuid": "b72d864c-e9d3-4406-b4a8-c8ec70c72bce",
+      "uuid": "4c95e9f3-3b01-4f98-b729-cb257317c472",
       "@type": "WorkflowCollection",
       "workflows": [
         {
           "@type": "Workflow",
-          "uuid": "f635d21c-f287-427b-b27c-430e3fc7e7dc",
-          "collection": "/api/3/workflow_collections/b72d864c-e9d3-4406-b4a8-c8ec70c72bce",
+          "uuid": "3785d316-04ff-415f-b411-f14fceb56e0c",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
           "steps": [
             {
-              "uuid": "007080f6-7f37-46aa-9381-8ae2d6919b97",
+              "uuid": "601dd8e5-8852-4dda-98db-47ebc4071e84",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
@@ -28,9 +28,9 @@
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
             },
             {
-              "uuid": "19890a73-e5a5-447e-8e55-15092d94e98d",
+              "uuid": "00d59e9b-d488-4c2c-94c8-fdf8b27ebe4a",
               "@type": "WorkflowStep",
-              "name": "List Pipelines",
+              "name": "Get Pipeline List",
               "description": null,
               "status": null,
               "arguments": {
@@ -46,7 +46,7 @@
                 "version": "1.0.0",
                 "connector": "azure-devops",
                 "operation": "list_pipelines",
-                "operationTitle": "List Pipelines"
+                "operationTitle": "Get Pipeline List"
               },
               "left": "188",
               "top": "120",
@@ -55,7 +55,7 @@
           ],
           "triggerLimit": null,
           "description": "Retrieves list of all pipelines within a project.",
-          "name": "List Pipelines",
+          "name": "Get Pipeline List",
           "tag": "#Azure DevOps",
           "recordTags": [
             "Microsoft",
@@ -66,26 +66,26 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/007080f6-7f37-46aa-9381-8ae2d6919b97",
+          "triggerStep": "/api/3/workflow_steps/601dd8e5-8852-4dda-98db-47ebc4071e84",
           "routes": [
             {
-              "uuid": "7ef86428-e836-48c6-94fd-c275f820c8c1",
+              "uuid": "f673f67d-ed0c-4b9e-98ae-9dcbdb43c73c",
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> List Pipelines",
-              "sourceStep": "/api/3/workflow_steps/007080f6-7f37-46aa-9381-8ae2d6919b97",
-              "targetStep": "/api/3/workflow_steps/19890a73-e5a5-447e-8e55-15092d94e98d"
+              "name": "Start-> Get Pipeline List",
+              "sourceStep": "/api/3/workflow_steps/601dd8e5-8852-4dda-98db-47ebc4071e84",
+              "targetStep": "/api/3/workflow_steps/00d59e9b-d488-4c2c-94c8-fdf8b27ebe4a"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "ac7ecb08-60fa-4bff-8d16-fa2c7fb35a41",
-          "collection": "/api/3/workflow_collections/b72d864c-e9d3-4406-b4a8-c8ec70c72bce",
+          "uuid": "b63a4153-7fb5-43cd-8af7-29b25bcd4afa",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
           "steps": [
             {
-              "uuid": "bbedf499-98e9-423c-8d10-de48f1bfc408",
+              "uuid": "ed3edca4-eb6a-4409-a175-88eb3fb2284c",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
@@ -102,9 +102,9 @@
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
             },
             {
-              "uuid": "4aa52513-1aaa-40ce-a6a0-9d14e4e139ad",
+              "uuid": "38b4b6b4-3cc0-49e1-b14f-c169cf9a2f4b",
               "@type": "WorkflowStep",
-              "name": "List Pipeline Runs",
+              "name": "Get Pipeline Run List",
               "description": null,
               "status": null,
               "arguments": {
@@ -117,7 +117,7 @@
                 "version": "1.0.0",
                 "connector": "azure-devops",
                 "operation": "list_pipeline_runs",
-                "operationTitle": "List Pipeline Runs"
+                "operationTitle": "Get Pipeline Run List"
               },
               "left": "188",
               "top": "120",
@@ -126,7 +126,7 @@
           ],
           "triggerLimit": null,
           "description": "Retrieves top 10000 runs for a specified pipeline.",
-          "name": "List Pipeline Runs",
+          "name": "Get Pipeline Run List",
           "tag": "#Azure DevOps",
           "recordTags": [
             "Microsoft",
@@ -137,26 +137,26 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/bbedf499-98e9-423c-8d10-de48f1bfc408",
+          "triggerStep": "/api/3/workflow_steps/ed3edca4-eb6a-4409-a175-88eb3fb2284c",
           "routes": [
             {
-              "uuid": "d53b4f70-d0fe-4343-afd9-92dba8674378",
+              "uuid": "6c5ea29b-2cb1-42c2-a865-ec9c2fe551b7",
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> List Pipeline Runs",
-              "sourceStep": "/api/3/workflow_steps/bbedf499-98e9-423c-8d10-de48f1bfc408",
-              "targetStep": "/api/3/workflow_steps/4aa52513-1aaa-40ce-a6a0-9d14e4e139ad"
+              "name": "Start-> Get Pipeline Run List",
+              "sourceStep": "/api/3/workflow_steps/ed3edca4-eb6a-4409-a175-88eb3fb2284c",
+              "targetStep": "/api/3/workflow_steps/38b4b6b4-3cc0-49e1-b14f-c169cf9a2f4b"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "828169ce-ec3d-401c-89ad-3f5f9d09b912",
-          "collection": "/api/3/workflow_collections/b72d864c-e9d3-4406-b4a8-c8ec70c72bce",
+          "uuid": "e927d6b5-7561-4860-94a6-d2c327590a13",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
           "steps": [
             {
-              "uuid": "eb2b3fab-4669-4578-9f59-d10e2afc3400",
+              "uuid": "e147c16f-515b-4f7f-907b-0c49a4707e03",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
@@ -173,7 +173,7 @@
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
             },
             {
-              "uuid": "9c44e0ed-c144-4203-ae14-defb50e32cc5",
+              "uuid": "ae3e390a-5f8d-4a07-bf6d-2c1d985a2fda",
               "@type": "WorkflowStep",
               "name": "Get Pipeline Run Details",
               "description": null,
@@ -209,26 +209,26 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/eb2b3fab-4669-4578-9f59-d10e2afc3400",
+          "triggerStep": "/api/3/workflow_steps/e147c16f-515b-4f7f-907b-0c49a4707e03",
           "routes": [
             {
-              "uuid": "b223fee8-d627-48c5-b8b8-3f27f512caf2",
+              "uuid": "dda5c265-9074-4a5d-8537-f67f51ccf0d5",
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
               "name": "Start-> Get Pipeline Run Details",
-              "sourceStep": "/api/3/workflow_steps/eb2b3fab-4669-4578-9f59-d10e2afc3400",
-              "targetStep": "/api/3/workflow_steps/9c44e0ed-c144-4203-ae14-defb50e32cc5"
+              "sourceStep": "/api/3/workflow_steps/e147c16f-515b-4f7f-907b-0c49a4707e03",
+              "targetStep": "/api/3/workflow_steps/ae3e390a-5f8d-4a07-bf6d-2c1d985a2fda"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "dd99ab0e-ba40-42c6-a06d-fc603b96f13f",
-          "collection": "/api/3/workflow_collections/b72d864c-e9d3-4406-b4a8-c8ec70c72bce",
+          "uuid": "595eed49-0647-4a30-b82f-270e42651985",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
           "steps": [
             {
-              "uuid": "4b67ea92-6e77-494b-b6c2-e949c9075ed9",
+              "uuid": "72846324-f2b2-4ff0-8d46-35e364169aca",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
@@ -245,9 +245,9 @@
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
             },
             {
-              "uuid": "c6a69917-b072-4abc-a2ff-1a317a1c89f9",
+              "uuid": "d1853025-1a32-455c-b2d8-d270c23dc071",
               "@type": "WorkflowStep",
-              "name": "List Projects",
+              "name": "Get Project List",
               "description": null,
               "status": null,
               "arguments": {
@@ -262,7 +262,7 @@
                 "version": "1.0.0",
                 "connector": "azure-devops",
                 "operation": "list_projects",
-                "operationTitle": "List Projects"
+                "operationTitle": "Get Project List"
               },
               "left": "188",
               "top": "120",
@@ -271,7 +271,7 @@
           ],
           "triggerLimit": null,
           "description": "Retrieve a list of all projects within the Azure DevOps organization.",
-          "name": "List Projects",
+          "name": "Get Project List",
           "tag": "#Azure DevOps",
           "recordTags": [
             "Microsoft",
@@ -282,26 +282,26 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/4b67ea92-6e77-494b-b6c2-e949c9075ed9",
+          "triggerStep": "/api/3/workflow_steps/72846324-f2b2-4ff0-8d46-35e364169aca",
           "routes": [
             {
-              "uuid": "300c8776-cd63-469a-872f-f94f3e889de4",
+              "uuid": "3a1ad2ad-5962-47fc-bc3f-48b7f6683af0",
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> List Projects",
-              "sourceStep": "/api/3/workflow_steps/4b67ea92-6e77-494b-b6c2-e949c9075ed9",
-              "targetStep": "/api/3/workflow_steps/c6a69917-b072-4abc-a2ff-1a317a1c89f9"
+              "name": "Start-> Get Project List",
+              "sourceStep": "/api/3/workflow_steps/72846324-f2b2-4ff0-8d46-35e364169aca",
+              "targetStep": "/api/3/workflow_steps/d1853025-1a32-455c-b2d8-d270c23dc071"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "ccdfc948-f909-4d5d-96a0-d12745840048",
-          "collection": "/api/3/workflow_collections/b72d864c-e9d3-4406-b4a8-c8ec70c72bce",
+          "uuid": "19854c9f-e9e3-45aa-a994-185de0faf70e",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
           "steps": [
             {
-              "uuid": "95668d47-b840-488a-8b13-ca95abaad2a4",
+              "uuid": "5d26f09d-d27a-4e83-9aca-f875f13f7841",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
@@ -318,9 +318,9 @@
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
             },
             {
-              "uuid": "3dd5f2e6-75c0-427c-bedc-b5688d9e8a7b",
+              "uuid": "fa573898-a31e-4169-b70b-62cc069a52f4",
               "@type": "WorkflowStep",
-              "name": "List Repositories",
+              "name": "Get Repository List",
               "description": null,
               "status": null,
               "arguments": {
@@ -335,7 +335,7 @@
                 "version": "1.0.0",
                 "connector": "azure-devops",
                 "operation": "list_repositories",
-                "operationTitle": "List Repositories"
+                "operationTitle": "Get Repository List"
               },
               "left": "188",
               "top": "120",
@@ -344,7 +344,7 @@
           ],
           "triggerLimit": null,
           "description": "Retrieve a list of all repositories within a project.",
-          "name": "List Repositories",
+          "name": "Get Repository List",
           "tag": "#Azure DevOps",
           "recordTags": [
             "Microsoft",
@@ -355,26 +355,26 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/95668d47-b840-488a-8b13-ca95abaad2a4",
+          "triggerStep": "/api/3/workflow_steps/5d26f09d-d27a-4e83-9aca-f875f13f7841",
           "routes": [
             {
-              "uuid": "0f8de2a3-f5e9-4b5e-b5d0-43d4f8332686",
+              "uuid": "d522648b-979f-42a6-9165-175b70397ea5",
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> List Repositories",
-              "sourceStep": "/api/3/workflow_steps/95668d47-b840-488a-8b13-ca95abaad2a4",
-              "targetStep": "/api/3/workflow_steps/3dd5f2e6-75c0-427c-bedc-b5688d9e8a7b"
+              "name": "Start-> Get Repository List",
+              "sourceStep": "/api/3/workflow_steps/5d26f09d-d27a-4e83-9aca-f875f13f7841",
+              "targetStep": "/api/3/workflow_steps/fa573898-a31e-4169-b70b-62cc069a52f4"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "3f7efb02-074f-49ce-8fb9-5dfced9c4b4b",
-          "collection": "/api/3/workflow_collections/b72d864c-e9d3-4406-b4a8-c8ec70c72bce",
+          "uuid": "db830bd6-9a0e-4ac6-8268-369048f16c0b",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
           "steps": [
             {
-              "uuid": "f2a42f25-86d4-40b2-90ad-9595c40bd370",
+              "uuid": "dafd74f4-718a-4500-8710-f8fc81df10ff",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
@@ -391,9 +391,9 @@
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
             },
             {
-              "uuid": "613e562e-784d-4acf-bd1b-10d9c9f46219",
+              "uuid": "47bf2ca6-9089-4b82-8437-c62e040654e4",
               "@type": "WorkflowStep",
-              "name": "List Branches",
+              "name": "Get Branch List",
               "description": null,
               "status": null,
               "arguments": {
@@ -415,7 +415,7 @@
                 "version": "1.0.0",
                 "connector": "azure-devops",
                 "operation": "list_branches",
-                "operationTitle": "List Branches"
+                "operationTitle": "Get Branch List"
               },
               "left": "188",
               "top": "120",
@@ -424,7 +424,7 @@
           ],
           "triggerLimit": null,
           "description": "Retrieves list of all branches within a specified repository.",
-          "name": "List Branches",
+          "name": "Get Branch List",
           "tag": "#Azure DevOps",
           "recordTags": [
             "Microsoft",
@@ -435,26 +435,26 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/f2a42f25-86d4-40b2-90ad-9595c40bd370",
+          "triggerStep": "/api/3/workflow_steps/dafd74f4-718a-4500-8710-f8fc81df10ff",
           "routes": [
             {
-              "uuid": "fdb91094-9ec7-460f-929d-e2b294f503ff",
+              "uuid": "53545239-5c1f-41e0-ac6d-3588b668cf41",
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> List Branches",
-              "sourceStep": "/api/3/workflow_steps/f2a42f25-86d4-40b2-90ad-9595c40bd370",
-              "targetStep": "/api/3/workflow_steps/613e562e-784d-4acf-bd1b-10d9c9f46219"
+              "name": "Start-> Get Branch List",
+              "sourceStep": "/api/3/workflow_steps/dafd74f4-718a-4500-8710-f8fc81df10ff",
+              "targetStep": "/api/3/workflow_steps/47bf2ca6-9089-4b82-8437-c62e040654e4"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "d6be7785-fa1b-4a6e-b059-96f5f8885832",
-          "collection": "/api/3/workflow_collections/b72d864c-e9d3-4406-b4a8-c8ec70c72bce",
+          "uuid": "fb162019-6e6b-4649-bb2f-4affd77d8ad9",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
           "steps": [
             {
-              "uuid": "fc382fd5-d2b1-4b6c-96ef-be653b60560a",
+              "uuid": "91cea347-83e9-45b7-9021-afaf3c5ed436",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
@@ -471,7 +471,7 @@
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
             },
             {
-              "uuid": "8070ed89-203a-486f-a1a4-a8b9889e35cf",
+              "uuid": "38cfa5a6-ffe0-4527-8e7f-ae8674803d61",
               "@type": "WorkflowStep",
               "name": "Get Commit Details",
               "description": null,
@@ -508,26 +508,26 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/fc382fd5-d2b1-4b6c-96ef-be653b60560a",
+          "triggerStep": "/api/3/workflow_steps/91cea347-83e9-45b7-9021-afaf3c5ed436",
           "routes": [
             {
-              "uuid": "eadd6665-26de-4e55-8a2b-773d34bc9d08",
+              "uuid": "43a34036-e8d9-4034-b3a2-b0cbde96c8d5",
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
               "name": "Start-> Get Commit Details",
-              "sourceStep": "/api/3/workflow_steps/fc382fd5-d2b1-4b6c-96ef-be653b60560a",
-              "targetStep": "/api/3/workflow_steps/8070ed89-203a-486f-a1a4-a8b9889e35cf"
+              "sourceStep": "/api/3/workflow_steps/91cea347-83e9-45b7-9021-afaf3c5ed436",
+              "targetStep": "/api/3/workflow_steps/38cfa5a6-ffe0-4527-8e7f-ae8674803d61"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "4e5de14c-9246-47a1-abf3-b19773e6937c",
-          "collection": "/api/3/workflow_collections/b72d864c-e9d3-4406-b4a8-c8ec70c72bce",
+          "uuid": "44bd71c4-c1d9-4251-9765-9cd2a868fb25",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
           "steps": [
             {
-              "uuid": "1ce744ef-7267-4a73-a2de-9bb61dc90dd4",
+              "uuid": "1b10186e-930e-4b46-bcdc-05e15a9112d0",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
@@ -544,9 +544,9 @@
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
             },
             {
-              "uuid": "f7725921-5ac5-469b-b6ea-29c87d6253af",
+              "uuid": "73ca8ab1-c47e-4696-a499-373e8d5034a8",
               "@type": "WorkflowStep",
-              "name": "List Pull Requests",
+              "name": "Get Pull Request List",
               "description": null,
               "status": null,
               "arguments": {
@@ -574,7 +574,7 @@
                 "version": "1.0.0",
                 "connector": "azure-devops",
                 "operation": "list_pull_requests",
-                "operationTitle": "List Pull Requests"
+                "operationTitle": "Get Pull Request List"
               },
               "left": "188",
               "top": "120",
@@ -583,7 +583,7 @@
           ],
           "triggerLimit": null,
           "description": "List all pull requests for a given repository or project.",
-          "name": "List Pull Requests",
+          "name": "Get Pull Request List",
           "tag": "#Azure DevOps",
           "recordTags": [
             "Microsoft",
@@ -594,26 +594,26 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/1ce744ef-7267-4a73-a2de-9bb61dc90dd4",
+          "triggerStep": "/api/3/workflow_steps/1b10186e-930e-4b46-bcdc-05e15a9112d0",
           "routes": [
             {
-              "uuid": "6afe0ebb-56ff-47b3-b101-be3f963502aa",
+              "uuid": "139f973b-5367-42bc-be47-b964ec9a3887",
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> List Pull Requests",
-              "sourceStep": "/api/3/workflow_steps/1ce744ef-7267-4a73-a2de-9bb61dc90dd4",
-              "targetStep": "/api/3/workflow_steps/f7725921-5ac5-469b-b6ea-29c87d6253af"
+              "name": "Start-> Get Pull Request List",
+              "sourceStep": "/api/3/workflow_steps/1b10186e-930e-4b46-bcdc-05e15a9112d0",
+              "targetStep": "/api/3/workflow_steps/73ca8ab1-c47e-4696-a499-373e8d5034a8"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "3d4125c9-c1b5-4db0-8479-11227bc5133b",
-          "collection": "/api/3/workflow_collections/b72d864c-e9d3-4406-b4a8-c8ec70c72bce",
+          "uuid": "fa17d688-f6fa-4409-b23b-5d7935e822e9",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
           "steps": [
             {
-              "uuid": "17139f52-39b9-4b0c-a327-1f8f6384dd24",
+              "uuid": "a26730cf-aed1-48de-a33c-044bcf003dc0",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
@@ -630,7 +630,7 @@
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
             },
             {
-              "uuid": "1ad893da-1cbf-4c07-a88b-948c54941ba7",
+              "uuid": "09fc66b8-e7a1-4adc-bafd-86eff5e639d8",
               "@type": "WorkflowStep",
               "name": "Get Pull Request Details",
               "description": null,
@@ -665,26 +665,26 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/17139f52-39b9-4b0c-a327-1f8f6384dd24",
+          "triggerStep": "/api/3/workflow_steps/a26730cf-aed1-48de-a33c-044bcf003dc0",
           "routes": [
             {
-              "uuid": "c0dc60f9-04bd-4979-b4d9-fcbc59d19d5a",
+              "uuid": "6795a84c-ee18-4fa9-88ab-47d41715c2b2",
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
               "name": "Start-> Get Pull Request Details",
-              "sourceStep": "/api/3/workflow_steps/17139f52-39b9-4b0c-a327-1f8f6384dd24",
-              "targetStep": "/api/3/workflow_steps/1ad893da-1cbf-4c07-a88b-948c54941ba7"
+              "sourceStep": "/api/3/workflow_steps/a26730cf-aed1-48de-a33c-044bcf003dc0",
+              "targetStep": "/api/3/workflow_steps/09fc66b8-e7a1-4adc-bafd-86eff5e639d8"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "41590f02-f1fd-4e7d-a30f-8048d78f7221",
-          "collection": "/api/3/workflow_collections/b72d864c-e9d3-4406-b4a8-c8ec70c72bce",
+          "uuid": "ff785232-b1b1-419e-928b-6b4ae3c2a7e9",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
           "steps": [
             {
-              "uuid": "76583f8e-0f24-4137-9ea1-a223eae9faa9",
+              "uuid": "ccb49ad4-22b3-405e-a607-0ed9c14ac713",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
@@ -701,7 +701,7 @@
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
             },
             {
-              "uuid": "35876697-80a1-4fb4-84db-9c822b45d2e2",
+              "uuid": "7ff604a0-5e37-48f6-b747-126f09d7b4aa",
               "@type": "WorkflowStep",
               "name": "Create Pull Request",
               "description": null,
@@ -743,26 +743,26 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/76583f8e-0f24-4137-9ea1-a223eae9faa9",
+          "triggerStep": "/api/3/workflow_steps/ccb49ad4-22b3-405e-a607-0ed9c14ac713",
           "routes": [
             {
-              "uuid": "d87eea73-9aea-4b42-8314-5f552c557b69",
+              "uuid": "57d099d0-c0f8-4066-a258-f3143fb839d3",
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
               "name": "Start-> Create Pull Request",
-              "sourceStep": "/api/3/workflow_steps/76583f8e-0f24-4137-9ea1-a223eae9faa9",
-              "targetStep": "/api/3/workflow_steps/35876697-80a1-4fb4-84db-9c822b45d2e2"
+              "sourceStep": "/api/3/workflow_steps/ccb49ad4-22b3-405e-a607-0ed9c14ac713",
+              "targetStep": "/api/3/workflow_steps/7ff604a0-5e37-48f6-b747-126f09d7b4aa"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "41080e3b-fd85-4b2f-a53e-c8bc0e5402f9",
-          "collection": "/api/3/workflow_collections/b72d864c-e9d3-4406-b4a8-c8ec70c72bce",
+          "uuid": "c6694127-cba0-49d6-9eb3-8797e03d6d84",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
           "steps": [
             {
-              "uuid": "2025a5c2-86da-46f1-bfc7-76af78446d35",
+              "uuid": "7e32f8cf-af69-4b8d-8e15-3bb3ad6640b7",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
@@ -779,7 +779,7 @@
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
             },
             {
-              "uuid": "ba97dc89-cd85-4537-8846-e9e12b63dfd5",
+              "uuid": "c1cbf879-88f0-4a27-b18c-91a7fc80c481",
               "@type": "WorkflowStep",
               "name": "Update Pull Request",
               "description": null,
@@ -820,26 +820,26 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/2025a5c2-86da-46f1-bfc7-76af78446d35",
+          "triggerStep": "/api/3/workflow_steps/7e32f8cf-af69-4b8d-8e15-3bb3ad6640b7",
           "routes": [
             {
-              "uuid": "570d4a5c-7899-44b9-b0bc-50dc4c3de7ca",
+              "uuid": "8658ec56-fe5e-4e6a-98ee-e0febdee4e1f",
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
               "name": "Start-> Update Pull Request",
-              "sourceStep": "/api/3/workflow_steps/2025a5c2-86da-46f1-bfc7-76af78446d35",
-              "targetStep": "/api/3/workflow_steps/ba97dc89-cd85-4537-8846-e9e12b63dfd5"
+              "sourceStep": "/api/3/workflow_steps/7e32f8cf-af69-4b8d-8e15-3bb3ad6640b7",
+              "targetStep": "/api/3/workflow_steps/c1cbf879-88f0-4a27-b18c-91a7fc80c481"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "053533c6-3581-464f-a5d5-207e84ac0da7",
-          "collection": "/api/3/workflow_collections/b72d864c-e9d3-4406-b4a8-c8ec70c72bce",
+          "uuid": "f18c62b2-f6cf-446d-8e56-a958c3604bfc",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
           "steps": [
             {
-              "uuid": "21e4b05a-8b58-4a39-bee9-a132c2728209",
+              "uuid": "e37d36d3-d2e9-4827-bc98-e04aad45ee36",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
@@ -856,9 +856,9 @@
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
             },
             {
-              "uuid": "14e28ae8-9d5a-460a-a632-d4f59e06ff80",
+              "uuid": "57d44229-441b-4ac7-951f-4b8062e6db36",
               "@type": "WorkflowStep",
-              "name": "List Pull Request Reviewers",
+              "name": "Get Pull Request Reviewer List",
               "description": null,
               "status": null,
               "arguments": {
@@ -872,7 +872,7 @@
                 "version": "1.0.0",
                 "connector": "azure-devops",
                 "operation": "list_pull_request_reviewers",
-                "operationTitle": "List Pull Request Reviewers"
+                "operationTitle": "Get Pull Request Reviewer List"
               },
               "left": "188",
               "top": "120",
@@ -881,7 +881,7 @@
           ],
           "triggerLimit": null,
           "description": "Retrieve the list of reviewers for a specific pull request.",
-          "name": "List Pull Request Reviewers",
+          "name": "Get Pull Request Reviewer List",
           "tag": "#Azure DevOps",
           "recordTags": [
             "Microsoft",
@@ -892,26 +892,26 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/21e4b05a-8b58-4a39-bee9-a132c2728209",
+          "triggerStep": "/api/3/workflow_steps/e37d36d3-d2e9-4827-bc98-e04aad45ee36",
           "routes": [
             {
-              "uuid": "7853361f-0a63-4672-bd9a-b7770f391696",
+              "uuid": "a2e39191-10ba-4ad5-826e-7159888a7b55",
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> List Pull Request Reviewers",
-              "sourceStep": "/api/3/workflow_steps/21e4b05a-8b58-4a39-bee9-a132c2728209",
-              "targetStep": "/api/3/workflow_steps/14e28ae8-9d5a-460a-a632-d4f59e06ff80"
+              "name": "Start-> Get Pull Request Reviewer List",
+              "sourceStep": "/api/3/workflow_steps/e37d36d3-d2e9-4827-bc98-e04aad45ee36",
+              "targetStep": "/api/3/workflow_steps/57d44229-441b-4ac7-951f-4b8062e6db36"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "e20ab0e6-cac8-4432-b8ef-5b0969fe8aad",
-          "collection": "/api/3/workflow_collections/b72d864c-e9d3-4406-b4a8-c8ec70c72bce",
+          "uuid": "5011ca0b-9424-431f-ad94-d1b6ef2c8def",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
           "steps": [
             {
-              "uuid": "4bca7207-9d9a-4e01-a2b3-cfb9d89ac306",
+              "uuid": "33dc227a-db91-4ccf-ba7d-b7450a934fd9",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
@@ -928,7 +928,7 @@
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
             },
             {
-              "uuid": "4528ab98-b2ce-434b-8f18-c0e8c52209a6",
+              "uuid": "c6822189-abaf-488b-887f-1a2033128657",
               "@type": "WorkflowStep",
               "name": "Add Pull Request Reviewer",
               "description": null,
@@ -965,26 +965,26 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/4bca7207-9d9a-4e01-a2b3-cfb9d89ac306",
+          "triggerStep": "/api/3/workflow_steps/33dc227a-db91-4ccf-ba7d-b7450a934fd9",
           "routes": [
             {
-              "uuid": "141ade19-cff2-4b1f-8f60-04f20bd20fd5",
+              "uuid": "d37508f6-670f-4385-82d4-8c31954a7ab8",
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
               "name": "Start-> Add Pull Request Reviewer",
-              "sourceStep": "/api/3/workflow_steps/4bca7207-9d9a-4e01-a2b3-cfb9d89ac306",
-              "targetStep": "/api/3/workflow_steps/4528ab98-b2ce-434b-8f18-c0e8c52209a6"
+              "sourceStep": "/api/3/workflow_steps/33dc227a-db91-4ccf-ba7d-b7450a934fd9",
+              "targetStep": "/api/3/workflow_steps/c6822189-abaf-488b-887f-1a2033128657"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "8e2d1d4d-a0ff-457f-82a9-e20287936c9d",
-          "collection": "/api/3/workflow_collections/b72d864c-e9d3-4406-b4a8-c8ec70c72bce",
+          "uuid": "c5a1726d-cc8f-44df-8a4b-4902aee84c32",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
           "steps": [
             {
-              "uuid": "c310c644-e7d5-4c8e-8fd1-7f65cf208cdd",
+              "uuid": "2d4dff56-19d5-405a-bccc-331e2b058aa5",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
@@ -1001,9 +1001,9 @@
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
             },
             {
-              "uuid": "2c221653-cabd-455e-8192-622f88096870",
+              "uuid": "a82dd0b9-4aa2-48a8-8797-dd6cb98eca4d",
               "@type": "WorkflowStep",
-              "name": "List Pull Request Commits",
+              "name": "Get Pull Request Commit List",
               "description": null,
               "status": null,
               "arguments": {
@@ -1019,7 +1019,7 @@
                 "version": "1.0.0",
                 "connector": "azure-devops",
                 "operation": "list_pull_request_commits",
-                "operationTitle": "List Pull Request Commits"
+                "operationTitle": "Get Pull Request Commit List"
               },
               "left": "188",
               "top": "120",
@@ -1028,7 +1028,7 @@
           ],
           "triggerLimit": null,
           "description": "Retrieve the commits associated with a specific pull request in Azure DevOps.",
-          "name": "List Pull Request Commits",
+          "name": "Get Pull Request Commit List",
           "tag": "#Azure DevOps",
           "recordTags": [
             "Microsoft",
@@ -1039,26 +1039,26 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/c310c644-e7d5-4c8e-8fd1-7f65cf208cdd",
+          "triggerStep": "/api/3/workflow_steps/2d4dff56-19d5-405a-bccc-331e2b058aa5",
           "routes": [
             {
-              "uuid": "7b1f4305-3c5c-47cf-b4d1-211051017391",
+              "uuid": "d186dba6-0baa-4801-af3b-e655c21c91ca",
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> List Pull Request Commits",
-              "sourceStep": "/api/3/workflow_steps/c310c644-e7d5-4c8e-8fd1-7f65cf208cdd",
-              "targetStep": "/api/3/workflow_steps/2c221653-cabd-455e-8192-622f88096870"
+              "name": "Start-> Get Pull Request Commit List",
+              "sourceStep": "/api/3/workflow_steps/2d4dff56-19d5-405a-bccc-331e2b058aa5",
+              "targetStep": "/api/3/workflow_steps/a82dd0b9-4aa2-48a8-8797-dd6cb98eca4d"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "dc6c748a-c898-426a-9eb9-3b18f028359d",
-          "collection": "/api/3/workflow_collections/b72d864c-e9d3-4406-b4a8-c8ec70c72bce",
+          "uuid": "f8f1ee8b-d0e5-4050-ae65-ff45d4eecc51",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
           "steps": [
             {
-              "uuid": "7e75948d-bd64-4358-a8a2-7e5208ea7681",
+              "uuid": "2764d729-0210-4214-8fc9-01d7b10fab35",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
@@ -1075,9 +1075,9 @@
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
             },
             {
-              "uuid": "5a81f06f-ed27-46e1-84b4-f704f18219f2",
+              "uuid": "1795b949-81d0-4eb3-b606-e11b71b56013",
               "@type": "WorkflowStep",
-              "name": "List Commits",
+              "name": "Get Commit List",
               "description": null,
               "status": null,
               "arguments": {
@@ -1112,7 +1112,7 @@
                 "version": "1.0.0",
                 "connector": "azure-devops",
                 "operation": "list_commits",
-                "operationTitle": "List Commits"
+                "operationTitle": "Get Commit List"
               },
               "left": "188",
               "top": "120",
@@ -1121,7 +1121,7 @@
           ],
           "triggerLimit": null,
           "description": "Retrieve the commits for a specific repository in Azure DevOps.",
-          "name": "List Commits",
+          "name": "Get Commit List",
           "tag": "#Azure DevOps",
           "recordTags": [
             "Microsoft",
@@ -1132,26 +1132,26 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/7e75948d-bd64-4358-a8a2-7e5208ea7681",
+          "triggerStep": "/api/3/workflow_steps/2764d729-0210-4214-8fc9-01d7b10fab35",
           "routes": [
             {
-              "uuid": "1c88405c-9319-483e-80bd-ff1b8a2baee4",
+              "uuid": "a63160aa-948a-4e07-ab00-5e5f283789e2",
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> List Commits",
-              "sourceStep": "/api/3/workflow_steps/7e75948d-bd64-4358-a8a2-7e5208ea7681",
-              "targetStep": "/api/3/workflow_steps/5a81f06f-ed27-46e1-84b4-f704f18219f2"
+              "name": "Start-> Get Commit List",
+              "sourceStep": "/api/3/workflow_steps/2764d729-0210-4214-8fc9-01d7b10fab35",
+              "targetStep": "/api/3/workflow_steps/1795b949-81d0-4eb3-b606-e11b71b56013"
             }
           ]
         },
         {
           "@type": "Workflow",
-          "uuid": "505bb9ae-0829-4eec-9461-b75864c4b038",
-          "collection": "/api/3/workflow_collections/b72d864c-e9d3-4406-b4a8-c8ec70c72bce",
+          "uuid": "64bec98f-6380-4492-9ae3-946d4781f035",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
           "steps": [
             {
-              "uuid": "b4ee25fb-d486-4251-b746-73c0f60cc8c4",
+              "uuid": "6ad4a4c2-89cf-4d5a-b987-f756ab04e833",
               "@type": "WorkflowStep",
               "name": "Start",
               "description": null,
@@ -1168,7 +1168,7 @@
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
             },
             {
-              "uuid": "67d06d4d-8721-40bd-bd82-974f7776cbb4",
+              "uuid": "48ac7608-1c5c-4e20-8c77-810ce3d943fa",
               "@type": "WorkflowStep",
               "name": "Run Pipeline",
               "description": null,
@@ -1207,16 +1207,16 @@
           "singleRecordExecution": false,
           "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/b4ee25fb-d486-4251-b746-73c0f60cc8c4",
+          "triggerStep": "/api/3/workflow_steps/6ad4a4c2-89cf-4d5a-b987-f756ab04e833",
           "routes": [
             {
-              "uuid": "79d6463c-1b41-4e87-a877-756a55179542",
+              "uuid": "dd1c7166-49b7-4190-8760-258fb4cae1d3",
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
               "name": "Start-> Run Pipeline",
-              "sourceStep": "/api/3/workflow_steps/b4ee25fb-d486-4251-b746-73c0f60cc8c4",
-              "targetStep": "/api/3/workflow_steps/67d06d4d-8721-40bd-bd82-974f7776cbb4"
+              "sourceStep": "/api/3/workflow_steps/6ad4a4c2-89cf-4d5a-b987-f756ab04e833",
+              "targetStep": "/api/3/workflow_steps/48ac7608-1c5c-4e20-8c77-810ce3d943fa"
             }
           ]
         }

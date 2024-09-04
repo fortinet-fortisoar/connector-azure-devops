@@ -142,7 +142,7 @@
   "operations": [
     {
       "operation": "list_pipelines",
-      "title": "List Pipelines",
+      "title": "Get Pipeline List",
       "description": "Retrieves list of all pipelines within a project.",
       "category": "investigation",
       "annotation": "list_pipelines",
@@ -228,7 +228,7 @@
     },
     {
       "operation": "list_pipeline_runs",
-      "title": "List Pipeline Runs",
+      "title": "Get Pipeline Run List",
       "description": "Retrieves top 10000 runs for a specified pipeline.",
       "category": "investigation",
       "annotation": "list_pipeline_runs",
@@ -385,7 +385,7 @@
     },
     {
       "operation": "list_projects",
-      "title": "List Projects",
+      "title": "Get Project List",
       "description": "Retrieve a list of all projects within the Azure DevOps organization.",
       "category": "investigation",
       "annotation": "list_projects",
@@ -459,7 +459,7 @@
     },
     {
       "operation": "list_repositories",
-      "title": "List Repositories",
+      "title": "Get Repository List",
       "description": "Retrieve a list of all repositories within a project.",
       "category": "investigation",
       "annotation": "list_repositories",
@@ -536,7 +536,7 @@
     },
     {
       "operation": "list_branches",
-      "title": "List Branches",
+      "title": "Get Branch List",
       "description": "Retrieves list of all branches within a specified repository.",
       "category": "investigation",
       "annotation": "list_branches",
@@ -790,7 +790,7 @@
     },
     {
       "operation": "list_pull_requests",
-      "title": "List Pull Requests",
+      "title": "Get Pull Request List",
       "description": "List all pull requests for a given repository or project.",
       "category": "investigation",
       "annotation": "list_pull_requests",
@@ -1466,7 +1466,7 @@
     },
     {
       "operation": "list_pull_request_reviewers",
-      "title": "List Pull Request Reviewers",
+      "title": "Get Pull Request Reviewer List",
       "description": "Retrieve the list of reviewers for a specific pull request.",
       "category": "investigation",
       "annotation": "list_pull_request_reviewers",
@@ -1598,7 +1598,7 @@
     },
     {
       "operation": "list_pull_request_commits",
-      "title": "List Pull Request Commits",
+      "title": "Get Pull Request Commit List",
       "description": "Retrieve the commits associated with a specific pull request in Azure DevOps.",
       "category": "investigation",
       "annotation": "list_pull_request_commits",
@@ -1678,7 +1678,7 @@
     },
     {
       "operation": "list_commits",
-      "title": "List Commits",
+      "title": "Get Commit List",
       "description": "Retrieve the commits for a specific repository in Azure DevOps.",
       "category": "investigation",
       "annotation": "list_commits",
