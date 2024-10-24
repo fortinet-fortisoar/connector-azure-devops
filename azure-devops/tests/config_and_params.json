@@ -120,7 +120,7 @@
             "title": "New PR from PyTest",
             "sourceRefName": "refs/heads/develop",
             "targetRefName": "refs/heads/main",
-            "pr_description": null,
+            "description": "This PR is created from PyTest.",
             "reviewers": null,
             "supportsIterations": false,
             "additional_input": null
@@ -131,7 +131,7 @@
             "project": "project 1",
             "repositoryId": "new repo",
             "pullRequestId":11,
-            "pr_title": null,
+            "title": "Updated Title",
             "description": null,
             "status": "Active",
             "targetRefName": null,

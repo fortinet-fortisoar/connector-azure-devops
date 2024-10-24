@@ -181,7 +181,7 @@
         {
           "title": "Sort Field",
           "name": "field",
-          "visible": true,
+          "visible": false,
           "required": false,
           "editable": true,
           "type": "text",
@@ -197,8 +197,8 @@
           "editable": true,
           "type": "select",
           "value": "Asc",
-          "tooltip": "Select the sort order in which result is to be sorted.",
-          "description": "Select the sort order in which result is to be sorted. You can choose from ASC or DESC.",
+          "tooltip": "Select the sort order in which result is to be sorted. Note: This will be sorted based on name field only.",
+          "description": "Select the sort order based in which result is to be sorted. You can choose from ASC or DESC. Note: This will be sorted based on name field only.",
           "options": [
             "Asc",
             "Desc"
@@ -1226,7 +1226,7 @@
         },
         {
           "title": "Pull Request Description",
-          "name": "pr_description",
+          "name": "description",
           "visible": true,
           "required": false,
           "editable": true,
@@ -1408,7 +1408,7 @@
         },
         {
           "title": "Pull Request Title",
-          "name": "pr_title",
+          "name": "title",
           "visible": true,
           "required": false,
           "editable": true,

@@ -43,6 +43,6 @@ class Azure(Connector):
             else:
                 new_config['access_token'] = old_config.get('access_token')
                 new_config['refresh_token'] = old_config.get('refresh_token')
-                new_config['expiresOn'] = old_config.get('expiresOn')
+                new_config['expiresOn'] = 0
         update_connnector_config(connector_info['connector_name'], connector_info['connector_version'], new_config,
                                  new_config['config_id'])
