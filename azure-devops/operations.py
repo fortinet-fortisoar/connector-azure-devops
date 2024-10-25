@@ -31,7 +31,7 @@ class AzureDevOps:
             ms_client = MicrosoftAuth(config)
             self.headers['Authorization'] = ms_client.get_validated_token(config, config.get('connector_info'))
         self.verify_ssl = config.get('verify_ssl')
-        self.api_version = config.get('api_version') or API_VERSION
+        self.api_version = config.get('api_version') if config.get('api_version') not in [None, ''] else API_VERSION
 
     def make_request(self, endpoint, method='GET', data=None, params={}, files=None):
         try:
@@ -112,7 +112,7 @@ def list_pipelines(config, params):
     endpoint = '/{0}/_apis/pipelines'.format(params.pop('project', ''))
     field = params.pop('field', 'name') or 'name'
     order = params.pop('order', 'asc').lower() or 'asc'
-    params['orderBy'] = "{0} {1}".format(field, order)
+    params['$orderBy'] = "{0} {1}".format(field, order)
     payload = _build_payload(params)
     return client.make_request(endpoint, params=payload)
 
@@ -209,14 +209,18 @@ def get_pull_requests_by_id(config, params):
 
 def create_pull_request(config, params):
     client = AzureDevOps(config)
-    endpoint = "/{0}/_apis/git/repositories/{1}/pullrequests".format(
-        params.pop('project', ''), params.pop('repositoryId', ''))
+    project = params.pop('project', '')
+    repository = params.pop('repositoryId', '')
+    endpoint = "/{0}/_apis/git/repositories/{1}/pullrequests".format(project, repository)
     query_param = {
         "supportsIterations": params.pop("supportsIterations", '')
     }
     query_param = _build_payload(query_param)
     params['reviewers'] = handle_comma_separated_input(params.get('reviewers'))
     additional_input = params.pop('additional_input', {})
+    params['targetRefName'] = get_ref_by_branch_name(config, project, repository, params['targetRefName'])
+    params['sourceRefName'] = get_ref_by_branch_name(config, project, repository, params['sourceRefName'])
+
     if additional_input and isinstance(additional_input, dict):
         params.update(additional_input)
     payload = _build_payload(params)
@@ -225,9 +229,11 @@ def create_pull_request(config, params):
 
 def update_pull_request(config, params):
     client = AzureDevOps(config)
-    endpoint = "/{0}/_apis/git/repositories/{1}/pullrequests/{2}".format(
-        params.pop('project', ''), params.pop('repositoryId', ''), params.pop('pullRequestId', ''))
+    project = params.pop('project', '')
+    repository = params.pop('repositoryId', '')
+    endpoint = "/{0}/_apis/git/repositories/{1}/pullrequests/{2}".format(project, repository, params.pop('pullRequestId', ''))
     params['status'] = PR_STATUS_MAPPING.get(params.get('status'))
+    params['targetRefName'] = get_ref_by_branch_name(config, project, repository, params['targetRefName'])
     if params.get('additional_input') and isinstance(params.get('additional_input'), dict):
         params.update(params.pop('additional_input', ''))
     payload = _build_payload(params)
@@ -258,6 +264,20 @@ def list_pull_request_commits(config, params):
                                                                                   params.pop('pullRequestId', ''))
     payload = _build_payload(params)
     return client.make_request(endpoint, params=payload)
+
+
+def get_ref_by_branch_name(config, project, repository, branch_name):
+    query_params = {
+        "project": project,
+        "repository": repository,
+        "filterContains": branch_name,
+        "limit": 1000
+    }
+    branches = list_branches(config, query_params).get('value')
+    count = len(branches)
+    if count == 1:
+        return branches[0].get('name')
+    return branch_name
 
 
 operations = {

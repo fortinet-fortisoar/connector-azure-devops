@@ -112,7 +112,11 @@ def test_list_pipelines_invalid_project(valid_credentials_with_token):
 @pytest.mark.parametrize("input_params", params['list_pipeline_runs'])
 def test_list_pipeline_runs_success(valid_credentials_with_token, input_params):
     logger.info("params: {0}".format(input_params))
-    assert operations['list_pipeline_runs'](valid_credentials_with_token, input_params.copy())
+    result = operations['list_pipeline_runs'](valid_credentials_with_token, input_params.copy())
+    assert result
+    for pipeline_run in result.get('value'):
+        params['get_pipeline_run'][0]['pipelineId'] = pipeline_run.get('pipeline').get('id')
+        params['get_pipeline_run'][0]['runId'] = pipeline_run.get('id')
 
 
 # Ensure that the provided input_params yield the correct output schema, or adjust the index in the list below.
