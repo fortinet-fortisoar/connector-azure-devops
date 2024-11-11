@@ -378,8 +378,8 @@
           "required": true,
           "editable": true,
           "type": "text",
-          "tooltip": "Specify the ID of the pipeline whose runs are to be retrieved.",
-          "description": "Specify the ID of the pipeline whose runs are to be retrieved."
+          "tooltip": "Specify the ID of the run is to be retrieved.",
+          "description": "Specify the ID of the run is to be retrieved."
         }
       ]
     },
@@ -1235,14 +1235,14 @@
           "description": "Specify a description for the pull request."
         },
         {
-          "title": "Reviewers",
+          "title": "Reviewer IDs",
           "name": "reviewers",
           "visible": true,
           "required": false,
           "editable": true,
           "type": "text",
-          "tooltip": "Specify the reviewers for this pull request in CSV format.",
-          "description": "Specify the reviewers for this pull request in CSV format."
+          "tooltip": "Specify reviewer IDs in CSV format to add as required reviewers to this pull request.",
+          "description": "Specify reviewer IDs in CSV format to add as required reviewers to this pull request."
         },
         {
           "title": "Supports Iterations",
@@ -1593,6 +1593,17 @@
           "type": "text",
           "tooltip": "Specify the ID of the reviewer to be added to the pull request.",
           "description": "Specify the ID of the reviewer to be added to the pull request."
+        },
+        {
+          "title": "Required Reviewer",
+          "name": "isRequired",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "checkbox",
+          "value": false,
+          "tooltip": "Select if the reviewer should be required.",
+          "description": "Specify if the reviewer should be required."
         }
       ]
     },

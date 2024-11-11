@@ -216,7 +216,9 @@ def create_pull_request(config, params):
         "supportsIterations": params.pop("supportsIterations", '')
     }
     query_param = _build_payload(query_param)
-    params['reviewers'] = handle_comma_separated_input(params.get('reviewers'))
+    reviewers = params.get('reviewers')
+    reviewers = reviewers.split(',') if isinstance(reviewers, str) else reviewers
+    params['reviewers'] = [{"id": reviewer.strip(), 'isRequired': True} for reviewer in reviewers]
     additional_input = params.pop('additional_input', {})
     params['targetRefName'] = get_ref_by_branch_name(config, project, repository, params['targetRefName'])
     params['sourceRefName'] = get_ref_by_branch_name(config, project, repository, params['sourceRefName'])
@@ -252,7 +254,8 @@ def add_pull_request_reviewer(config, params):
     endpoint = "/{0}/_apis/git/repositories/{1}/pullRequests/{2}/reviewers".format(
         params.pop('project', ''), params.pop('repositoryId', ''), params.pop('pullRequestId', ''))
     payload = [{
-        'id': params.get('reviewerId')
+        'id': params.get('reviewerId'),
+        'isRequired': params.get('isRequired', False)
     }]
     return client.make_request(endpoint, method='POST', data=json.dumps(payload))
 
@@ -277,6 +280,9 @@ def get_ref_by_branch_name(config, project, repository, branch_name):
     count = len(branches)
     if count == 1:
         return branches[0].get('name')
+    for branch in branches:
+        if branch.get('name', '') == 'refs/heads/{0}'.format(branch_name):
+            return branch.get('name')
     return branch_name
 
 
