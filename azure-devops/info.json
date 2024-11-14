@@ -487,7 +487,37 @@
             "remoteUrl": "",
             "isDisabled": "",
             "defaultBranch": "",
-            "isInMaintenance": ""
+            "isInMaintenance": "",
+            "validRemoteUrls": [],
+            "_links": {
+              "ssh": {
+                "href": ""
+              },
+              "web": {
+                "href": ""
+              },
+              "refs": {
+                "href": ""
+              },
+              "self": {
+                "href": ""
+              },
+              "items": {
+                "href": ""
+              },
+              "pushes": {
+                "href": ""
+              },
+              "commits": {
+                "href": ""
+              },
+              "project": {
+                "href": ""
+              },
+              "pullRequests": {
+                "href": ""
+              }
+            }
           }
         ]
       },
@@ -743,7 +773,24 @@
           "email": "",
           "imageUrl": ""
         },
-        "remoteUrl": ""
+        "remoteUrl": "",
+        "changes": [
+          {
+            "item": {
+              "url": "",
+              "path": "",
+              "commitId": "",
+              "objectId": "",
+              "gitObjectType": ""
+            },
+            "changeType": ""
+          }
+        ],
+        "changeCounts": {
+          "Add": "",
+          "Edit": "",
+          "Delete": ""
+        }
       },
       "parameters": [
         {
@@ -849,6 +896,7 @@
               }
             },
             "mergeStatus": "",
+            "description": "",
             "codeReviewId": "",
             "creationDate": "",
             "pullRequestId": "",
@@ -1054,7 +1102,9 @@
         "lastMergeTargetCommit": {
           "url": "",
           "commitId": ""
-        }
+        },
+        "supportsIterations": "",
+        "description": ""
       },
       "parameters": [
         {
@@ -1171,7 +1221,9 @@
         "lastMergeTargetCommit": {
           "url": "",
           "commitId": ""
-        }
+        },
+        "supportsIterations": "",
+        "description": ""
       },
       "parameters": [
         {
@@ -1235,14 +1287,14 @@
           "description": "Specify a description for the pull request."
         },
         {
-          "title": "Reviewer IDs",
+          "title": "Reviewers",
           "name": "reviewers",
           "visible": true,
           "required": false,
           "editable": true,
           "type": "text",
-          "tooltip": "Specify reviewer IDs in CSV format to add as required reviewers to this pull request.",
-          "description": "Specify reviewer IDs in CSV format to add as required reviewers to this pull request."
+          "tooltip": "Specify reviewers in CSV format to add as required reviewers to this pull request.",
+          "description": "Specify reviewers in CSV format to add as required reviewers to this pull request."
         },
         {
           "title": "Supports Iterations",
@@ -1288,6 +1340,9 @@
             "href": ""
           },
           "workItems": {
+            "href": ""
+          },
+          "iterations": {
             "href": ""
           },
           "repository": {
@@ -1373,7 +1428,9 @@
         "lastMergeTargetCommit": {
           "url": "",
           "commitId": ""
-        }
+        },
+        "supportsIterations": "",
+        "description": ""
       },
       "parameters": [
         {
@@ -1585,7 +1642,7 @@
           "description": "Specify the ID of the pull request to which the reviewer will be added."
         },
         {
-          "title": "Reviewer ID",
+          "title": "Reviewer",
           "name": "reviewerId",
           "visible": true,
           "required": true,
@@ -1743,156 +1800,176 @@
           "description": "Specify the ID or name of the repository."
         },
         {
-          "title": "Commit IDs",
-          "name": "searchCriteria.ids",
+          "title": "Search Options",
+          "name": "type",
           "visible": true,
           "required": false,
           "editable": true,
-          "type": "text",
-          "tooltip": "Specify exact commit IDs to retrieve in CSV format.",
-          "description": "(Optional) Specify exact commit IDs to retrieve in CSV format."
-        },
-        {
-          "title": "Committer",
-          "name": "searchCriteria.user",
-          "visible": true,
-          "required": false,
-          "editable": true,
-          "type": "text",
-          "tooltip": "Specify the alias or display name of the committer.",
-          "description": "(Optional) Specify the alias or display name of the committer."
-        },
-        {
-          "title": "From Commit ID",
-          "name": "searchCriteria.fromCommitId",
-          "visible": true,
-          "required": false,
-          "editable": true,
-          "type": "text",
-          "tooltip": "Specify the lower bound commit ID for filtering commits.",
-          "description": "(Optional) Specify the lower bound commit ID for filtering commits."
-        },
-        {
-          "title": "To Commit ID",
-          "name": "searchCriteria.toCommitId",
-          "visible": true,
-          "required": false,
-          "editable": true,
-          "type": "text",
-          "tooltip": "Specify the upper bound commit ID for filtering commits.",
-          "description": "(Optional) Specify the upper bound commit ID for filtering commits."
-        },
-        {
-          "title": "From Date",
-          "name": "searchCriteria.fromDate",
-          "visible": true,
-          "required": false,
-          "editable": true,
-          "type": "datetime",
-          "tooltip": "Specify the start date to include history entries created after this date.",
-          "description": "(Optional) Specify the start date to include history entries created after this date."
-        },
-        {
-          "title": "To Date",
-          "name": "searchCriteria.toDate",
-          "visible": true,
-          "required": false,
-          "editable": true,
-          "type": "datetime",
-          "tooltip": "Specify the end date to include history entries created before this date.",
-          "description": "(Optional) Specify the end date to include history entries created before this date."
-        },
-        {
-          "title": "Commit Author",
-          "name": "searchCriteria.author",
-          "visible": true,
-          "required": false,
-          "editable": true,
-          "type": "text",
-          "tooltip": "Specify the alias or display name of the author.",
-          "description": "(Optional) Specify the alias or display name of the author."
-        },
-        {
-          "title": "Exclude Deletes",
-          "name": "searchCriteria.excludeDeletes",
-          "visible": true,
-          "required": false,
-          "editable": true,
-          "type": "checkbox",
-          "value": false,
-          "tooltip": "Specify whether to exclude delete entries for the specified path.",
-          "description": "(Optional) Specify whether to exclude delete entries for the specified path."
-        },
-        {
-          "title": "History Mode",
-          "name": "searchCriteria.historyMode",
-          "visible": true,
-          "required": false,
-          "editable": true,
-          "type": "text",
-          "tooltip": "Specify the Git history mode to use.",
-          "description": "(Optional) Specify the Git history mode to use."
-        },
-        {
-          "title": "Include Push Data",
-          "name": "searchCriteria.includePushData",
-          "visible": true,
-          "required": false,
-          "editable": true,
-          "type": "checkbox",
-          "value": false,
-          "tooltip": "Specify whether to include push information.",
-          "description": "(Optional) Specify whether to include push information."
-        },
-        {
-          "title": "Show Oldest Commits First",
-          "name": "searchCriteria.showOldestCommitsFirst",
-          "visible": true,
-          "required": false,
-          "editable": true,
-          "type": "checkbox",
-          "value": false,
-          "tooltip": "Specify whether to show the oldest commits first.",
-          "description": "(Optional) Specify whether to show the oldest commits first."
-        },
-        {
-          "title": "Search Criteria",
-          "name": "searchCriteria",
-          "visible": true,
-          "required": false,
-          "editable": true,
-          "type": "json",
-          "tooltip": "Specify the search criteria to retrieve the commits from Azure DevOps.",
-          "description": "Specify the search criteria to retrieve the commits from Azure DevOps. For example, you can include parameters like `fromCommitId`, `toCommitId`, `author`, and `fromDate`.",
-          "value": {
-            "author": "",
-            "compareVersion.version": "",
-            "fromCommitId": "",
-            "fromDate": "",
-            "toCommitId": "",
-            "toDate": "",
-            "user": ""
-          }
-        },
-        {
-          "title": "Offset",
-          "name": "$skip",
-          "visible": true,
-          "required": false,
-          "editable": true,
-          "type": "integer",
-          "tooltip": "Specify the number of records to skip.",
-          "description": "(Optional) Specify the number of records to skip."
-        },
-        {
-          "title": "Limit",
-          "name": "$top",
-          "visible": true,
-          "required": false,
-          "editable": true,
-          "type": "integer",
-          "tooltip": "Specify the maximum number of commits to retrieve.",
-          "description": "(Optional) Specify the maximum number of commits to retrieve."
+          "type": "select",
+          "description": "(Optional) Select the criteria to filter search results. Choose between ‘Commit IDs,’ which allows specifying exact commit IDs in CSV format, or ‘Other,’ which provides additional options for filtering by author, date range, and other commit details.",
+          "tooltip": "Select the criteria to filter search results.",
+          "onchange": {
+            "Commit IDs": [
+              {
+                "title": "Commit IDs",
+                "name": "searchCriteria.ids",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "type": "text",
+                "tooltip": "Specify exact commit IDs to retrieve in CSV format.",
+                "description": "(Optional) Specify exact commit IDs to retrieve in CSV format."
+              }
+            ],
+            "Other": [
+              {
+                "title": "Committer",
+                "name": "searchCriteria.user",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "type": "text",
+                "tooltip": "Specify the alias or display name of the committer.",
+                "description": "(Optional) Specify the alias or display name of the committer."
+              },
+              {
+                "title": "From Commit ID",
+                "name": "searchCriteria.fromCommitId",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "type": "text",
+                "tooltip": "Specify the lower bound commit ID for filtering commits.",
+                "description": "(Optional) Specify the lower bound commit ID for filtering commits."
+              },
+              {
+                "title": "To Commit ID",
+                "name": "searchCriteria.toCommitId",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "type": "text",
+                "tooltip": "Specify the upper bound commit ID for filtering commits.",
+                "description": "(Optional) Specify the upper bound commit ID for filtering commits."
+              },
+              {
+                "title": "From Date",
+                "name": "searchCriteria.fromDate",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "type": "datetime",
+                "tooltip": "Specify the start date to include history entries created after this date.",
+                "description": "(Optional) Specify the start date to include history entries created after this date."
+              },
+              {
+                "title": "To Date",
+                "name": "searchCriteria.toDate",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "type": "datetime",
+                "tooltip": "Specify the end date to include history entries created before this date.",
+                "description": "(Optional) Specify the end date to include history entries created before this date."
+              },
+              {
+                "title": "Commit Author",
+                "name": "searchCriteria.author",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "type": "text",
+                "tooltip": "Specify the alias or display name of the author.",
+                "description": "(Optional) Specify the alias or display name of the author."
+              },
+              {
+                "title": "Exclude Deletes",
+                "name": "searchCriteria.excludeDeletes",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "type": "checkbox",
+                "value": false,
+                "tooltip": "Specify whether to exclude delete entries for the specified path.",
+                "description": "(Optional) Specify whether to exclude delete entries for the specified path."
+              },
+              {
+                "title": "History Mode",
+                "name": "searchCriteria.historyMode",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "type": "text",
+                "tooltip": "Specify the Git history mode to use.",
+                "description": "(Optional) Specify the Git history mode to use."
+              },
+              {
+                "title": "Include Push Data",
+                "name": "searchCriteria.includePushData",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "type": "checkbox",
+                "value": false,
+                "tooltip": "Specify whether to include push information.",
+                "description": "(Optional) Specify whether to include push information."
+              },
+              {
+                "title": "Show Oldest Commits First",
+                "name": "searchCriteria.showOldestCommitsFirst",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "type": "checkbox",
+                "value": false,
+                "tooltip": "Specify whether to show the oldest commits first.",
+                "description": "(Optional) Specify whether to show the oldest commits first."
+              },
+              {
+                "title": "Search Criteria",
+                "name": "searchCriteria",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "type": "json",
+                "tooltip": "Specify the search criteria to retrieve the commits from Azure DevOps.",
+                "description": "Specify the search criteria to retrieve the commits from Azure DevOps. For example, you can include parameters like `fromCommitId`, `toCommitId`, `author`, and `fromDate`.",
+                "value": {
+                  "author": "",
+                  "compareVersion.version": "",
+                  "fromCommitId": "",
+                  "fromDate": "",
+                  "toCommitId": "",
+                  "toDate": "",
+                  "user": ""
+                }
+              },
+              {
+                "title": "Offset",
+                "name": "$skip",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "type": "integer",
+                "tooltip": "Specify the number of records to skip.",
+                "description": "(Optional) Specify the number of records to skip."
+              },
+              {
+                "title": "Limit",
+                "name": "$top",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "type": "integer",
+                "tooltip": "Specify the maximum number of commits to retrieve.",
+                "description": "(Optional) Specify the maximum number of commits to retrieve."
+              }
+            ]
+          },
+          "options": [
+            "Commit IDs",
+            "Other"
+          ]
         }
       ]
     },

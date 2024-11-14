@@ -31,3 +31,37 @@ PR_STATUS_MAPPING = {
     "Completed": "completed",
     "Not Set": "notSet"
 }
+
+REVIEWER_PAYLOAD = {
+        "query": "",
+        "identityTypes": [
+            "user"
+        ],
+        "operationScopes": [
+            "ims",
+            "source"
+        ],
+        "options": {
+            "MinResults": 5,
+            "MaxResults": 40
+        },
+        "properties": [
+            "DisplayName",
+            "IsMru",
+            "ScopeName",
+            "SamAccountName",
+            "Active",
+            "SubjectDescriptor",
+            "Department",
+            "JobTitle",
+            "Mail",
+            "MailNickname",
+            "PhysicalDeliveryOfficeName",
+            "SignInAddress",
+            "Surname",
+            "Guest",
+            "TelephoneNumber",
+            "Manager",
+            "Description"
+        ]
+    }

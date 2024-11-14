@@ -126,7 +126,8 @@ def list_pipeline_runs(config, params):
 
 def get_pipeline_run(config, params):
     client = AzureDevOps(config)
-    endpoint = '/{0}/_apis/pipelines/{1}/runs/{2}'.format(params.get('project'), params.get('pipelineId'), params.get('runId'))
+    endpoint = '/{0}/_apis/pipelines/{1}/runs/{2}'.format(params.get('project'), params.get('pipelineId'),
+                                                          params.get('runId'))
     return client.make_request(endpoint)
 
 
@@ -171,7 +172,9 @@ def list_branches(config, params):
 
 def list_commits(config, params):
     client = AzureDevOps(config)
-    endpoint = "/{0}/_apis/git/repositories/{1}/commits".format(params.pop('project', ''), params.pop('repositoryId', ''))
+    endpoint = "/{0}/_apis/git/repositories/{1}/commits".format(params.pop('project', ''),
+                                                                params.pop('repositoryId', ''))
+    params.pop('type', None)
     params['searchCriteria.ids'] = handle_comma_separated_input(params.get('searchCriteria.ids'))
     search_criteria = {'searchCriteria.{0}'.format(k): v for k, v in params.pop('searchCriteria', {}).items()
                        if v or isinstance(v, (int, bool))}
@@ -209,6 +212,9 @@ def get_pull_requests_by_id(config, params):
 
 def create_pull_request(config, params):
     client = AzureDevOps(config)
+    additional_input = params.pop('additional_input', {})
+    if additional_input and isinstance(additional_input, dict):
+        params.update(additional_input)
     project = params.pop('project', '')
     repository = params.pop('repositoryId', '')
     endpoint = "/{0}/_apis/git/repositories/{1}/pullrequests".format(project, repository)
@@ -218,26 +224,24 @@ def create_pull_request(config, params):
     query_param = _build_payload(query_param)
     reviewers = params.get('reviewers')
     reviewers = reviewers.split(',') if isinstance(reviewers, str) else reviewers
-    params['reviewers'] = [{"id": reviewer.strip(), 'isRequired': True} for reviewer in reviewers]
-    additional_input = params.pop('additional_input', {})
+    params['reviewers'] = [{"id": get_reviewer_id(config, reviewer.strip()), 'isRequired': True}
+                           for reviewer in reviewers]
     params['targetRefName'] = get_ref_by_branch_name(config, project, repository, params['targetRefName'])
     params['sourceRefName'] = get_ref_by_branch_name(config, project, repository, params['sourceRefName'])
-
-    if additional_input and isinstance(additional_input, dict):
-        params.update(additional_input)
     payload = _build_payload(params)
     return client.make_request(endpoint, method='POST', params=query_param, data=json.dumps(payload))
 
 
 def update_pull_request(config, params):
     client = AzureDevOps(config)
-    project = params.pop('project', '')
-    repository = params.pop('repositoryId', '')
-    endpoint = "/{0}/_apis/git/repositories/{1}/pullrequests/{2}".format(project, repository, params.pop('pullRequestId', ''))
-    params['status'] = PR_STATUS_MAPPING.get(params.get('status'))
-    params['targetRefName'] = get_ref_by_branch_name(config, project, repository, params['targetRefName'])
     if params.get('additional_input') and isinstance(params.get('additional_input'), dict):
         params.update(params.pop('additional_input', ''))
+    project = params.pop('project', '')
+    repository = params.pop('repositoryId', '')
+    endpoint = "/{0}/_apis/git/repositories/{1}/pullrequests/{2}".format(project, repository,
+                                                                         params.pop('pullRequestId', ''))
+    params['status'] = PR_STATUS_MAPPING.get(params.get('status'))
+    params['targetRefName'] = get_ref_by_branch_name(config, project, repository, params['targetRefName'])
     payload = _build_payload(params)
     return client.make_request(endpoint, method='PATCH', data=json.dumps(payload))
 
@@ -254,7 +258,7 @@ def add_pull_request_reviewer(config, params):
     endpoint = "/{0}/_apis/git/repositories/{1}/pullRequests/{2}/reviewers".format(
         params.pop('project', ''), params.pop('repositoryId', ''), params.pop('pullRequestId', ''))
     payload = [{
-        'id': params.get('reviewerId'),
+        'id': get_reviewer_id(config, params.get('reviewerId')),
         'isRequired': params.get('isRequired', False)
     }]
     return client.make_request(endpoint, method='POST', data=json.dumps(payload))
@@ -284,6 +288,30 @@ def get_ref_by_branch_name(config, project, repository, branch_name):
         if branch.get('name', '') == 'refs/heads/{0}'.format(branch_name):
             return branch.get('name')
     return branch_name
+
+
+def get_reviewer_id(config, query_string):
+    client = AzureDevOps(config)
+    endpoint = '/_apis/IdentityPicker/Identities?api-version=7.2-preview.1'
+    payload = REVIEWER_PAYLOAD
+    payload['query'] = query_string
+    result = client.make_request(endpoint, method='POST', data=json.dumps(payload))
+    reviewers = result.get('results', [{}])[0].get('identities', [])
+    reviewer_id = None
+    if len(reviewers) == 0:
+        logger.error("Reviewer {0} not found".format(query_string))
+    elif len(reviewers) == 1:
+        reviewer_id = reviewers[0]['localId']
+    else:
+        for reviewer in reviewers:
+            match_field_values = reviewers['displayName'], reviewers['signInAddress'], reviewers['samAccountName']
+            if query_string in match_field_values:
+                reviewer_id = reviewer['localId']
+                break
+    if reviewer_id:
+        return reviewer_id
+    logger.error('Reviewer {0} not found, check if provided reviewer has appropriate permissions.'.format(query_string))
+    return query_string
 
 
 operations = {
