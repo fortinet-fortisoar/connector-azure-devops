@@ -1293,8 +1293,8 @@
           "required": false,
           "editable": true,
           "type": "text",
-          "tooltip": "Specify reviewers in CSV format to add as required reviewers to this pull request.",
-          "description": "Specify reviewers in CSV format to add as required reviewers to this pull request."
+          "tooltip": "Specify reviewers(IDs, display names or email IDs) in CSV format to add as required reviewers to this pull request.",
+          "description": "Specify reviewers(IDs, display names or email IDs) in CSV format to add as required reviewers to this pull request."
         },
         {
           "title": "Supports Iterations",
@@ -1648,14 +1648,14 @@
           "required": true,
           "editable": true,
           "type": "text",
-          "tooltip": "Specify the ID of the reviewer to be added to the pull request.",
-          "description": "Specify the ID of the reviewer to be added to the pull request."
+          "tooltip": "Specify the ID, display name or email ID of the reviewer to be added to the pull request.",
+          "description": "Specify the ID, display name or email ID of the reviewer to be added to the pull request."
         },
         {
           "title": "Required Reviewer",
           "name": "isRequired",
           "visible": true,
-          "required": true,
+          "required": false,
           "editable": true,
           "type": "checkbox",
           "value": false,
