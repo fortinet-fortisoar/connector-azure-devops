@@ -33,9 +33,9 @@ class AzureDevOps:
         self.verify_ssl = config.get('verify_ssl')
         self.api_version = config.get('api_version') if config.get('api_version') not in [None, ''] else API_VERSION
 
-    def make_request(self, endpoint, method='GET', data=None, params={}, files=None):
+    def make_request(self, endpoint, method='GET', data=None, params={}, files=None, is_url=False):
         try:
-            url = self.server_url + endpoint
+            url = endpoint if is_url else self.server_url + endpoint
             logger.info('Executing url {}'.format(url))
             params['api-version'] = self.api_version
             # CURL UTILS CODE
@@ -150,8 +150,7 @@ def run_pipeline(config, params):
 def list_projects(config, params):
     client = AzureDevOps(config)
     endpoint = "/_apis/projects"
-    params['stateFilter'] = PROJECT_STATE_MAPPING.get(params.get('stateFilter', 'Well Formed'),
-                                                      params.get('stateFilter'))
+    params['stateFilter'] = PROJECT_STATE_MAPPING.get(params.get('stateFilter', 'Well Formed'), params.get('stateFilter'))
     payload = _build_payload(params)
     return client.make_request(endpoint, params=payload)
 
@@ -224,8 +223,9 @@ def create_pull_request(config, params):
     query_param = _build_payload(query_param)
     reviewers = params.get('reviewers')
     reviewers = reviewers.split(',') if isinstance(reviewers, str) else reviewers
-    params['reviewers'] = [{"id": get_reviewer_id(config, reviewer.strip()), 'isRequired': True}
-                           for reviewer in reviewers]
+    if reviewers:
+        params['reviewers'] = [{"id": get_reviewer_id(config, reviewer.strip()), 'isRequired': True}
+                               for reviewer in reviewers]
     params['targetRefName'] = get_ref_by_branch_name(config, project, repository, params['targetRefName'])
     params['sourceRefName'] = get_ref_by_branch_name(config, project, repository, params['sourceRefName'])
     payload = _build_payload(params)
@@ -291,27 +291,32 @@ def get_ref_by_branch_name(config, project, repository, branch_name):
 
 
 def get_reviewer_id(config, query_string):
-    client = AzureDevOps(config)
-    endpoint = '/_apis/IdentityPicker/Identities?api-version=7.2-preview.1'
-    payload = REVIEWER_PAYLOAD
-    payload['query'] = query_string
-    result = client.make_request(endpoint, method='POST', data=json.dumps(payload))
-    reviewers = result.get('results', [{}])[0].get('identities', [])
-    reviewer_id = None
-    if len(reviewers) == 0:
-        logger.error("Reviewer {0} not found".format(query_string))
-    elif len(reviewers) == 1:
-        reviewer_id = reviewers[0]['localId']
-    else:
-        for reviewer in reviewers:
-            match_field_values = reviewers['displayName'], reviewers['signInAddress'], reviewers['samAccountName']
-            if query_string in match_field_values:
-                reviewer_id = reviewer['localId']
-                break
-    if reviewer_id:
-        return reviewer_id
-    logger.error('Reviewer {0} not found, check if provided reviewer has appropriate permissions.'.format(query_string))
-    return query_string
+    try:
+        client = AzureDevOps(config)
+        endpoint = 'https://vssps.dev.azure.com/{0}/_apis/identities'.format(config.get('organization'))
+        query_params = {
+            'searchFilter': 'General',
+            'filterValue': query_string
+        }
+        result = client.make_request(endpoint, params=query_params, is_url=True)
+        reviewers = result.get('value')
+        reviewer_id = None
+        if result.get('count') == 0:
+            logger.error("Reviewer {0} not found".format(query_string))
+        elif result.get('count') == 1:
+            reviewer_id = reviewers[0]['id']
+        else:
+            for reviewer in reviewers:
+                if query_string == reviewers['providerDisplayName']:
+                    reviewer_id = reviewer['id']
+                    break
+        if reviewer_id:
+            return reviewer_id
+        logger.error('Reviewer {0} not found, check if provided reviewer has appropriate permissions.'.format(query_string))
+        return query_string
+    except Exception as error:
+        logger.exception('Error occurred while getting user ID. Error: {}'.format(error))
+        return query_string
 
 
 operations = {

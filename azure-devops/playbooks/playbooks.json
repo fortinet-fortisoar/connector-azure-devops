@@ -940,7 +940,8 @@
                   "project": "",
                   "repositoryId": "",
                   "pullRequestId": "",
-                  "reviewerId": ""
+                  "reviewerId": "",
+                  "isRequired": false
                 },
                 "version": "1.0.0",
                 "connector": "azure-devops",
