@@ -222,7 +222,7 @@ def create_pull_request(config, params):
     }
     query_param = _build_payload(query_param)
     reviewers = params.get('reviewers')
-    reviewers = reviewers.split(',') if isinstance(reviewers, str) else reviewers
+    reviewers = reviewers.split(',') if isinstance(reviewers, str) and reviewers else reviewers
     if reviewers:
         params['reviewers'] = [{"id": get_reviewer_id(config, reviewer.strip()), 'isRequired': True}
                                for reviewer in reviewers]
