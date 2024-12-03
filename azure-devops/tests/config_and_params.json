@@ -199,14 +199,5 @@
             "previewRun": false,
             "resources": null
         }
-    ],
-    "invalid_params": {
-        "text": "qwertyuioplkjhgfdsazxcvbnm",
-        "password": "*******",
-        "integer": -123,
-        "json": {
-            "status": "val,mdnsue",
-            "jhdbh": "kjwndcjksn"
-        }
-    }
+    ]
 }

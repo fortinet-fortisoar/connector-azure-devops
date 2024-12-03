@@ -12,7 +12,6 @@ Copyright end
 
 import pytest
 import logging
-logger = logging.getLogger(__name__)
 from testframework.conftest import valid_configuration, invalid_configuration, valid_configuration_with_token,\
     connector_id, connector_details, info_json, params_json
 from testframework.helpers.test_helpers import run_health_check_success, run_invalid_config_test, run_success_test,\
@@ -113,9 +112,7 @@ def test_list_pipeline_runs_success(cache, valid_configuration_with_token, conne
     for result in run_success_test(cache, connector_details, operation_name='list_pipeline_runs',
                                    action_params=params_json['list_pipeline_runs']):
         assert result.get('status') == "Success"
-        print("\n\nlist_pipeline_runs result: {0}\n\n".format(result))
         for pipeline_run in result.get('data', {}).get('value'):
-            logger.info("\n\nlist_pipeline_runs: {0}\n\n".format(pipeline_run))
             params_json['get_pipeline_run'][0]['pipelineId'] = pipeline_run.get('pipeline').get('id')
             params_json['get_pipeline_run'][0]['runId'] = pipeline_run.get('id')
 
@@ -279,8 +276,8 @@ def test_get_commit_success(cache, valid_configuration_with_token, connector_det
 def test_validate_get_commit_output_schema(cache, valid_configuration_with_token, connector_details,
                                                  info_json, params_json):
     set_report_metadata(connector_details, "Get Commit Details", "Validate Output Schema")
-    # run_output_schema_validation(cache, 'get_commit', info_json, params_json['get_commit'])
-    assert _validate_json_schema(cache, 'get_commit', info_json)
+    run_output_schema_validation(cache, 'get_commit', info_json, params_json['get_commit'])
+
 
 @pytest.mark.get_commit
 def test_get_commit_invalid_project(valid_configuration_with_token, connector_details, params_json):
