@@ -9,7 +9,7 @@
   "category": "DevOps and Digital Operations",
   "icon_small_name": "small.png",
   "icon_large_name": "large.png",
-  "help_online": "",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.0/azure-devops/1040/azure-devops-v1-0-0",
   "configuration": {
     "fields": [
       {
@@ -20,8 +20,8 @@
         "editable": true,
         "visible": true,
         "value": "https://dev.azure.com",
-        "tooltip": "IP address or hostname of the Azure DevOps server to which you will connect and perform automated operations.",
-        "description": "IP address or hostname of the Azure DevOps server to which you will connect and perform automated operations."
+        "tooltip": "Specify the IP address or hostname of the Azure DevOps server to connect and perform automated operations.",
+        "description": "Specify the IP address or hostname of the Azure DevOps server to connect and perform automated operations."
       },
       {
         "title": "Organization Name",
@@ -31,7 +31,7 @@
         "editable": true,
         "type": "text",
         "tooltip": "Specify the name of the organization on Azure DevOps.",
-        "description": "Specify the name of the organization on Azure DevOps."
+        "description": "Specify the name of the organization created on Azure DevOps."
       },
       {
         "title": "Auth Type",
@@ -45,7 +45,7 @@
         ],
         "name": "auth_type",
         "value": "Access Token",
-        "description": "Select the method using which you will get authentication tokens used to access the security graph APIs. You can choose between On behalf of User - Delegate Permission or Without a User - Application Permission.",
+        "description": "Select the authentication method to access the security graph APIs. You can choose from the following options: Access Token, On behalf of User - Delegate Permission",
         "tooltip": "Select the method using which you will get authentication tokens used to access the security graph APIs.",
         "onchange": {
           "On behalf of User - Delegate Permission": [
@@ -124,7 +124,7 @@
         "type": "text",
         "value": "7.1",
         "tooltip": "Specify the API version to use.",
-        "description": "Specify the API version to use. By default it uses 7.1 api-version."
+        "description": "Specify the API version to use. By default it uses 7.1 api version."
       },
       {
         "title": "Verify SSL",
@@ -134,8 +134,8 @@
         "editable": true,
         "visible": true,
         "value": true,
-        "description": "Specifies whether the SSL certificate for the server is to be verified. By default, this option is set to True.",
-        "tooltip": "Specifies whether the SSL certificate for the server is to be verified or not."
+        "description": "Specifies whether the SSL certificate for the server is to be verified. By default, this option is selected, i.e., set to true.",
+        "tooltip": "Specifies whether the SSL certificate for the server is to be verified."
       }
     ]
   },
@@ -175,8 +175,8 @@
           "required": true,
           "editable": true,
           "type": "text",
-          "tooltip": "Specify the name of the project on Azure DevOps, whose pipelines is to be retrieved.",
-          "description": "Specify the name of the project on Azure DevOps, whose pipelines is to be retrieved."
+          "tooltip": "Specify the name of the project to retrieve its pipelines from Azure DevOps. ",
+          "description": "Specify the name of the project to retrieve its pipelines from Azure DevOps."
         },
         {
           "title": "Sort Field",
@@ -186,8 +186,8 @@
           "editable": true,
           "type": "text",
           "value": "name",
-          "tooltip": "Specify the name of the based on which results is to be sorted.",
-          "description": "Specify the name of the based on which results is to be sorted. By default it is set to name."
+          "tooltip": "Specify the field based on which to sort the retrieved results from Azure DevOps. By default it is set to name.",
+          "description": "(Optional) Specify the field based on which to sort the retrieved results from Azure DevOps. By default it is set to name."
         },
         {
           "title": "Sort Order",
@@ -197,8 +197,8 @@
           "editable": true,
           "type": "select",
           "value": "Asc",
-          "tooltip": "Select the sort order in which result is to be sorted. Note: This will be sorted based on name field only.",
-          "description": "Select the sort order based in which result is to be sorted. You can choose from ASC or DESC. Note: This will be sorted based on name field only.",
+          "tooltip": "Select the sort order to sort the retrieved results from Azure DevOps. Note: The selected sort order sorts the results only by the name field.",
+          "description": "(Optional) Select the sort order to sort the retrieved results from Azure DevOps. You can choose from the following options: ASC, DESC. \nNOTE: The selected sort order sorts the results only by the name field.",
           "options": [
             "Asc",
             "Desc"
@@ -211,8 +211,8 @@
           "required": false,
           "editable": true,
           "type": "text",
-          "tooltip": "Specify the continuation token from a previous request, to retrieve the next page of results.",
-          "description": "Specify the continuation token from a previous request, to retrieve the next page of results."
+          "tooltip": "Specify the continuation token from a previous request to retrieve the next page of results.",
+          "description": "(Optional) Specify the continuation token from a previous request to retrieve the next page of results."
         },
         {
           "title": "Limit",
@@ -221,8 +221,8 @@
           "required": false,
           "editable": true,
           "type": "integer",
-          "tooltip": "Specify the maximum number of records, to be retrieved in this operation.",
-          "description": "Specify the maximum number of records, to be retrieved in this operation."
+          "tooltip": "Specify the maximum number of records to be retrieved in this operation.",
+          "description": "(Optional) Specify the maximum number of records to be retrieved in this operation."
         }
       ]
     },
@@ -278,7 +278,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the name of the project on Azure DevOps, whose pipeline runs are to be retrieved.",
-          "description": "Specify the name of the project on Azure DevOps, whose pipeline runs are to be retrieved."
+          "description": "Specify the name of the project to retrieve its pipeline run list from Azure DevOps."
         },
         {
           "title": "Pipeline ID",
@@ -359,7 +359,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the name of the project on Azure DevOps, whose pipeline runs are to be retrieved.",
-          "description": "Specify the name of the project on Azure DevOps, whose pipeline runs are to be retrieved."
+          "description": "Specify the name of the project to retrieve its pipeline run details from Azure DevOps."
         },
         {
           "title": "Pipeline ID",
@@ -369,7 +369,7 @@
           "editable": true,
           "type": "integer",
           "tooltip": "Specify the ID of the pipeline whose runs are to be retrieved.",
-          "description": "Specify the ID of the pipeline whose runs are to be retrieved."
+          "description": "Specify the ID of the pipeline whose run details are to be retrieved."
         },
         {
           "title": "Run ID",
@@ -379,7 +379,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the ID of the run is to be retrieved.",
-          "description": "Specify the ID of the run is to be retrieved."
+          "description": "Specify the ID of the run whose details are to be retrieved."
         }
       ]
     },
@@ -413,7 +413,7 @@
           "editable": true,
           "type": "select",
           "tooltip": "Select the state of the project to be retrieved from Azure DevOps.",
-          "description": "Select the state of the project to be retrieved from Azure DevOps. By default it is set to \"Well Formed\". You can choose from \"All\",\"Create Pending\", \"Deleted\", \"Deleting\", \"New\", \"Unchanged\", \"Well Formed\"",
+          "description": "(Optional) Select the state of the project to be retrieved from Azure DevOps. You can choose from the following options: All Create Pending Deleted Deleting New Unchanged Well Formed (Default)",
           "value": "Well Formed",
           "options": [
             "All",
@@ -433,7 +433,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the continuation token from a previous request, to retrieve the next page of results.",
-          "description": "Specify the continuation token from a previous request, to retrieve the next page of results."
+          "description": "(Optional) Specify the continuation token from a previous request to retrieve the next page of results."
         },
         {
           "title": "Offset",
@@ -443,7 +443,7 @@
           "editable": true,
           "type": "integer",
           "tooltip": "Specify the number of records, to be skipped in this operation.",
-          "description": "Specify the number of records, to be skipped retrieved in this operation."
+          "description": "(Optional) Specify the number of records to be skipped when retrieving results."
         },
         {
           "title": "Limit",
@@ -453,7 +453,7 @@
           "editable": true,
           "type": "integer",
           "tooltip": "Specify the maximum number of records, to be retrieved in this operation.",
-          "description": "Specify the maximum number of records, to be retrieved in this operation."
+          "description": "(Optional) Specify the maximum number of records to be retrieved."
         }
       ]
     },
@@ -530,7 +530,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the name of the project on Azure DevOps, whose repositories are to be retrieved.",
-          "description": "Specify the name of the project on Azure DevOps, whose repositories are to be retrieved."
+          "description": "Specify the name of the project to retrieve its repositories from Azure DevOps."
         },
         {
           "title": "Include Hidden Repositories",
@@ -540,7 +540,7 @@
           "editable": true,
           "type": "checkbox",
           "tooltip": "Select to include hidden repositories in the response. The default value is false.",
-          "description": "Select to include hidden repositories in the response. The default value is false."
+          "description": "(Optional) Select to include hidden repositories in the response. By default, this option is cleared, i.e., set to false."
         },
         {
           "title": "Include All URLs",
@@ -550,7 +550,7 @@
           "editable": true,
           "type": "checkbox",
           "tooltip": "Select to include all remote URLs in the response. The default value is false.",
-          "description": "Select to include all remote URLs in the response. The default value is false."
+          "description": "(Optional) Select to include all remote URLs in the response. By default, this option is cleared, i.e., set to false."
         },
         {
           "title": "Include Reference Links",
@@ -560,7 +560,7 @@
           "editable": true,
           "type": "checkbox",
           "tooltip": "Select to include reference links in the response. The default value is false.",
-          "description": "Select to include reference links in the response. The default value is false."
+          "description": "(Optional) Select to include reference links in the response. By default, this option is cleared, i.e., set to false."
         }
       ]
     },
@@ -612,7 +612,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the name of the project from which to retrieve the repository branches.",
-          "description": "Specify the name of the project from which to retrieve the repository branches."
+          "description": "Specify the name of the project from which to retrieve the branch list."
         },
         {
           "title": "Repository",
@@ -622,7 +622,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the ID or name of the repository which is to be retrieved.",
-          "description": "Specify the ID or name of the repository which is to be retrieved."
+          "description": "Specify the ID or name of the repository whose branch list is to be retrieved."
         },
         {
           "title": "Branch Name Filter (Contains)",
@@ -632,7 +632,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify a substring to filter branch names that include this value.",
-          "description": "Specify a substring to filter branch names that include this value."
+          "description": "(Optional) Specify a substring to retrieve only those branch names that contain the specified string."
         },
         {
           "title": "Branch Name Filter (Starts With)",
@@ -643,7 +643,7 @@
           "type": "text",
           "placeholder": "heads",
           "tooltip": "Specify a prefix to filter branch names that begin with the given value. For example, heads/ma will return branches such as refs/heads/main and refs/heads/master. Use this filter to narrow down results based on the starting characters of branch names.",
-          "description": "Specify a prefix to filter branch names that begin with the given value. For example, heads/ma will return branches such as refs/heads/main and refs/heads/master. Use this filter to narrow down results based on the starting characters of branch names."
+          "description": "(Optional) Specify a prefix to retrieve only those branch names that start with the specified string. For example, heads/ma returns branches such as refs/heads/main and refs/heads/master."
         },
         {
           "title": "Include My Branches",
@@ -653,7 +653,7 @@
           "editable": true,
           "type": "checkbox",
           "tooltip": "Include only branches that the user owns, favorites, and the default branch. Default is false.",
-          "description": "Include only branches that the user owns, favorites, and the default branch. Default is false."
+          "description": "(Optional) Select to include only those branches that the user owns, has marked as favorites, and the default branch. By default, this option is cleared, i.e., set to false."
         },
         {
           "title": "Include Statuses",
@@ -663,7 +663,7 @@
           "editable": true,
           "type": "checkbox",
           "tooltip": "Include up to the first 1000 commit statuses for each ref. Default is false.",
-          "description": "Include up to the first 1000 commit statuses for each ref. Default is false."
+          "description": "(Optional) Select to include up to the first 1000 commit statuses for each ref. By default, this option is cleared, i.e., set to false."
         },
         {
           "title": "Include Links",
@@ -673,7 +673,7 @@
           "editable": true,
           "type": "checkbox",
           "tooltip": "Specify whether referenceLinks should be included in the result. Default is false.",
-          "description": "Specify whether referenceLinks should be included in the result. Default is false."
+          "description": "(Optional) Select to include referenceLinks in the results. By default, this option is cleared, i.e., set to false."
         },
         {
           "title": "Latest Statuses Only",
@@ -683,7 +683,7 @@
           "editable": true,
           "type": "checkbox",
           "tooltip": "Include only the tip commit status for each ref. Requires includeStatuses to be true. Default is false.",
-          "description": "Include only the tip commit status for each ref. Requires includeStatuses to be true. Default is false."
+          "description": "(Optional) Select to include only the tip commit status for each ref. Requires includeStatuses to be true. By default, this option is cleared, i.e., set to false."
         },
         {
           "title": "Peel Tags",
@@ -693,7 +693,7 @@
           "editable": true,
           "type": "checkbox",
           "tooltip": "Specify if annotated tags should populate the PeeledObjectId property. Default is false.",
-          "description": "Specify if annotated tags should populate the PeeledObjectId property. Default is false."
+          "description": "(Optional) Select to use annotated tags to populate the PeeledObjectId property. By default, this option is cleared, i.e., set to false."
         },
         {
           "title": "Continuation Token",
@@ -703,7 +703,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the continuation token used for pagination.",
-          "description": "Specify the continuation token used for pagination."
+          "description": "(Optional) Specify the continuation token from a previous request to retrieve the next page of results."
         },
         {
           "title": "Limit",
@@ -713,7 +713,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the maximum number of refs to return. It cannot be bigger than 1000.",
-          "description": "Specify the maximum number of refs to return. It cannot be bigger than 1000."
+          "description": "(Optional) Specify the maximum number of refs to return. Maximum value is 1000."
         }
       ]
     },
@@ -801,7 +801,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the name of the project from which to retrieve the repository branches.",
-          "description": "Specify the name of the project from which to retrieve the repository branches."
+          "description": "Specify the name of the project from which to retrieve the commit details."
         },
         {
           "title": "Repository",
@@ -821,7 +821,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the ID of the commit which is to be retrieved.",
-          "description": "Specify the ID of the commit which is to be retrieved."
+          "description": "Specify the ID of the commit to be retrieved."
         },
         {
           "title": "Change Count",
@@ -831,7 +831,7 @@
           "editable": true,
           "type": "integer",
           "tooltip": "Specify the number of changes to include in the result.",
-          "description": "Specify the number of changes to include in the result."
+          "description": "(Optional) Specify the number of changes to include in the result."
         }
       ]
     },
@@ -934,7 +934,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the name of the project on Azure DevOps, whose pipeline runs are to be retrieved.",
-          "description": "Specify the name of the project on Azure DevOps, whose pipeline runs are to be retrieved."
+          "description": "Specify the name of the project from which to retrieve the list of pull requests (PR)."
         },
         {
           "title": "Repository",
@@ -944,7 +944,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the ID or name of the repository whose commit is to be retrieved.",
-          "description": "Specify the ID or name of the repository whose commit is to be retrieved."
+          "description": "Specify the ID or name of the repository to retrieve its list of PRs."
         },
         {
           "title": "Status",
@@ -954,7 +954,7 @@
           "editable": true,
           "type": "select",
           "tooltip": "Select the status of the pull requests to be retrieved from Azure DevOps.",
-          "description": "Select the status of the pull requests to be retrieved from Azure DevOps. By default it is set to \"Not Set\". You can choose from \"All\", \"Active\", \"Abandoned\", \"Completed\", \"Not Set\"",
+          "description": "(Optional) Select the status of the pull requests to filter the retrieved results. You can choose from the following options: All Active Abandoned Completed Not Set",
           "value": "Not Set",
           "options": [
             "All",
@@ -972,7 +972,7 @@
           "editable": true,
           "type": "json",
           "tooltip": "Specify the search criteria to retrieve the pull requests from Azure DevOps.",
-          "description": "Specify the search criteria to retrieve the pull requests from Azure DevOps. For example, ",
+          "description": "(Optional) Specify the search criteria, as JSON, to retrieve the pull requests from Azure DevOps. For example: { \"maxTime\": \"\", \"minTime\": \"\", \"creatorId\": \"\", \"reviewerId\": \"\", \"includeLinks\": \"\", \"repositoryId\": \"\", \"sourceRefName\": \"\", \"targetRefName\": \"\", \"queryTimeRangeType\": \"\", \"sourceRepositoryId\": \"\" }",
           "value": {
             "repositoryId": "",
             "sourceRepositoryId": "",
@@ -994,7 +994,7 @@
           "editable": true,
           "type": "integer",
           "tooltip": "Specify the number of records, to be skipped in this operation.",
-          "description": "Specify the number of records, to be skipped retrieved in this operation."
+          "description": "(Optional) Specify the number of records to be skipped retrieved in this operation."
         },
         {
           "title": "Limit",
@@ -1004,7 +1004,7 @@
           "editable": true,
           "type": "integer",
           "tooltip": "Specify the maximum number of records, to be retrieved in this operation.",
-          "description": "Specify the maximum number of records, to be retrieved in this operation."
+          "description": "(Optional) Specify the maximum number of records to be retrieved in this operation."
         }
       ]
     },
@@ -1115,7 +1115,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the name of the project on Azure DevOps, whose pipeline runs are to be retrieved.",
-          "description": "Specify the name of the project on Azure DevOps, whose pipeline runs are to be retrieved."
+          "description": "Specify the name of the project from which to retrieve the pull request (PR) details."
         },
         {
           "title": "Pull Request ID",
@@ -1234,7 +1234,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the Azure DevOps project associated with the repository.",
-          "description": "Specify the Azure DevOps project associated with the repository."
+          "description": "Specify the Azure DevOps project associated with the repository under which the PR is to be created."
         },
         {
           "title": "Repository",
@@ -1244,7 +1244,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Select the ID or name of the repository where the pull request will be created.",
-          "description": "Select the ID or name of the repository where the pull request will be created."
+          "description": "Select the ID or name of the repository under which the PR is to be created."
         },
         {
           "title": "Pull Request Title",
@@ -1254,7 +1254,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify a title for the pull request.",
-          "description": "Specify a title for the pull request."
+          "description": "Specify a title for the pull request being created."
         },
         {
           "title": "Source Branch Name",
@@ -1264,7 +1264,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the name of the source branch.",
-          "description": "Specify the name of the source branch."
+          "description": "Specify the name of the source branch for creating the PR."
         },
         {
           "title": "Target Branch Name",
@@ -1274,7 +1274,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the name of the target branch.",
-          "description": "Specify the name of the target branch."
+          "description": "Specify the name of the target branch for creating the PR."
         },
         {
           "title": "Pull Request Description",
@@ -1284,7 +1284,7 @@
           "editable": true,
           "type": "textarea",
           "tooltip": "Specify a description for the pull request.",
-          "description": "Specify a description for the pull request."
+          "description": "(Optional) Specify a description for the pull request."
         },
         {
           "title": "Reviewers",
@@ -1294,7 +1294,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify reviewers(IDs, display names or email IDs) in CSV format to add as required reviewers to this pull request.",
-          "description": "Specify reviewers(IDs, display names or email IDs) in CSV format to add as required reviewers to this pull request."
+          "description": "(Optional) Specify IDs, display names, or email IDs as comma-separated values to add as reviewers for this pull request."
         },
         {
           "title": "Supports Iterations",
@@ -1305,7 +1305,7 @@
           "type": "checkbox",
           "value": false,
           "tooltip": "Specify whether to enable reviewing of subsequent pushes individually.",
-          "description": "Specify whether to enable reviewing of subsequent pushes individually."
+          "description": "(Optional) Select to enable reviewing of subsequent pushes individually."
         },
         {
           "title": "Additional Inputs",
@@ -1315,7 +1315,7 @@
           "editable": true,
           "type": "json",
           "tooltip": "Specify other parameters of pull request to be created in json format.",
-          "description": "Specify other parameters of pull request to be created in json format. For example, { \"isDraft\": true }"
+          "description": "(Optional) Specify any other parameters, as JSON, of this pull request to be created. For example, { \"isDraft\": true }"
         }
       ]
     },
@@ -1441,7 +1441,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the Azure DevOps project associated with the repository.",
-          "description": "Specify the Azure DevOps project associated with the repository."
+          "description": "Specify the Azure DevOps project associated with the repository under which the PR is to be updated."
         },
         {
           "title": "Repository",
@@ -1451,7 +1451,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Select the ID or name of the repository where the pull request exists.",
-          "description": "Select the ID or name of the repository where the pull request exists."
+          "description": "Select the ID or name of the repository under which the PR is to be updated."
         },
         {
           "title": "Pull Request ID",
@@ -1471,7 +1471,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify a new title for the pull request.",
-          "description": "Specify a new title for the pull request."
+          "description": "Specify a title for the pull request to update."
         },
         {
           "title": "Pull Request Description",
@@ -1481,7 +1481,7 @@
           "editable": true,
           "type": "textarea",
           "tooltip": "Specify a new description for the pull request (up to 4000 characters).",
-          "description": "Specify a new description for the pull request (up to 4000 characters)."
+          "description": "(Optional) Specify a new description for the pull request (up to 4000 characters)."
         },
         {
           "title": "Pull Request Status",
@@ -1491,7 +1491,7 @@
           "editable": true,
           "type": "select",
           "tooltip": "Specify the new status of the pull request.",
-          "description": "Specify the new status of the pull request. You can choose from \"Active\",\n            \"Abandoned\",\n            \"Completed\",\n            \"Not Set\"",
+          "description": "(Optional) Select the new status of the pull requests to update. You can choose from the following options: Active Abandoned Completed Not Set",
           "options": [
             "Active",
             "Abandoned",
@@ -1507,7 +1507,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the name of the new target branch if retargeting the pull request.",
-          "description": "Specify the name of the new target branch if retargeting the pull request."
+          "description": "(Optional) Specify a different name of the target branch to update, if changing the target for the PR."
         },
         {
           "title": "Additional Inputs",
@@ -1517,7 +1517,7 @@
           "editable": true,
           "type": "json",
           "tooltip": "Specify other parameters of pull request to be updated in json format.",
-          "description": "Specify other parameters of pull request to be updated in json format."
+          "description": "Specify any other parameters, as JSON, of this pull request to be created. For example, { \"isDraft\": true }"
         }
       ]
     },
@@ -1558,7 +1558,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the name of the Azure DevOps project associated with the repository.",
-          "description": "Specify the name of the Azure DevOps project associated with the repository."
+          "description": "Specify the name of the Azure DevOps project associated with the repository whose PR reviewers are to be retrieved."
         },
         {
           "title": "Repository",
@@ -1619,7 +1619,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the name of the Azure DevOps project associated with the repository.",
-          "description": "Specify the name of the Azure DevOps project associated with the repository."
+          "description": "Specify the name of the Azure DevOps project associated with the repository where PR reviewers are to be added."
         },
         {
           "title": "Repository",
@@ -1639,7 +1639,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the ID of the pull request to which the reviewer will be added.",
-          "description": "Specify the ID of the pull request to which the reviewer will be added."
+          "description": "Specify the ID of the pull request to which the reviewer is to be added."
         },
         {
           "title": "Reviewer",
@@ -1649,7 +1649,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the ID, display name or email ID of the reviewer to be added to the pull request.",
-          "description": "Specify the ID, display name or email ID of the reviewer to be added to the pull request."
+          "description": "Specify the ID, display name, or email address of the reviewer to be added to the pull request."
         },
         {
           "title": "Required Reviewer",
@@ -1660,7 +1660,7 @@
           "type": "checkbox",
           "value": false,
           "tooltip": "Select if the reviewer should be required.",
-          "description": "Specify if the reviewer should be required."
+          "description": "(Optional) Select to mark the reviewer as required."
         }
       ]
     },
@@ -1700,7 +1700,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the name of the Azure DevOps project associated with the repository.",
-          "description": "Specify the name of the Azure DevOps project associated with the repository."
+          "description": "Specify the name of the Azure DevOps project associated with the repository whose PR commit list is to be retrieved."
         },
         {
           "title": "Repository",
@@ -1740,7 +1740,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the continuation token used for pagination.",
-          "description": "(Optional) Specify the continuation token used for pagination."
+          "description": "(Optional) Specify the continuation token from a previous request to retrieve the next page of results."
         }
       ]
     },
@@ -1787,7 +1787,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the name of the Azure DevOps project.",
-          "description": "(Optional) Specify the name of the Azure DevOps project."
+          "description": "Specify the name of the Azure DevOps project associated with the repository whose commits are to be retrieved."
         },
         {
           "title": "Repository",
@@ -1797,7 +1797,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the ID or name of the repository.",
-          "description": "Specify the ID or name of the repository."
+          "description": "Specify the ID or name of the repository whose commit list is to be retrieved."
         },
         {
           "title": "Search Options",
@@ -1806,7 +1806,7 @@
           "required": false,
           "editable": true,
           "type": "select",
-          "description": "(Optional) Select the criteria to filter search results. Choose between ‘Commit IDs,’ which allows specifying exact commit IDs in CSV format, or ‘Other,’ which provides additional options for filtering by author, date range, and other commit details.",
+          "description": "(Optional) Select the criteria to filter search results. You can choose from the following options: Commit IDs, Other",
           "tooltip": "Select the criteria to filter search results.",
           "onchange": {
             "Commit IDs": [
@@ -1817,8 +1817,8 @@
                 "required": false,
                 "editable": true,
                 "type": "text",
-                "tooltip": "Specify exact commit IDs to retrieve in CSV format.",
-                "description": "(Optional) Specify exact commit IDs to retrieve in CSV format."
+                "tooltip": "Specify exact commit IDs as comma-separated values.",
+                "description": "Specify exact commit IDs as comma-separated values."
               }
             ],
             "Other": [
@@ -2067,7 +2067,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the name of the project on Azure DevOps, whose pipeline runs are to be retrieved.",
-          "description": "Specify the name of the project on Azure DevOps, whose pipeline runs are to be retrieved."
+          "description": "Specify the name of the project under which the pipeline is to be run."
         },
         {
           "title": "Pipeline ID",
@@ -2087,7 +2087,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the names of the pipeline stages in CSV format that should be skipped during execution.",
-          "description": "(Optional) Specify the names of the pipeline stages in CSV format that should be skipped during execution."
+          "description": "(Optional) Specify the pipeline stage names as comma-separated values that are to be skipped during execution."
         },
         {
           "title": "Pipeline Version",
@@ -2097,7 +2097,7 @@
           "editable": true,
           "type": "integer",
           "tooltip": "Specify the pipeline version.",
-          "description": "(Optional) Specify the pipeline version."
+          "description": "(Optional) Specify the pipeline version being run."
         },
         {
           "title": "Preview Run",
@@ -2108,7 +2108,7 @@
           "type": "checkbox",
           "value": false,
           "tooltip": "If true, don't actually create a new run. Instead, return the final YAML document after parsing templates.",
-          "description": "(Optional) If true, don't actually create a new run. Instead, return the final YAML document after parsing templates."
+          "description": "(Optional) Select to return the final YAML document after parsing templates as a run preview."
         },
         {
           "title": "Resources",
