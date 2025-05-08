@@ -5,9 +5,13 @@ Copyright (c) 2025 Fortinet Inc
 Copyright end
 """
 
+import os
+import uuid
 import json
+import base64
 import requests
 from .microsoft_api_auth import *
+from concurrent.futures import ThreadPoolExecutor
 from connectors.core.connector import get_logger, ConnectorError
 from .constants import *
 
@@ -48,7 +52,7 @@ class AzureDevOps:
             response = requests.request(method, url, auth=self.auth, params=params, files=files,
                                         data=data, headers=self.headers, verify=self.verify_ssl)
             if response.ok:
-                logger.info('successfully get response for url {}'.format(url))
+                logger.info('successfully got response for url {}'.format(url))
                 if method.lower() == 'delete':
                     return response
                 else:
@@ -97,6 +101,14 @@ def _check_health(config):
 
 def _build_payload(params):
     return {key: val for key, val in params.items() if val is not None and val != ''}
+
+
+def is_uuid(string):
+    try:
+        val = uuid.UUID(string)
+        return str(val) == string.lower()
+    except ValueError:
+        return False
 
 
 def handle_comma_separated_input(input_value):
@@ -319,6 +331,261 @@ def get_reviewer_id(config, query_string):
         return query_string
 
 
+def create_repository(config, params):
+    client = AzureDevOps(config)
+    project = params.pop('project', '')
+    repository = params.pop('repository', '')
+    parentRepository = params.pop('parentRepository', '')
+    if parentRepository:
+        params.pop('sourceRef')
+    endpoint = "/{0}/_apis/git/repositories".format(project)
+    query_param = _build_payload(params)
+    payload = {
+      "name": repository,
+      "project": {
+        "id": project
+      }
+    }
+    if parentRepository:
+        payload.update({"parentRepository": {
+            "id": parentRepository,
+            "project": {
+              "id": project
+            }
+          }})
+    return client.make_request(endpoint, method='POST', params=query_param, data=json.dumps(payload))
+
+
+def update_repository(config, params):
+    client = AzureDevOps(config)
+    repositoryId = params.pop('repositoryId', '')
+    endpoint = "/_apis/git/repositories/{0}".format(repositoryId)
+    payload = _build_payload(params)
+    return client.make_request(endpoint, method='PATCH', data=json.dumps(payload))
+
+
+def get_repo_tree(client, repositoryId, branch_name, path, recursive=False):
+    payload = {
+        "scopePath": path,
+        "recursionLevel": "full" if recursive else "oneLevel",
+        "versionDescriptor.version": branch_name,
+        "versionDescriptor.versionType": "branch"
+    }
+    endpoint = "/_apis/git/repositories/{0}/items".format(repositoryId)
+    # Get the tree for the specified branch and path
+    return client.make_request(endpoint, params=payload)
+
+
+def file_exists_in_repository(client, repositoryId, branch_name, relative_path):
+    try:
+        parent = os.path.dirname(relative_path)  # get path only
+        file = os.path.basename(relative_path)  # get file name
+        tree = get_repo_tree(client, repositoryId, branch_name, parent)
+        # Check if the file exists in the tree
+        return any(item['path'].split("/")[-1] == file and item['type'] == 'blob' for item in tree)
+    except:
+        return False
+
+
+def process_file(client, repositoryId, branch_name, local_directory, file, root, changes):
+    if not any(x in os.path.join(local_directory, file) for x in ['.DS_Store', '.git', '.pyc']):
+        local_path = os.path.join(root, file)
+        relative_path = os.path.relpath(local_path, local_directory)
+        if local_path.endswith('.png'):
+            with open(local_path, 'rb', encoding="utf8", errors='ignore') as input_file:
+                content_base64 = base64.b64encode(input_file.read()).decode('utf-8')
+                if file_exists_in_repository(client, repositoryId, branch_name, relative_path):
+                    changes.append({"changeType": "edit", "item": {"path": relative_path},
+                                    "newContent": {"content": content_base64, "contentType": "base64encoded"}})
+                else:
+                    changes.append({"changeType": "add", "item": {"path": relative_path},
+                                    "newContent": {"content": content_base64, "contentType": "base64encoded"}})
+        else:
+            with open(local_path, 'r', encoding='utf-8', errors='ignore') as input_file:
+                content = input_file.read()
+                if file_exists_in_repository(client, repositoryId, branch_name, relative_path):
+                    changes.append({"changeType": "edit", "item": {"path": relative_path},
+                                    "newContent": {"content": content, "contentType": "rawtext"}})
+                else:
+                    changes.append({"changeType": "add", "item": {"path": relative_path},
+                                    "newContent": {"content": content, "contentType": "rawtext"}})
+
+
+def push_repository(config, params):
+    client = AzureDevOps(config)
+    project = params.pop('project', '')
+    repositoryId = params.pop('repositoryId', '')
+    local_directory = params.pop('clone_path', '')
+    commit_message = params.pop('commit_message', '')
+    branch_name = params.pop('branch', '')
+    previousCommitSha = params.pop('previousCommitSha', '')
+    changes = []
+    try:
+        if local_directory:
+            with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+                futures = []
+                for root, dirs, files in os.walk(local_directory):
+                    for file in files:
+                        futures.append(executor.submit(process_file, client, repositoryId, branch_name, local_directory, file, root, changes))
+                for future in futures:
+                    future.result()
+
+            existing_files = get_repo_tree(client, repositoryId, branch_name, path='/', recursive=True)
+            # Identify files in the repository that are not present locally
+            for existing_file in existing_files:
+                repo_file_path = existing_file['path']
+                local_file_path = os.path.join(local_directory, repo_file_path)
+                if not os.path.exists(local_file_path):
+                    # File is in the repository but not present locally, delete it
+                    changes.append({"changeType": "delete", "item": {"path": repo_file_path}})
+        payload = {
+            "refUpdates": [
+                {
+                    "name": branch_name,
+                    "oldObjectId": previousCommitSha
+                }
+            ],
+            "commits": [
+                {
+                    "comment": commit_message,
+                    "changes": changes
+                }
+            ]
+        }
+        if not local_directory:
+            payload['refUpdates'][0]['oldObjectId'] = "0000000000000000000000000000000000000000"
+            payload['commits'][0]['changes'] = [{"changeType": "add", "item": {"path": "/readme.md"}, "newContent": {"content": "README", "contentType": "rawtext"}}]
+        endpoint = "/{0}/_apis/git/repositories/{1}/pushes".format(project, repositoryId)
+        return client.make_request(endpoint, method='POST', data=json.dumps(payload))
+    except AssertionError as err:
+        raise ConnectorError(err)
+
+
+def create_branch(config, params):
+    previousCommitSha = params.pop('previousCommitSha', '')
+    if previousCommitSha:
+        client = AzureDevOps(config)
+        payload = [
+          {
+            "name": params.pop('branch', ''),
+            "oldObjectId": "0000000000000000000000000000000000000000",
+            "newObjectId": previousCommitSha
+          }
+        ]
+        endpoint = "/{0}/_apis/git/repositories/{1}/refs".format(params.pop('project', ''), params.pop('repositoryId', ''))
+        return client.make_request(endpoint, method='POST', data=json.dumps(payload))
+    else:
+        return push_repository(config, params)
+
+
+def delete_branch(config, params):
+    client = AzureDevOps(config)
+    payload = [
+      {
+        "name": params.pop('branch', ''),
+        "oldObjectId": params.pop('previousCommitSha', ''),
+        "newObjectId": "0000000000000000000000000000000000000000"
+      }
+    ]
+    endpoint = "/{0}/_apis/git/repositories/{1}/refs".format(params.pop('project', ''), params.pop('repositoryId', ''))
+    return client.make_request(endpoint, method='POST', data=json.dumps(payload))
+
+
+def create_pull_request_comment(config, params):
+    client = AzureDevOps(config)
+    repositoryId = params.pop('repositoryId', '')
+    pullRequestId = params.pop('pullRequestId', '')
+    content = params.pop('content', '')
+    threadId = params.pop('threadId', '')
+    if threadId:
+        parentCommentId = params.pop('parentCommentId', '')
+        endpoint = "/_apis/git/repositories/{0}/pullRequests/{1}/threads/{2}/comments".format(repositoryId, pullRequestId,
+                                                                                              threadId)
+        payload = {
+          "content": content,
+          "commentType": 1
+        }
+        if parentCommentId:
+            payload.update({"parentCommentId": parentCommentId})
+    else:
+        endpoint = "/_apis/git/repositories/{0}/pullRequests/{1}/threads".format(repositoryId, pullRequestId)
+        payload = {
+          "comments": [
+            {
+              "parentCommentId": 0,
+              "content": content,
+              "commentType": 1
+            }
+          ],
+          "status": 1
+        }
+    return client.make_request(endpoint, method='POST', data=json.dumps(payload))
+
+
+def list_pull_request_comment(config, params):
+    client = AzureDevOps(config)
+    repositoryId = params.pop('repositoryId', '')
+    pullRequestId = params.pop('pullRequestId', '')
+    threadId = params.pop('threadId', '')
+    if threadId:
+        endpoint = "/_apis/git/repositories/{0}/pullRequests/{1}/threads/{2}/comments".format(repositoryId, pullRequestId, threadId)
+    else:
+        endpoint = '/_apis/git/repositories/{0}/pullRequests/{1}/threads'.format(repositoryId, pullRequestId)
+    return client.make_request(endpoint)
+
+
+def list_users(config, params):
+    client = AzureDevOps(config)
+    endpoint = 'https://vssps.dev.azure.com/{0}/_apis/graph/users'.format(config.get('organization'))
+    payload = _build_payload(params)
+    return client.make_request(endpoint, params=payload, is_url=True)
+
+
+def get_release(config, params):
+    client = AzureDevOps(config)
+    endpoint = 'https://vsrm.dev.azure.com/{0}/{1}/_apis/release/releases/{2}'.format(config.get('organization'), params.get('project'), params.get('releaseId'))
+    return client.make_request(endpoint, is_url=True)
+
+
+def get_file_from_repository(config, params):
+    client = AzureDevOps(config)
+    endpoint = '/_apis/git/repositories/{0}/items'.format(params.pop('repositoryId'))
+    payload = _build_payload(params)
+    payload.update({"$format": "json"})
+    return client.make_request(endpoint, params=payload)
+
+
+def create_merge_request(config, params):
+    client = AzureDevOps(config)
+    project = params.pop('project', '')
+    repositoryNameOrId = params.pop('repositoryNameOrId', '')
+    endpoint = "/{0}/_apis/git/repositories/{1}/merges".format(project, repositoryNameOrId)
+    params = _build_payload(params)
+    payload = {
+      "parents": params.pop('parents', '').split(','),
+      "comment": params.pop('comment', '')
+    }
+    return client.make_request(endpoint, method='POST', data=json.dumps(payload))
+
+
+def create_release(config, params):
+    client = AzureDevOps(config)
+    project = params.pop('project', '')
+    definitionId = params.pop('definitionId', '')
+    endpoint = "https://vsrm.dev.azure.com/{0}/{1}/_apis/release/releases".format(config.get('organization'), project)
+    params = _build_payload(params)
+    payload = {
+      "definitionId": definitionId,
+      "artifacts": params.pop('artifacts'),
+      "reason": "none"
+    }
+    if params.get('description'):
+        payload['description'] = params.pop('description')
+    if params.get('other_fields'):
+        payload.update(params.pop('other_fields'))
+    return client.make_request(endpoint, method='POST', data=json.dumps(payload), is_url=True)
+
+
 operations = {
     'list_pipelines': list_pipelines,
     'list_pipeline_runs': list_pipeline_runs,
@@ -336,5 +603,17 @@ operations = {
     'list_pull_request_reviewers': list_pull_request_reviewers,
     'add_pull_request_reviewer': add_pull_request_reviewer,
     'list_pull_request_commits': list_pull_request_commits,
+    'create_repository': create_repository,
+    'update_repository': update_repository,
+    'push_repository': push_repository,
+    'create_branch': create_branch,
+    'delete_branch': delete_branch,
+    'create_pull_request_comment': create_pull_request_comment,
+    'list_pull_request_comment': list_pull_request_comment,
+    'list_users': list_users,
+    'get_release': get_release,
+    'get_file_from_repository': get_file_from_repository,
+    'create_merge_request': create_merge_request,
+    'create_release': create_release,
     'check_health': _check_health
 }
