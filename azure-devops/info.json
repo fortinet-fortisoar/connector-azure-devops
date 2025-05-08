@@ -1,7 +1,7 @@
 {
   "name": "azure-devops",
   "label": "Azure DevOps",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Azure DevOps is a cloud-based service for managing software development projects. The Azure DevOps FortiSOAR connector integrates with Azure DevOps to automate the management of repositories, pipelines, work items, and more within FortiSOAR, enabling streamlined DevOps workflows and incident response.",
   "publisher": "Fortinet",
   "cs_approved": true,
@@ -9,7 +9,7 @@
   "category": "DevOps and Digital Operations",
   "icon_small_name": "small.png",
   "icon_large_name": "large.png",
-  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.0/azure-devops/1040/azure-devops-v1-0-0",
+  "help_online": "",
   "configuration": {
     "fields": [
       {
@@ -933,7 +933,7 @@
           "required": true,
           "editable": true,
           "type": "text",
-          "tooltip": "Specify the name of the project on Azure DevOps, whose pipeline runs are to be retrieved.",
+          "tooltip": "Specify the name of the project from which to retrieve the list of pull requests (PR).",
           "description": "Specify the name of the project from which to retrieve the list of pull requests (PR)."
         },
         {
@@ -943,7 +943,7 @@
           "required": true,
           "editable": true,
           "type": "text",
-          "tooltip": "Specify the ID or name of the repository whose commit is to be retrieved.",
+          "tooltip": "Specify the ID or name of the repository to retrieve its list of PRs.",
           "description": "Specify the ID or name of the repository to retrieve its list of PRs."
         },
         {
@@ -2119,6 +2119,1335 @@
           "type": "json",
           "tooltip": "Specify the resources required for the run.",
           "description": "(Optional) Specify the resources required for the run."
+        }
+      ]
+    },
+    {
+      "operation": "create_repository",
+      "title": "Create Repository",
+      "description": "Creates a new repository within a project.",
+      "category": "investigation",
+      "annotation": "create_repository",
+      "enabled": true,
+      "output_schema": {
+        "id": "",
+        "name": "",
+        "url": "",
+        "project": {
+          "id": "",
+          "name": "",
+          "url": "",
+          "state": "",
+          "revision": "",
+          "visibility": "",
+          "defaultTeamImageUrl": ""
+        },
+        "size": "",
+        "remoteUrl": "",
+        "sshUrl": "",
+        "isFork": "",
+        "_links": {
+          "forkSyncOperation": {
+            "href": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "title": "Project ID",
+          "name": "project",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the ID of the project to create a repository within. ",
+          "description": "Specify the ID of the project to create a repository within. "
+        },
+        {
+          "title": "Repository Name",
+          "name": "repository",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name of the repository to create. ",
+          "description": "Specify the name of the repository to create. "
+        },
+        {
+          "title": "Parent Repository ID",
+          "name": "parentRepository",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the ID of the parent repository to create a fork of. ",
+          "description": "Specify the ID of the parent repository to create a fork of. "
+        },
+        {
+          "title": "Source Ref",
+          "name": "sourceRef",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the source ref to create a fork syncing only the provided refs. ",
+          "description": "Specify the source ref to create a fork syncing only the provided refs. "
+        }
+      ]
+    },
+    {
+      "operation": "update_repository",
+      "title": "Update Repository",
+      "description": "Updates the Git repository with either a new repo name or a new default branch.",
+      "category": "investigation",
+      "annotation": "update_repository",
+      "enabled": true,
+      "output_schema": {
+        "id": "",
+        "name": "",
+        "RenamedRepository": "",
+        "isDisabled": "",
+        "url": "",
+        "project": {
+          "id": "",
+          "name": "",
+          "url": "",
+          "state": ""
+        },
+        "defaultBranch": "",
+        "remoteUrl": "",
+        "type": ""
+      },
+      "parameters": [
+        {
+          "title": "Repository ID",
+          "name": "repositoryId",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the ID of the repository to update.",
+          "description": "Specify the ID of the repository to update."
+        },
+        {
+          "title": "Repository Name",
+          "name": "name",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the new name of the repository.",
+          "description": "Specify the new name of the repository."
+        },
+        {
+          "title": "Default Branch",
+          "name": "defaultBranch",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the new default branch of the repository.",
+          "description": "Specify the new default branch of the repository."
+        },
+        {
+          "title": "Disable Repository",
+          "name": "isDisabled",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "value": false,
+          "tooltip": "Specifies whether to disable the repository. By default, this option is set to false.",
+          "description": "Specifies whether to disable the repository. By default, this option is set to false."
+        },
+        {
+          "title": "Mark In Maintenance",
+          "name": "isInMaintenance",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "value": false,
+          "tooltip": "Specifies whether to mark the repository in maintenance. By default, this option is set to false.",
+          "description": "Specifies whether to mark the repository in maintenance. By default, this option is set to false."
+        }
+      ]
+    },
+    {
+      "operation": "push_repository",
+      "title": "Push Changes",
+      "description": "Commits the local changes to the specified repository in a Azure Devops project based on the input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "push_changes",
+      "enabled": true,
+      "output_schema": {
+        "commits": [
+          {
+            "treeId": "",
+            "commitId": "",
+            "author": {
+              "name": "",
+              "email": "",
+              "date": ""
+            },
+            "committer": {
+              "name": "",
+              "email": "",
+              "date": ""
+            },
+            "comment": "",
+            "parents": [],
+            "url": ""
+          }
+        ],
+        "refUpdates": [
+          {
+            "repositoryId": "",
+            "name": "",
+            "oldObjectId": "",
+            "newObjectId": ""
+          }
+        ],
+        "pushedBy": {
+          "id": "",
+          "displayName": "",
+          "uniqueName": "",
+          "url": "",
+          "imageUrl": ""
+        },
+        "pushId": "",
+        "date": "",
+        "url": "",
+        "_links": {
+          "self": {
+            "href": ""
+          },
+          "repository": {
+            "href": ""
+          },
+          "commits": {
+            "href": ""
+          },
+          "pusher": {
+            "href": ""
+          },
+          "refs": {
+            "href": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "title": "Repository ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "repositoryId",
+          "description": "Specify the ID of the repository in which to push the changes.",
+          "tooltip": "Specify the ID of the repository in which to push the changes."
+        },
+        {
+          "title": "Branch Name",
+          "name": "branch",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name of the branch in which to push the changes.",
+          "description": "Specify the name of the branch in which to push the changes."
+        },
+        {
+          "title": "Previous Commit ID",
+          "name": "previousCommitSha",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the previous commit ID of the branch in which to push the changes.",
+          "description": "Specify the previous commit ID of the branch in which to push the changes."
+        },
+        {
+          "title": "Commit Message",
+          "name": "commit_message",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the commit message to be used for pushing the changes.",
+          "description": "Specify the commit message to be used for pushing the changes."
+        },
+        {
+          "title": "Cloned Repository Path",
+          "name": "clone_path",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the path of the cloned repository in which to push the changes.",
+          "description": "Specify the path of the cloned repository in which to push the changes."
+        }
+      ]
+    },
+    {
+      "operation": "create_branch",
+      "title": "Create Branch",
+      "description": "Creates a new branch within a repository.",
+      "category": "investigation",
+      "annotation": "create_branch",
+      "enabled": true,
+      "output_schema": {
+        "commits": [
+          {
+            "treeId": "",
+            "commitId": "",
+            "author": {
+              "name": "",
+              "email": "",
+              "date": ""
+            },
+            "committer": {
+              "name": "",
+              "email": "",
+              "date": ""
+            },
+            "comment": "",
+            "parents": [],
+            "url": ""
+          }
+        ],
+        "refUpdates": [
+          {
+            "repositoryId": "",
+            "name": "",
+            "oldObjectId": "",
+            "newObjectId": ""
+          }
+        ],
+        "pushedBy": {
+          "id": "",
+          "displayName": "",
+          "uniqueName": "",
+          "url": "",
+          "imageUrl": ""
+        },
+        "pushId": "",
+        "date": "",
+        "url": "",
+        "_links": {
+          "self": {
+            "href": ""
+          },
+          "repository": {
+            "href": ""
+          },
+          "commits": {
+            "href": ""
+          },
+          "pusher": {
+            "href": ""
+          },
+          "refs": {
+            "href": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "title": "Project",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "project",
+          "description": "Specify the ID of the project to create a new branch within.",
+          "tooltip": "Specify the ID of the project to create a new branch within."
+        },
+        {
+          "title": "Repository ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "repositoryId",
+          "description": "Specify the ID of the repository to create a new branch within.",
+          "tooltip": "Specify the ID of the repository to create a new branch within."
+        },
+        {
+          "title": "Branch Name",
+          "name": "branch",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name of the branch to create.",
+          "description": "Specify the name of the branch to create."
+        },
+        {
+          "title": "Commit Message",
+          "name": "commit_message",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the commit message to be used for pushing the changes.",
+          "description": "Specify the commit message to be used for pushing the changes."
+        },
+        {
+          "title": "Previous Commit ID",
+          "name": "previousCommitSha",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the reference previous commit SHA you want to use to create branch from.",
+          "description": "Specify the reference previous commit SHA you want to use to create branch from."
+        }
+      ]
+    },
+    {
+      "operation": "delete_branch",
+      "title": "Delete Branch",
+      "description": "Deletes a branch within a repository.",
+      "category": "investigation",
+      "annotation": "delete_branch",
+      "enabled": true,
+      "output_schema": {},
+      "parameters": [
+        {
+          "title": "Project",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "project",
+          "description": "Specify the ID or name of the project that contains the branch.",
+          "tooltip": "Specify the ID or name of the project that contains the branch."
+        },
+        {
+          "title": "Repository ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "repositoryId",
+          "description": "Specify the ID or name of the repository that contains the branch.",
+          "tooltip": "Specify the ID or name of the repository that contains the branch."
+        },
+        {
+          "title": "Branch Name",
+          "name": "branch",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name of the branch to delete.",
+          "description": "Specify the name of the branch to delete."
+        },
+        {
+          "title": "Previous Commit ID",
+          "name": "previousCommitSha",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the previous commit SHA of the branch to delete.",
+          "description": "Specify the previous commit SHA of the branch to delete."
+        }
+      ]
+    },
+    {
+      "operation": "create_pull_request_comment",
+      "title": "Create Pull Request Comment",
+      "description": "Creates a new comment on a pull request thread based on the input parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "create_pull_request_comment",
+      "enabled": true,
+      "output_schema": {
+        "id": "",
+        "parentCommentId": "",
+        "author": {
+          "id": "",
+          "displayName": "",
+          "uniqueName": "",
+          "url": "",
+          "imageUrl": ""
+        },
+        "content": "",
+        "publishedDate": "",
+        "lastUpdatedDate": "",
+        "commentType": ""
+      },
+      "parameters": [
+        {
+          "title": "Repository ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "repositoryId",
+          "description": "Specify the ID of the repository to create a new PR comment within.",
+          "tooltip": "Specify the ID of the repository to create a new PR comment within."
+        },
+        {
+          "title": "Pull Request ID",
+          "name": "pullRequestId",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "integer",
+          "tooltip": "Specify the ID of the pull request to create a pull request comment.",
+          "description": "Specify the ID of the pull request to create a pull request comment."
+        },
+        {
+          "title": "Content",
+          "name": "content",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the comment content.",
+          "description": "Specify the comment content."
+        },
+        {
+          "title": "Thread ID",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "threadId",
+          "description": "Specify the ID of the thread that the desired comment is in.",
+          "tooltip": "Specify the ID of the thread that the desired comment is in."
+        },
+        {
+          "title": "Parent Comment ID",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "parentCommentId",
+          "description": "Specify the ID of the parent comment. This is used for replies.",
+          "tooltip": "Specify the ID of the parent comment. This is used for replies."
+        }
+      ]
+    },
+    {
+      "operation": "list_pull_request_comment",
+      "title": "Get Pull Request Comment List",
+      "description": "Retrieve all comments associated with a specific thread in a pull request based on the input parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "list_pull_request_comment",
+      "enabled": true,
+      "output_schema": [{
+        "id": "",
+        "parentCommentId": "",
+        "author": {
+          "id": "",
+          "displayName": "",
+          "uniqueName": "",
+          "url": "",
+          "imageUrl": ""
+        },
+        "content": "",
+        "publishedDate": "",
+        "lastUpdatedDate": "",
+        "commentType": ""
+      }],
+      "parameters": [
+        {
+          "title": "Repository ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "repositoryId",
+          "description": "Specify the ID of the repository to create a new PR comment within.",
+          "tooltip": "Specify the ID of the repository to create a new PR comment within."
+        },
+        {
+          "title": "Pull Request ID",
+          "name": "pullRequestId",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "integer",
+          "tooltip": "Specify the ID of the pull request to create a pull request comment.",
+          "description": "Specify the ID of the pull request to create a pull request comment."
+        },
+        {
+          "title": "Thread ID",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "threadId",
+          "description": "Specify the ID of the thread that the desired comment is in.",
+          "tooltip": "Specify the ID of the thread that the desired comment is in."
+        }
+      ]
+    },
+    {
+      "operation": "list_users",
+      "title": "Get User List",
+      "description": "Retrieve a list of all users in a given scope.",
+      "category": "investigation",
+      "annotation": "list_users",
+      "enabled": true,
+      "output_schema": {
+        "count": "",
+        "value": [
+          {
+            "subjectKind": "",
+            "metaType": "",
+            "domain": "",
+            "principalName": "",
+            "mailAddress": "",
+            "origin": "",
+            "originId": "",
+            "displayName": "",
+            "_links": {
+              "self": {
+                "href": ""
+              },
+              "memberships": {
+                "href": ""
+              },
+              "membershipState": {
+                "href": ""
+              },
+              "storageKey": {
+                "href": ""
+              },
+              "avatar": {
+                "href": ""
+              }
+            },
+            "url": "",
+            "descriptor": ""
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "title": "Scope",
+          "name": "scopeDescriptor",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify a non-default scope (collection, project) to search for users.",
+          "description": "(Optional) Specify a non-default scope (collection, project) to search for users."
+        },
+        {
+          "title": "Continuation Token",
+          "name": "continuationToken",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the continuation token from a previous request, to retrieve the next page of results.",
+          "description": "(Optional) Specify the continuation token from a previous request to retrieve the next page of results."
+        },
+        {
+          "title": "Subject Subtypes",
+          "name": "subjectTypes",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify a comma separated list of user subject subtypes to reduce the retrieved results, e.g. msa’, ‘aad’, ‘svc’ (service identity), ‘imp’ (imported identity), etc.",
+          "description": "(Optional) Specify a comma separated list of user subject subtypes to reduce the retrieved results, e.g. msa’, ‘aad’, ‘svc’ (service identity), ‘imp’ (imported identity), etc."
+        }
+      ]
+    },
+    {
+      "operation": "get_release",
+      "title": "Get Release Details",
+      "description": "Retrieve details of a specific release.",
+      "category": "investigation",
+      "annotation": "get_release",
+      "enabled": true,
+      "output_schema": {
+        "id": "",
+        "name": "",
+        "status": "",
+        "createdOn": "",
+        "modifiedOn": "",
+        "modifiedBy": {
+          "id": "",
+          "displayName": "",
+          "uniqueName": "",
+          "url": "",
+          "imageUrl": ""
+        },
+        "createdBy": {
+          "id": "",
+          "displayName": "",
+          "uniqueName": "",
+          "url": "",
+          "imageUrl": ""
+        },
+        "environments": [
+          {
+            "id": "",
+            "releaseId": "",
+            "name": "",
+            "status": "",
+            "variables": {},
+            "preDeployApprovals": [],
+            "postDeployApprovals": [],
+            "preApprovalsSnapshot": {
+              "approvals": [
+                {
+                  "rank": "",
+                  "isAutomated": "",
+                  "isNotificationOn": "",
+                  "approver": {
+                    "id": "",
+                    "displayName": "",
+                    "uniqueName": "",
+                    "url": "",
+                    "imageUrl": ""
+                  },
+                  "id": ""
+                }
+              ],
+              "approvalOptions": {
+                "requiredApproverCount": "",
+                "releaseCreatorCanBeApprover": "",
+                "autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped": "",
+                "enforceIdentityRevalidation": "",
+                "timeoutInMintues": ""
+              }
+            },
+            "postApprovalsSnapshot": {
+              "approvals": [
+                {
+                  "rank": "",
+                  "isAutomated": "",
+                  "isNotificationOn": "",
+                  "id": ""
+                }
+              ]
+            },
+            "deploySteps": [],
+            "rank": "",
+            "definitionEnvironmentId": "",
+            "environmentOptions": {
+              "emailNotificationType": "",
+              "emailRecipients": "",
+              "skipArtifactsDownload": "",
+              "timeoutInMinutes": "",
+              "enableAccessToken": "",
+              "publishDeploymentStatus": ""
+            },
+            "demands": [],
+            "conditions": [],
+            "workflowTasks": [],
+            "deployPhasesSnapshot": [
+              {
+                "deploymentInput": {
+                  "parallelExecution": {
+                    "parallelExecutionType": ""
+                  },
+                  "skipArtifactsDownload": "",
+                  "timeoutInMinutes": "",
+                  "queueId": "",
+                  "demands": [],
+                  "enableAccessToken": ""
+                },
+                "rank": "",
+                "phaseType": "",
+                "name": "",
+                "workflowTasks": [
+                  {
+                    "taskId": "",
+                    "version": "",
+                    "name": "",
+                    "enabled": "",
+                    "alwaysRun": "",
+                    "continueOnError": "",
+                    "timeoutInMinutes": "",
+                    "definitionType": "",
+                    "inputs": {
+                      "scriptType": "",
+                      "scriptName": "",
+                      "arguments": "",
+                      "inlineScript": "",
+                      "workingFolder": "",
+                      "failOnStandardError": ""
+                    }
+                  }
+                ]
+              }
+            ],
+            "owner": {
+              "id": "",
+              "displayName": "",
+              "uniqueName": "",
+              "url": "",
+              "imageUrl": ""
+            },
+            "schedules": [],
+            "release": {
+              "id": "",
+              "name": "",
+              "url": "",
+              "_links": {
+                "web": {
+                  "href": ""
+                },
+                "self": {
+                  "href": ""
+                }
+              }
+            },
+            "releaseDefinition": {
+              "id": "",
+              "name": "",
+              "url": "",
+              "_links": {
+                "web": {
+                  "href": ""
+                },
+                "self": {
+                  "href": ""
+                }
+              }
+            },
+            "releaseCreatedBy": {
+              "id": "",
+              "displayName": ""
+            },
+            "triggerReason": ""
+          }
+        ],
+        "variables": {},
+        "variableGroups": [],
+        "artifacts": [
+          {
+            "sourceId": "",
+            "type": "",
+            "alias": "",
+            "definitionReference": {
+              "artifactSourceDefinitionUrl": {
+                "id": "",
+                "name": ""
+              },
+              "defaultVersionBranch": {
+                "id": "",
+                "name": ""
+              },
+              "defaultVersionSpecific": {
+                "id": "",
+                "name": ""
+              },
+              "defaultVersionTags": {
+                "id": "",
+                "name": ""
+              },
+              "defaultVersionType": {
+                "id": "",
+                "name": ""
+              },
+              "definition": {
+                "id": "",
+                "name": ""
+              },
+              "project": {
+                "id": "",
+                "name": ""
+              },
+              "version": {
+                "id": "",
+                "name": ""
+              },
+              "artifactSourceVersionUrl": {
+                "id": "",
+                "name": ""
+              },
+              "branch": {
+                "id": "",
+                "name": ""
+              }
+            },
+            "isPrimary": ""
+          }
+        ],
+        "releaseDefinition": {
+          "id": "",
+          "name": "",
+          "url": "",
+          "_links": {
+            "self": {
+              "href": ""
+            },
+            "web": {
+              "href": ""
+            }
+          }
+        },
+        "description": "",
+        "reason": "",
+        "releaseNameFormat": "",
+        "keepForever": "",
+        "definitionSnapshotRevision": "",
+        "logsContainerUrl": "",
+        "url": "",
+        "_links": {
+          "self": {
+            "href": ""
+          },
+          "web": {
+            "href": ""
+          }
+        },
+        "tags": [],
+        "projectReference": {
+          "id": "",
+          "name": ""
+        },
+        "properties": {}
+      },
+      "parameters": [
+        {
+          "title": "Project",
+          "name": "project",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name or ID of the project from which to retrieve the release details.",
+          "description": "Specify the name or ID of the project from which to retrieve the release details."
+        },
+        {
+          "title": "Release ID",
+          "name": "releaseId",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "integer",
+          "tooltip": "Specify the ID of the release whose details is to be retrieved.",
+          "description": "Specify the ID of the release whose details is to be retrieved."
+        }
+      ]
+    },
+    {
+      "operation": "get_file_from_repository",
+      "title": "Get File",
+      "description": "Retrieves information about a file based on the input parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "get_file_from_repository",
+      "enabled": true,
+      "output_schema": {
+        "count": "",
+        "value": [
+          {
+            "objectId": "",
+            "gitObjectType": "",
+            "commitId": "",
+            "path": "",
+            "url": ""
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "title": "Repository ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "repositoryId",
+          "description": "Specify the name or ID of the repository from which the file is to be retrieved.",
+          "tooltip": "Specify the name or ID of the repository from which the file is to be retrieved."
+        },
+        {
+          "title": "File Path",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "scopePath",
+          "description": "Specify the path of the file to retrieve.",
+          "tooltip": "Specify the path of the file to retrieve."
+        },
+        {
+          "title": "Include Content",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": false,
+          "type": "checkbox",
+          "name": "includeContent",
+          "tooltip": "Set to true to include file content. Default is false.",
+          "description": "(Optional) Set to true to include file content. Default is false."
+        },
+        {
+          "title": "Include Content Metadata",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": false,
+          "type": "checkbox",
+          "name": "includeContentMetadata",
+          "description": "(Optional) Set to true to include content metadata. Default is false.",
+          "tooltip": "Set to true to include content metadata. Default is false."
+        }
+      ]
+    },
+    {
+      "operation": "create_release",
+      "title": "Create Release",
+      "description": "Creates a new release based on the input parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "create_release",
+      "enabled": true,
+      "output_schema": {
+        "id": "",
+        "name": "",
+        "status": "",
+        "createdOn": "",
+        "modifiedOn": "",
+        "modifiedBy": {
+          "id": "",
+          "displayName": "",
+          "uniqueName": "",
+          "url": "",
+          "imageUrl": ""
+        },
+        "createdBy": {
+          "id": "",
+          "displayName": "",
+          "uniqueName": "",
+          "url": "",
+          "imageUrl": ""
+        },
+        "environments": [
+          {
+            "id": "",
+            "releaseId": "",
+            "name": "",
+            "status": "",
+            "variables": {},
+            "preDeployApprovals": [],
+            "postDeployApprovals": [],
+            "preApprovalsSnapshot": {
+              "approvals": [
+                {
+                  "rank": "",
+                  "isAutomated": "",
+                  "isNotificationOn": "",
+                  "approver": {
+                    "id": "",
+                    "displayName": "",
+                    "uniqueName": "",
+                    "url": "",
+                    "imageUrl": ""
+                  },
+                  "id": ""
+                }
+              ],
+              "approvalOptions": {
+                "requiredApproverCount": "",
+                "releaseCreatorCanBeApprover": "",
+                "autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped": "",
+                "enforceIdentityRevalidation": "",
+                "timeoutInMintues": ""
+              }
+            },
+            "postApprovalsSnapshot": {
+              "approvals": [
+                {
+                  "rank": "",
+                  "isAutomated": "",
+                  "isNotificationOn": "",
+                  "id": ""
+                }
+              ]
+            },
+            "deploySteps": [],
+            "rank": "",
+            "definitionEnvironmentId": "",
+            "environmentOptions": {
+              "emailNotificationType": "",
+              "emailRecipients": "",
+              "skipArtifactsDownload": "",
+              "timeoutInMinutes": "",
+              "enableAccessToken": "",
+              "publishDeploymentStatus": ""
+            },
+            "demands": [],
+            "conditions": [],
+            "workflowTasks": [],
+            "deployPhasesSnapshot": [
+              {
+                "deploymentInput": {
+                  "parallelExecution": {
+                    "parallelExecutionType": ""
+                  },
+                  "skipArtifactsDownload": "",
+                  "timeoutInMinutes": "",
+                  "queueId": "",
+                  "demands": [],
+                  "enableAccessToken": ""
+                },
+                "rank": "",
+                "phaseType": "",
+                "name": "",
+                "workflowTasks": [
+                  {
+                    "taskId": "",
+                    "version": "",
+                    "name": "",
+                    "enabled": "",
+                    "alwaysRun": "",
+                    "continueOnError": "",
+                    "timeoutInMinutes": "",
+                    "definitionType": "",
+                    "inputs": {
+                      "scriptType": "",
+                      "scriptName": "",
+                      "arguments": "",
+                      "inlineScript": "",
+                      "workingFolder": "",
+                      "failOnStandardError": ""
+                    }
+                  }
+                ]
+              }
+            ],
+            "owner": {
+              "id": "",
+              "displayName": "",
+              "uniqueName": "",
+              "url": "",
+              "imageUrl": ""
+            },
+            "schedules": [],
+            "release": {
+              "id": "",
+              "name": "",
+              "url": "",
+              "_links": {
+                "web": {
+                  "href": ""
+                },
+                "self": {
+                  "href": ""
+                }
+              }
+            },
+            "releaseDefinition": {
+              "id": "",
+              "name": "",
+              "url": "",
+              "_links": {
+                "web": {
+                  "href": ""
+                },
+                "self": {
+                  "href": ""
+                }
+              }
+            },
+            "releaseCreatedBy": {
+              "id": "",
+              "displayName": ""
+            },
+            "triggerReason": ""
+          }
+        ],
+        "variables": {},
+        "variableGroups": [],
+        "artifacts": [
+          {
+            "sourceId": "",
+            "type": "",
+            "alias": "",
+            "definitionReference": {
+              "artifactSourceDefinitionUrl": {
+                "id": "",
+                "name": ""
+              },
+              "defaultVersionBranch": {
+                "id": "",
+                "name": ""
+              },
+              "defaultVersionSpecific": {
+                "id": "",
+                "name": ""
+              },
+              "defaultVersionTags": {
+                "id": "",
+                "name": ""
+              },
+              "defaultVersionType": {
+                "id": "",
+                "name": ""
+              },
+              "definition": {
+                "id": "",
+                "name": ""
+              },
+              "project": {
+                "id": "",
+                "name": ""
+              },
+              "version": {
+                "id": "",
+                "name": ""
+              },
+              "artifactSourceVersionUrl": {
+                "id": "",
+                "name": ""
+              }
+            },
+            "isPrimary": ""
+          }
+        ],
+        "releaseDefinition": {
+          "id": "",
+          "name": "",
+          "url": "",
+          "_links": {
+            "self": {
+              "href": ""
+            },
+            "web": {
+              "href": ""
+            }
+          }
+        },
+        "description": "",
+        "reason": "",
+        "releaseNameFormat": "",
+        "keepForever": "",
+        "definitionSnapshotRevision": "",
+        "logsContainerUrl": "",
+        "url": "",
+        "_links": {
+          "self": {
+            "href": ""
+          },
+          "web": {
+            "href": ""
+          }
+        },
+        "tags": [],
+        "projectReference": {
+          "id": "",
+          "name": ""
+        },
+        "properties": {}
+      },
+      "parameters": [
+        {
+          "title": "Project",
+          "name": "project",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name or ID of the project for which to create the release.",
+          "description": "Specify the name or ID of the project for which to create the release."
+        },
+        {
+          "title": "Definition ID",
+          "name": "definitionId",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "integer",
+          "tooltip": "Specify the definition ID to create a release.",
+          "description": "Specify the definition ID to create a release."
+        },
+        {
+          "title": "Artifact Metadata",
+          "tooltip": "Specify list of artifact to create a release in the JSON format.",
+          "description": "Specify list of artifact to create a release in the JSON format.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "json",
+          "name": "artifacts"
+        },
+        {
+          "title": "Description",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "description",
+          "description": "Specify the description to create a release.",
+          "tooltip": "Specify the description to create a release."
+        },
+        {
+          "title": "Other Fields",
+          "tooltip": "(Optional) Specify other fields in the JSON format.",
+          "description": "(Optional) Specify other fields in the JSON format. For more information about other fields, see https://learn.microsoft.com/en-us/rest/api/azure/devops/release/releases/create?view=azure-devops-rest-7.1&tabs=HTTP.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "json",
+          "name": "other_fields"
+        }
+      ]
+    },
+    {
+      "operation": "create_merge_request",
+      "title": "Create Merge Request",
+      "description": "Creates a new merge request on a repository based on the input parameters that you have specified.  Currently it support merging only 2 commits.",
+      "category": "investigation",
+      "annotation": "create_merge_request",
+      "enabled": true,
+      "output_schema": {
+        "mergeOperationId": "",
+        "status": "",
+        "detailedStatus": {},
+        "parents": [],
+        "comment": ""
+      },
+      "parameters": [
+        {
+          "title": "Project",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "project",
+          "description": "Specify the name or ID of the project in which to create the merge request.",
+          "tooltip": "Specify the name or ID of the project in which to create the merge request."
+        },
+        {
+          "title": "Repository Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "repositoryNameOrId",
+          "description": "Specify the name or ID of the repository in which to create the merge request.",
+          "tooltip": "Specify the name or ID of the repository in which to create the merge request."
+        },
+        {
+          "title": "Parent Commit ID",
+          "name": "parents",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify an enumeration of the parent commit IDs for the merge commit.",
+          "description": "Specify an enumeration of the parent commit IDs for the merge commit."
+        },
+        {
+          "title": "Comment",
+          "name": "comment",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the comment or message of the commit.",
+          "description": "Specify the comment or message of the commit."
         }
       ]
     }

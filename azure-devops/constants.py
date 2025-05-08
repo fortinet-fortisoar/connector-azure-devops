@@ -5,6 +5,7 @@ Copyright (c) 2025 Fortinet Inc
 Copyright end
 """
 
+MAX_WORKERS = 8
 
 # redirect url
 DEFAULT_REDIRECT_URL = 'https://localhost/myapp'
