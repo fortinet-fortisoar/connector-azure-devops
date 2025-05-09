@@ -34,6 +34,16 @@
         "description": "Specify the name of the organization created on Azure DevOps."
       },
       {
+        "title": "Username",
+        "type": "text",
+        "name": "username",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "tooltip": "Specify the username used to access the Azure DevOps server to connect and perform the automated operations.",
+        "description": "Specify the username used to access the Azure DevOps server to connect and perform the automated operations."
+      },
+      {
         "title": "Auth Type",
         "required": true,
         "editable": true,
@@ -2125,7 +2135,7 @@
     {
       "operation": "create_repository",
       "title": "Create Repository",
-      "description": "Creates a new repository within a project.",
+      "description": "Creates a new repository within a project based on the input parameters you have specified.",
       "category": "investigation",
       "annotation": "create_repository",
       "enabled": true,
@@ -2190,15 +2200,15 @@
           "required": false,
           "editable": true,
           "type": "text",
-          "tooltip": "Specify the source ref to create a fork syncing only the provided refs. ",
-          "description": "Specify the source ref to create a fork syncing only the provided refs. "
+          "tooltip": "Specify the source ref to create a fork syncing only the provided refs. e.g. refs/heads/main ",
+          "description": "Specify the source ref to create a fork syncing only the provided refs. e.g. refs/heads/main "
         }
       ]
     },
     {
       "operation": "update_repository",
       "title": "Update Repository",
-      "description": "Updates the Git repository with either a new repo name or a new default branch.",
+      "description": "Updates a repository within a project based on the input parameters you have specified.",
       "category": "investigation",
       "annotation": "update_repository",
       "enabled": true,
@@ -2276,7 +2286,7 @@
     {
       "operation": "push_repository",
       "title": "Push Changes",
-      "description": "Commits the local changes to the specified repository in a Azure Devops project based on the input parameters you have specified.",
+      "description": "Commits the local changes to a repository within a project based on the input parameters you have specified.",
       "category": "investigation",
       "annotation": "push_changes",
       "enabled": true,
@@ -2338,6 +2348,16 @@
       },
       "parameters": [
         {
+          "title": "Project",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "project",
+          "description": "Specify the ID of the project in which to push the changes.",
+          "tooltip": "Specify the ID of the project in which to push the changes."
+        },
+        {
           "title": "Repository ID",
           "required": true,
           "editable": true,
@@ -2384,15 +2404,15 @@
           "required": true,
           "editable": true,
           "type": "text",
-          "tooltip": "Specify the path of the cloned repository in which to push the changes.",
-          "description": "Specify the path of the cloned repository in which to push the changes."
+          "tooltip": "Specify the path to the cloned repository where you want to push the latest changes.",
+          "description": "Specify the path to the cloned repository where you want to push the latest changes."
         }
       ]
     },
     {
       "operation": "create_branch",
       "title": "Create Branch",
-      "description": "Creates a new branch within a repository.",
+      "description": "Creates a new branch within a repository based on the input parameters you have specified.",
       "category": "investigation",
       "annotation": "create_branch",
       "enabled": true,
@@ -2490,8 +2510,8 @@
           "required": true,
           "editable": true,
           "type": "text",
-          "tooltip": "Specify the commit message to be used for pushing the changes.",
-          "description": "Specify the commit message to be used for pushing the changes."
+          "tooltip": "Specify the commit message to be used for creating a branch.",
+          "description": "Specify the commit message to be used for creating a branch."
         },
         {
           "title": "Previous Commit ID",
@@ -2508,11 +2528,24 @@
     {
       "operation": "delete_branch",
       "title": "Delete Branch",
-      "description": "Deletes a branch within a repository.",
+      "description": "Deletes a branch within a repository based on the input parameters you have specified.",
       "category": "investigation",
       "annotation": "delete_branch",
       "enabled": true,
-      "output_schema": {},
+      "output_schema": {
+        "value": [
+          {
+            "repositoryId": "",
+            "name": "",
+            "oldObjectId": "",
+            "newObjectId": "",
+            "isLocked": "",
+            "updateStatus": "",
+            "success": ""
+          }
+        ],
+        "count": ""
+      },
       "parameters": [
         {
           "title": "Project",
@@ -2525,7 +2558,7 @@
           "tooltip": "Specify the ID or name of the project that contains the branch."
         },
         {
-          "title": "Repository ID",
+          "title": "Repository",
           "required": true,
           "editable": true,
           "visible": true,
@@ -2634,7 +2667,7 @@
     {
       "operation": "list_pull_request_comment",
       "title": "Get Pull Request Comment List",
-      "description": "Retrieve all comments associated with a specific thread in a pull request based on the input parameters that you have specified.",
+      "description": "Retrieve all comments associated with a pull request or thread in a pull request based on the input parameters that you have specified.",
       "category": "investigation",
       "annotation": "list_pull_request_comment",
       "enabled": true,
@@ -2661,8 +2694,8 @@
           "visible": true,
           "type": "text",
           "name": "repositoryId",
-          "description": "Specify the ID of the repository to create a new PR comment within.",
-          "tooltip": "Specify the ID of the repository to create a new PR comment within."
+          "description": "Specify the ID of the repository to retrieve PR comments.",
+          "tooltip": "Specify the ID of the repository to retrieve PR comments."
         },
         {
           "title": "Pull Request ID",
@@ -2671,8 +2704,8 @@
           "required": true,
           "editable": true,
           "type": "integer",
-          "tooltip": "Specify the ID of the pull request to create a pull request comment.",
-          "description": "Specify the ID of the pull request to create a pull request comment."
+          "tooltip": "Specify the ID of the pull request to retrieve comments.",
+          "description": "Specify the ID of the pull request to retrieve comments."
         },
         {
           "title": "Thread ID",
@@ -2681,15 +2714,15 @@
           "visible": true,
           "type": "integer",
           "name": "threadId",
-          "description": "Specify the ID of the thread that the desired comment is in.",
-          "tooltip": "Specify the ID of the thread that the desired comment is in."
+          "description": "Specify the ID of the thread to retrieve comments.",
+          "tooltip": "Specify the ID of the thread to retrieve comments."
         }
       ]
     },
     {
       "operation": "list_users",
       "title": "Get User List",
-      "description": "Retrieve a list of all users in a given scope.",
+      "description": "Retrieve a list of all users in a given scope based on the input parameters you have specified.",
       "category": "investigation",
       "annotation": "list_users",
       "enabled": true,
@@ -2736,7 +2769,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify a non-default scope (collection, project) to search for users.",
-          "description": "(Optional) Specify a non-default scope (collection, project) to search for users."
+          "description": "Specify a non-default scope (collection, project) to search for users."
         },
         {
           "title": "Continuation Token",
@@ -2746,7 +2779,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the continuation token from a previous request, to retrieve the next page of results.",
-          "description": "(Optional) Specify the continuation token from a previous request to retrieve the next page of results."
+          "description": "Specify the continuation token from a previous request to retrieve the next page of results."
         },
         {
           "title": "Subject Subtypes",
@@ -2756,14 +2789,14 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify a comma separated list of user subject subtypes to reduce the retrieved results, e.g. msa’, ‘aad’, ‘svc’ (service identity), ‘imp’ (imported identity), etc.",
-          "description": "(Optional) Specify a comma separated list of user subject subtypes to reduce the retrieved results, e.g. msa’, ‘aad’, ‘svc’ (service identity), ‘imp’ (imported identity), etc."
+          "description": "Specify a comma separated list of user subject subtypes to reduce the retrieved results, e.g. msa’, ‘aad’, ‘svc’ (service identity), ‘imp’ (imported identity), etc."
         }
       ]
     },
     {
       "operation": "get_release",
       "title": "Get Release Details",
-      "description": "Retrieve details of a specific release.",
+      "description": "Retrieve details of a specific release based on the input parameters you have specified.",
       "category": "investigation",
       "annotation": "get_release",
       "enabled": true,
@@ -3035,7 +3068,7 @@
     {
       "operation": "get_file_from_repository",
       "title": "Get File",
-      "description": "Retrieves information about a file based on the input parameters that you have specified.",
+      "description": "Retrieve information about a file within a repository based on the input parameters that you have specified.",
       "category": "investigation",
       "annotation": "get_file_from_repository",
       "enabled": true,
@@ -3053,7 +3086,7 @@
       },
       "parameters": [
         {
-          "title": "Repository ID",
+          "title": "Repository",
           "required": true,
           "editable": true,
           "visible": true,
@@ -3081,7 +3114,7 @@
           "type": "checkbox",
           "name": "includeContent",
           "tooltip": "Set to true to include file content. Default is false.",
-          "description": "(Optional) Set to true to include file content. Default is false."
+          "description": "Set to true to include file content. Default is false."
         },
         {
           "title": "Include Content Metadata",
@@ -3091,7 +3124,7 @@
           "value": false,
           "type": "checkbox",
           "name": "includeContentMetadata",
-          "description": "(Optional) Set to true to include content metadata. Default is false.",
+          "description": "Set to true to include content metadata. Default is false.",
           "tooltip": "Set to true to include content metadata. Default is false."
         }
       ]
@@ -3364,8 +3397,8 @@
         },
         {
           "title": "Artifact Metadata",
-          "tooltip": "Specify list of artifact to create a release in the JSON format.",
-          "description": "Specify list of artifact to create a release in the JSON format.",
+          "tooltip": "Specify list of artifact in the JSON format to create a release.",
+          "description": "Specify list of artifact in the JSON format to create a release.",
           "required": true,
           "editable": true,
           "visible": true,
@@ -3384,8 +3417,8 @@
         },
         {
           "title": "Other Fields",
-          "tooltip": "(Optional) Specify other fields in the JSON format.",
-          "description": "(Optional) Specify other fields in the JSON format. For more information about other fields, see https://learn.microsoft.com/en-us/rest/api/azure/devops/release/releases/create?view=azure-devops-rest-7.1&tabs=HTTP.",
+          "tooltip": "Specify other fields in the JSON format.",
+          "description": "Specify other fields in the JSON format. For more information about other fields, see https://learn.microsoft.com/en-us/rest/api/azure/devops/release/releases/create?view=azure-devops-rest-7.1&tabs=HTTP.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -3420,7 +3453,7 @@
           "tooltip": "Specify the name or ID of the project in which to create the merge request."
         },
         {
-          "title": "Repository Name",
+          "title": "Repository",
           "required": true,
           "editable": true,
           "visible": true,
@@ -3436,18 +3469,416 @@
           "required": true,
           "editable": true,
           "type": "text",
-          "tooltip": "Specify an enumeration of the parent commit IDs for the merge commit.",
-          "description": "Specify an enumeration of the parent commit IDs for the merge commit."
+          "tooltip": "Specify an enumeration of the parent commit IDs for the merge commit. e.g. <commit-sha>, <commit-sha>",
+          "description": "Specify an enumeration of the parent commit IDs for the merge commit. e.g. <commit-sha>, <commit-sha>"
         },
         {
           "title": "Comment",
           "name": "comment",
           "visible": true,
-          "required": false,
+          "required": true,
           "editable": true,
           "type": "text",
-          "tooltip": "Specify the comment or message of the commit.",
-          "description": "Specify the comment or message of the commit."
+          "tooltip": "Specify the comment or message to add while creating the merge request.",
+          "description": "Specify the comment or message to add while creating the merge request."
+        }
+      ]
+    },
+    {
+      "operation": "create_new_file_in_repository",
+      "title": "Create File",
+      "description": "Creates a new file within the repository based on the input parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "create_new_file_in_repository",
+      "enabled": true,
+      "output_schema": {
+        "commits": [
+          {
+            "treeId": "",
+            "commitId": "",
+            "author": {
+              "name": "",
+              "email": "",
+              "date": ""
+            },
+            "committer": {
+              "name": "",
+              "email": "",
+              "date": ""
+            },
+            "comment": "",
+            "parents": [],
+            "url": ""
+          }
+        ],
+        "refUpdates": [
+          {
+            "repositoryId": "",
+            "name": "",
+            "oldObjectId": "",
+            "newObjectId": ""
+          }
+        ],
+        "pushedBy": {
+          "id": "",
+          "displayName": "",
+          "uniqueName": "",
+          "url": "",
+          "imageUrl": ""
+        },
+        "pushId": "",
+        "date": "",
+        "url": "",
+        "_links": {
+          "self": {
+            "href": ""
+          },
+          "repository": {
+            "href": ""
+          },
+          "commits": {
+            "href": ""
+          },
+          "pusher": {
+            "href": ""
+          },
+          "refs": {
+            "href": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "title": "Project",
+          "name": "project",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name or ID of the project within which the file is to be created.",
+          "description": "Specify the name or ID of the project within which the file is to be created."
+        },
+        {
+          "title": "Repository",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "repo_name",
+          "description": "Specify the name or ID of the repository within which the file is to be created.",
+          "tooltip": "Specify the name or ID of the repository within which the file is to be created."
+        },
+        {
+          "title": "Branch Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "branch",
+          "description": "Specify the name of the branch in which to create the file.",
+          "tooltip": "Specify the name of the branch in which to create the file."
+        },
+        {
+          "title": "Previous Commit ID",
+          "name": "previousCommitSha",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the previous commit ID of the branch in which to create the file.",
+          "description": "Specify the previous commit ID of the branch in which to create the file."
+        },
+        {
+          "title": "File Path",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "file_path",
+          "description": "Specify the full path of the file to create.",
+          "tooltip": "Specify the full path of the file to create."
+        },
+        {
+          "title": "Content",
+          "tooltip": "Specify the contents to add to the file being created.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "textarea",
+          "name": "content",
+          "description": "Specify the contents to add to the file being created."
+        },
+        {
+          "title": "Commit Message",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "commit_message",
+          "description": "Specify the commit message to add while creating the file.",
+          "tooltip": "Specify the commit message to add while creating the file."
+        }
+      ]
+    },
+    {
+      "operation": "update_file_in_repository",
+      "title": "Update File",
+      "description": "Updates a file within the repository based on the input parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "update_file_in_repository",
+      "enabled": true,
+      "output_schema": {
+        "commits": [
+          {
+            "treeId": "",
+            "commitId": "",
+            "author": {
+              "name": "",
+              "email": "",
+              "date": ""
+            },
+            "committer": {
+              "name": "",
+              "email": "",
+              "date": ""
+            },
+            "comment": "",
+            "parents": [],
+            "url": ""
+          }
+        ],
+        "refUpdates": [
+          {
+            "repositoryId": "",
+            "name": "",
+            "oldObjectId": "",
+            "newObjectId": ""
+          }
+        ],
+        "pushedBy": {
+          "id": "",
+          "displayName": "",
+          "uniqueName": "",
+          "url": "",
+          "imageUrl": ""
+        },
+        "pushId": "",
+        "date": "",
+        "url": "",
+        "_links": {
+          "self": {
+            "href": ""
+          },
+          "repository": {
+            "href": ""
+          },
+          "commits": {
+            "href": ""
+          },
+          "pusher": {
+            "href": ""
+          },
+          "refs": {
+            "href": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "title": "Project",
+          "name": "project",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name or ID of the project in which the file is to be updated.",
+          "description": "Specify the name or ID of the project in which the file is to be updated."
+        },
+        {
+          "title": "Repository",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "repo_name",
+          "description": "Specify the name or ID of the repository in which the file is to be updated.",
+          "tooltip": "Specify the name or ID of the repository in which the file is to be updated."
+        },
+        {
+          "title": "Branch Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "branch",
+          "tooltip": "Specify the name of the branch in which to update the file.",
+          "description": "Specify the name of the branch in which to update the file."
+        },
+        {
+          "title": "Previous Commit ID",
+          "name": "previousCommitSha",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the previous commit ID of the branch in which to update the file.",
+          "description": "Specify the previous commit ID of the branch in which to update the file."
+        },
+        {
+          "title": "File Path",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "file_path",
+          "description": "Specify the full path of the file to update.",
+          "tooltip": "Specify the full path of the file to update."
+        },
+        {
+          "title": "Content",
+          "tooltip": "Specify the contents to update in the file being updated.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "textarea",
+          "name": "content",
+          "description": "Specify the contents to update in the file being updated."
+        },
+        {
+          "title": "Commit Message",
+          "tooltip": "Specify the commit message for updating the file.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "commit_message",
+          "description": "Specify the commit message for updating the file."
+        }
+      ]
+    },
+    {
+      "operation": "delete_existing_file_in_repository",
+      "title": "Delete File",
+      "description": "Deletes a file within the repository based on the input parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "delete_existing_file_in_repository",
+      "enabled": true,
+      "output_schema": {
+        "commits": [
+          {
+            "treeId": "",
+            "commitId": "",
+            "author": {
+              "name": "",
+              "email": "",
+              "date": ""
+            },
+            "committer": {
+              "name": "",
+              "email": "",
+              "date": ""
+            },
+            "comment": "",
+            "parents": [],
+            "url": ""
+          }
+        ],
+        "refUpdates": [
+          {
+            "repositoryId": "",
+            "name": "",
+            "oldObjectId": "",
+            "newObjectId": ""
+          }
+        ],
+        "pushedBy": {
+          "id": "",
+          "displayName": "",
+          "uniqueName": "",
+          "url": "",
+          "imageUrl": ""
+        },
+        "pushId": "",
+        "date": "",
+        "url": "",
+        "_links": {
+          "self": {
+            "href": ""
+          },
+          "repository": {
+            "href": ""
+          },
+          "commits": {
+            "href": ""
+          },
+          "pusher": {
+            "href": ""
+          },
+          "refs": {
+            "href": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "title": "Project",
+          "name": "project",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name or ID of the project in which the file is to be deleted.",
+          "description": "Specify the name or ID of the project in which the file is to be deleted."
+        },
+        {
+          "title": "Repository",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "repo_name",
+          "description": "Specify the name or ID of the repository in which the file is to be deleted.",
+          "tooltip": "Specify the name or ID of the repository in which the file is to be deleted."
+        },
+        {
+          "title": "Branch Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "branch",
+          "description": "Specify the name of the branch in which to delete the file.",
+          "tooltip": "Specify the name of the branch in which to delete the file."
+        },
+        {
+          "title": "Previous Commit ID",
+          "name": "previousCommitSha",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the previous commit ID of the branch in which to delete the file.",
+          "description": "Specify the previous commit ID of the branch in which to delete the file."
+        },
+        {
+          "title": "File Path",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "file_path",
+          "description": "Specify the full path of the file to delete.",
+          "tooltip": "Specify the full path of the file to delete."
+        },
+        {
+          "title": "Commit Message",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "commit_message",
+          "description": "Specify the commit message for deleting the file.",
+          "tooltip": "Specify the commit message for deleting the file."
         }
       ]
     }
