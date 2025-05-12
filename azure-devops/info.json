@@ -3096,6 +3096,16 @@
           "tooltip": "Specify the name or ID of the repository from which the file is to be retrieved."
         },
         {
+          "title": "Branch Name",
+          "name": "versionDescriptor.version",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify the name of the branch from which the file is to be retrieved.",
+          "description": "Specify the name of the branch from which the file is to be retrieved."
+        },
+        {
           "title": "File Path",
           "required": true,
           "editable": true,

@@ -552,7 +552,7 @@ def get_file_from_repository(config, params):
     client = AzureDevOps(config)
     endpoint = '/_apis/git/repositories/{0}/items'.format(params.pop('repositoryId'))
     payload = _build_payload(params)
-    payload.update({"$format": "json"})
+    payload.update({"$format": "json", "versionDescriptor.versionType": "branch"})
     return client.make_request(endpoint, params=payload)
 
 
