@@ -6,7 +6,7 @@
   "publisher": "Fortinet",
   "cs_approved": true,
   "cs_compatible": true,
-  "category": "DevOps and Digital Operations",
+  "category": "Source Code Management",
   "icon_small_name": "small.png",
   "icon_large_name": "large.png",
   "help_online": "",
@@ -2265,21 +2265,13 @@
           "visible": true,
           "required": false,
           "editable": true,
-          "type": "checkbox",
-          "value": false,
-          "tooltip": "Specifies whether to disable the repository. By default, this option is set to false.",
-          "description": "Specifies whether to disable the repository. By default, this option is set to false."
-        },
-        {
-          "title": "Mark In Maintenance",
-          "name": "isInMaintenance",
-          "visible": true,
-          "required": false,
-          "editable": true,
-          "type": "checkbox",
-          "value": false,
-          "tooltip": "Specifies whether to mark the repository in maintenance. By default, this option is set to false.",
-          "description": "Specifies whether to mark the repository in maintenance. By default, this option is set to false."
+          "type": "select",
+          "options": [
+            "True",
+            "False"
+          ],
+          "tooltip": "Specifies whether to disable the repository. You can select from the following options: True, False",
+          "description": "Specifies whether to disable the repository. You can select from the following options: True, False"
         }
       ]
     },

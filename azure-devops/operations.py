@@ -361,6 +361,8 @@ def update_repository(config, params):
     repositoryId = params.pop('repositoryId', '')
     endpoint = "/_apis/git/repositories/{0}".format(repositoryId)
     payload = _build_payload(params)
+    if params.get('isDisabled'):
+        payload.update({"isDisabled": params.pop('isDisabled') == "True"})
     return client.make_request(endpoint, method='PATCH', data=json.dumps(payload))
 
 
