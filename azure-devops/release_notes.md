@@ -5,7 +5,10 @@
     - Update Repository
     - Create Branch
     - Delete Branch
+    - Create File
     - Get File
+    - Update File
+    - Delete File
     - Get User List
     - Create Pull Request Comment
     - Get Pull Request Comment List
@@ -13,3 +16,5 @@
     - Create Merge Request
     - Create Release
     - Get Release Details
+
+- Added a new configuration parameter `Username`.

@@ -2150,6 +2150,237 @@
               "targetStep": "/api/3/workflow_steps/fa792d2a-7687-4f04-8fc7-1fb0149f3868"
             }
           ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "bb1faea9-04fa-448f-b1c0-7c6cd2a97a54",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
+          "triggerLimit": null,
+          "description": "Creates a single file in the repository based on the input parameters that you have specified.",
+          "name": "Create File",
+          "tag": "#Azure DevOps",
+          "recordTags": [
+            "Azure",
+            "azure-devops"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/9bbb2818-e6b9-4be2-a200-81775c9e3f69",
+          "steps": [
+            {
+              "uuid": "9bbb2818-e6b9-4be2-a200-81775c9e3f69",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "f2ad973b-8258-45be-89ae-5a8ee2c8d4c6",
+                "title": "Azure DevOps: Create File",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "f31abbc9-5829-49a0-a64e-67babc49f04f",
+              "@type": "WorkflowStep",
+              "name": "Create File",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure DevOps",
+                "config": "",
+                "params": [],
+                "version": "2.0.0",
+                "connector": "azure-devops",
+                "operation": "create_new_file_in_repository",
+                "operationTitle": "Create File"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "cd1e8c30-7868-49a2-8ab4-d2fdebe6e0aa",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Create File",
+              "sourceStep": "/api/3/workflow_steps/9bbb2818-e6b9-4be2-a200-81775c9e3f69",
+              "targetStep": "/api/3/workflow_steps/f31abbc9-5829-49a0-a64e-67babc49f04f"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "f51b1224-a147-4408-b013-9db4c81c731e",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
+          "triggerLimit": null,
+          "description": "Updates a single file in the repository based on the input parameters that you have specified..",
+          "name": "Update File",
+          "tag": "#Azure DevOps",
+          "recordTags": [
+            "Azure",
+            "azure-devops"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/63b0f143-bd53-4bdc-b906-391e6ba6a3ba",
+          "steps": [
+            {
+              "uuid": "63b0f143-bd53-4bdc-b906-391e6ba6a3ba",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "1ea09e13-a521-4328-9bb4-ec45d7715948",
+                "title": "Azure DevOps: Update File",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "dee0383b-21c9-4cde-a6a9-d7f46e913893",
+              "@type": "WorkflowStep",
+              "name": "Update File",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure DevOps",
+                "config": "",
+                "params": [],
+                "version": "2.0.0",
+                "connector": "azure-devops",
+                "operation": "update_file_in_repository",
+                "operationTitle": "Update File"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "74c34e2a-86f3-4100-94cb-8525eedf5431",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Update File",
+              "sourceStep": "/api/3/workflow_steps/63b0f143-bd53-4bdc-b906-391e6ba6a3ba",
+              "targetStep": "/api/3/workflow_steps/dee0383b-21c9-4cde-a6a9-d7f46e913893"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "82c28c9d-a1c9-430f-8285-76042d68452b",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
+          "triggerLimit": null,
+          "description": "Deletes a single file in the repository based on the input parameters that you have specified..",
+          "name": "Delete File",
+          "tag": "#Azure DevOps",
+          "recordTags": [
+            "Azure",
+            "azure-devops"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/1ee19534-9c48-49e8-81a7-89e0c8bb0db5",
+          "steps": [
+            {
+              "uuid": "1ee19534-9c48-49e8-81a7-89e0c8bb0db5",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "58be5275-e940-4732-b2fc-1ba2d74b693c",
+                "title": "Azure DevOps: Delete File",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "5336aab6-fd1a-4e2d-aa1a-433ed0ee7120",
+              "@type": "WorkflowStep",
+              "name": "Delete File",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure DevOps",
+                "config": "",
+                "params": [],
+                "version": "2.0.0",
+                "connector": "azure-devops",
+                "operation": "delete_existing_file_in_repository",
+                "operationTitle": "Delete File"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "2247f4a9-2452-4de2-87f3-3da738335de8",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Delete File",
+              "sourceStep": "/api/3/workflow_steps/1ee19534-9c48-49e8-81a7-89e0c8bb0db5",
+              "targetStep": "/api/3/workflow_steps/5336aab6-fd1a-4e2d-aa1a-433ed0ee7120"
+            }
+          ]
         }
       ],
       "name": "Sample - Azure DevOps - 2.0.0",

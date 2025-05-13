@@ -336,7 +336,7 @@ def create_repository(config, params):
     project = params.pop('project', '')
     repository = params.pop('repository', '')
     parentRepository = params.pop('parentRepository', '')
-    if parentRepository:
+    if not parentRepository:
         params.pop('sourceRef')
     endpoint = "/{0}/_apis/git/repositories".format(project)
     query_param = _build_payload(params)
@@ -361,6 +361,8 @@ def update_repository(config, params):
     repositoryId = params.pop('repositoryId', '')
     endpoint = "/_apis/git/repositories/{0}".format(repositoryId)
     payload = _build_payload(params)
+    if params.get('isDisabled'):
+        payload.update({"isDisabled": params.pop('isDisabled') == "True"})
     return client.make_request(endpoint, method='PATCH', data=json.dumps(payload))
 
 
@@ -380,9 +382,9 @@ def file_exists_in_repository(client, repositoryId, branch_name, relative_path):
     try:
         parent = os.path.dirname(relative_path)  # get path only
         file = os.path.basename(relative_path)  # get file name
-        tree = get_repo_tree(client, repositoryId, branch_name, parent)
+        tree = get_repo_tree(client, repositoryId, branch_name, parent).get("value")
         # Check if the file exists in the tree
-        return any(item['path'].split("/")[-1] == file and item['type'] == 'blob' for item in tree)
+        return any(item['path'].split("/")[-1] == file and item['gitObjectType'] == 'blob' for item in tree)
     except:
         return False
 
@@ -430,14 +432,15 @@ def push_repository(config, params):
                 for future in futures:
                     future.result()
 
-            existing_files = get_repo_tree(client, repositoryId, branch_name, path='/', recursive=True)
+            existing_files = get_repo_tree(client, repositoryId, branch_name, path='/', recursive=True).get("value")
             # Identify files in the repository that are not present locally
             for existing_file in existing_files:
-                repo_file_path = existing_file['path']
-                local_file_path = os.path.join(local_directory, repo_file_path)
-                if not os.path.exists(local_file_path):
-                    # File is in the repository but not present locally, delete it
-                    changes.append({"changeType": "delete", "item": {"path": repo_file_path}})
+                if existing_file['gitObjectType'] == 'blob':
+                    repo_file_path = existing_file['path'].lstrip('/')
+                    local_file_path = os.path.join(local_directory, repo_file_path)
+                    if not os.path.exists(local_file_path):
+                        # File is in the repository but not present locally, delete it
+                        changes.append({"changeType": "delete", "item": {"path": repo_file_path}})
         payload = {
             "refUpdates": [
                 {
@@ -454,7 +457,7 @@ def push_repository(config, params):
         }
         if not local_directory:
             payload['refUpdates'][0]['oldObjectId'] = "0000000000000000000000000000000000000000"
-            payload['commits'][0]['changes'] = [{"changeType": "add", "item": {"path": "/readme.md"}, "newContent": {"content": "README", "contentType": "rawtext"}}]
+            payload['commits'][0]['changes'] = [{"changeType": "add", "item": {"path": "/README.md"}, "newContent": {"content": "README", "contentType": "rawtext"}}]
         endpoint = "/{0}/_apis/git/repositories/{1}/pushes".format(project, repositoryId)
         return client.make_request(endpoint, method='POST', data=json.dumps(payload))
     except AssertionError as err:
@@ -551,7 +554,7 @@ def get_file_from_repository(config, params):
     client = AzureDevOps(config)
     endpoint = '/_apis/git/repositories/{0}/items'.format(params.pop('repositoryId'))
     payload = _build_payload(params)
-    payload.update({"$format": "json"})
+    payload.update({"$format": "json", "versionDescriptor.versionType": "branch"})
     return client.make_request(endpoint, params=payload)
 
 
@@ -561,8 +564,13 @@ def create_merge_request(config, params):
     repositoryNameOrId = params.pop('repositoryNameOrId', '')
     endpoint = "/{0}/_apis/git/repositories/{1}/merges".format(project, repositoryNameOrId)
     params = _build_payload(params)
+    parents_raw = params.pop('parents', '')
+    if isinstance(parents_raw, str):
+        parents = [p.strip() for p in parents_raw.split(',') if p.strip()]
+    else:
+        parents = parents_raw
     payload = {
-      "parents": params.pop('parents', '').split(','),
+      "parents": parents,
       "comment": params.pop('comment', '')
     }
     return client.make_request(endpoint, method='POST', data=json.dumps(payload))
@@ -584,6 +592,90 @@ def create_release(config, params):
     if params.get('other_fields'):
         payload.update(params.pop('other_fields'))
     return client.make_request(endpoint, method='POST', data=json.dumps(payload), is_url=True)
+
+
+def create_new_file_in_repository(config, params):
+    client = AzureDevOps(config)
+    project = params.pop('project', '')
+    repo_name = params.pop('repo_name', '')
+    branch_name = params.pop('branch', '')
+    previousCommitSha = params.pop('previousCommitSha', '')
+    file_path = params.pop('file_path', '')
+    content = params.pop('content', '')
+    commit_message = params.pop('commit_message', '')
+
+    payload = {
+        "refUpdates": [
+            {
+                "name": branch_name,
+                "oldObjectId": previousCommitSha
+            }
+        ],
+        "commits": [
+            {
+                "comment": commit_message,
+                "changes": [{"changeType": "add", "item": {"path": file_path},
+                             "newContent": {"content": content, "contentType": "rawtext"}}]
+            }
+        ]
+    }
+    endpoint = "/{0}/_apis/git/repositories/{1}/pushes".format(project, repo_name)
+    return client.make_request(endpoint, method='POST', data=json.dumps(payload))
+
+
+def update_file_in_repository(config, params):
+    client = AzureDevOps(config)
+    project = params.pop('project', '')
+    repo_name = params.pop('repo_name', '')
+    branch_name = params.pop('branch', '')
+    previousCommitSha = params.pop('previousCommitSha', '')
+    file_path = params.pop('file_path', '')
+    content = params.pop('content', '')
+    commit_message = params.pop('commit_message', '')
+
+    payload = {
+        "refUpdates": [
+            {
+                "name": branch_name,
+                "oldObjectId": previousCommitSha
+            }
+        ],
+        "commits": [
+            {
+                "comment": commit_message,
+                "changes": [{"changeType": "edit", "item": {"path": file_path},
+                             "newContent": {"content": content, "contentType": "rawtext"}}]
+            }
+        ]
+    }
+    endpoint = "/{0}/_apis/git/repositories/{1}/pushes".format(project, repo_name)
+    return client.make_request(endpoint, method='POST', data=json.dumps(payload))
+
+
+def delete_existing_file_in_repository(config, params):
+    client = AzureDevOps(config)
+    project = params.pop('project', '')
+    repo_name = params.pop('repo_name', '')
+    branch_name = params.pop('branch', '')
+    previousCommitSha = params.pop('previousCommitSha', '')
+    file_path = params.pop('file_path', '')
+    commit_message = params.pop('commit_message', '')
+    payload = {
+        "refUpdates": [
+            {
+                "name": branch_name,
+                "oldObjectId": previousCommitSha
+            }
+        ],
+        "commits": [
+            {
+                "comment": commit_message,
+                "changes": [{"changeType": "delete", "item": {"path": file_path}}]
+            }
+        ]
+    }
+    endpoint = "/{0}/_apis/git/repositories/{1}/pushes".format(project, repo_name)
+    return client.make_request(endpoint, method='POST', data=json.dumps(payload))
 
 
 operations = {
@@ -615,5 +707,8 @@ operations = {
     'get_file_from_repository': get_file_from_repository,
     'create_merge_request': create_merge_request,
     'create_release': create_release,
+    'create_new_file_in_repository': create_new_file_in_repository,
+    'update_file_in_repository': update_file_in_repository,
+    'delete_existing_file_in_repository': delete_existing_file_in_repository,
     'check_health': _check_health
 }
