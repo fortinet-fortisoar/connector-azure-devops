@@ -3065,16 +3065,23 @@
       "annotation": "get_file_from_repository",
       "enabled": true,
       "output_schema": {
-        "count": "",
-        "value": [
-          {
-            "objectId": "",
-            "gitObjectType": "",
-            "commitId": "",
-            "path": "",
-            "url": ""
+          "objectId": "",
+          "gitObjectType": "",
+          "commitId": "",
+          "path": "",
+          "content": "",
+          "url": "",
+          "_links": {
+              "self": {
+                  "href": ""
+              },
+              "repository": {
+                  "href": ""
+              },
+              "blob": {
+                  "href": ""
+              }
           }
-        ]
       },
       "parameters": [
         {
@@ -3103,7 +3110,7 @@
           "editable": true,
           "visible": true,
           "type": "text",
-          "name": "scopePath",
+          "name": "path",
           "description": "Specify the path of the file to retrieve.",
           "tooltip": "Specify the path of the file to retrieve."
         },
@@ -3745,6 +3752,20 @@
           "type": "textarea",
           "name": "content",
           "description": "Specify the contents to update in the file being updated."
+        },
+        {
+          "title": "Operation",
+          "tooltip": "Select the operation you want to perform.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "operation",
+          "description": "Select the operation you want to perform. You can choose from the following options: Append, Overwrite.",
+          "options": [
+            "Append",
+            "Overwrite"
+          ]
         },
         {
           "title": "Commit Message",
