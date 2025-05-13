@@ -370,7 +370,7 @@ def get_repo_tree(client, repositoryId, branch_name, path, recursive=False):
     payload = {
         "scopePath": path,
         "recursionLevel": "full" if recursive else "oneLevel",
-        "versionDescriptor.version": branch_name,
+        "versionDescriptor.version": branch_name.split("/")[-1],
         "versionDescriptor.versionType": "branch"
     }
     endpoint = "/_apis/git/repositories/{0}/items".format(repositoryId)
@@ -632,7 +632,12 @@ def update_file_in_repository(config, params):
     file_path = params.pop('file_path', '')
     content = params.pop('content', '')
     commit_message = params.pop('commit_message', '')
-
+    operation = params.pop('operation', '')
+    if operation == "Append":
+        endpoint = '/_apis/git/repositories/{0}/items'.format(repo_name)
+        payload = {"$format": "json", "versionDescriptor.versionType": "branch", "versionDescriptor.version": branch_name.split("/")[-1], "path": file_path, "includeContent": True}
+        existing_content = client.make_request(endpoint, params=payload)['content']
+        content = existing_content + content
     payload = {
         "refUpdates": [
             {
