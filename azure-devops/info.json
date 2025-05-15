@@ -34,14 +34,14 @@
         "description": "Specify the name of the organization created on Azure DevOps."
       },
       {
-        "title": "Username",
+        "title": "Principal Name",
         "type": "text",
-        "name": "username",
+        "name": "principalName",
         "required": true,
         "editable": true,
         "visible": true,
-        "tooltip": "Specify the username used to access the Azure DevOps server to connect and perform the automated operations.",
-        "description": "Specify the username used to access the Azure DevOps server to connect and perform the automated operations."
+        "tooltip": "Specify the principal name used to access the Azure DevOps server to connect and perform the automated operations.",
+        "description": "Specify the principal name used to access the Azure DevOps server to connect and perform the automated operations."
       },
       {
         "title": "Auth Type",
@@ -2141,26 +2141,57 @@
       "enabled": true,
       "output_schema": {
         "id": "",
-        "name": "",
         "url": "",
-        "project": {
-          "id": "",
-          "name": "",
-          "url": "",
-          "state": "",
-          "revision": "",
-          "visibility": "",
-          "defaultTeamImageUrl": ""
-        },
+        "name": "",
         "size": "",
-        "remoteUrl": "",
-        "sshUrl": "",
-        "isFork": "",
         "_links": {
+          "ssh": {
+            "href": ""
+          },
+          "web": {
+            "href": ""
+          },
+          "refs": {
+            "href": ""
+          },
+          "self": {
+            "href": ""
+          },
+          "items": {
+            "href": ""
+          },
+          "pushes": {
+            "href": ""
+          },
+          "commits": {
+            "href": ""
+          },
+          "project": {
+            "href": ""
+          },
+          "pullRequests": {
+            "href": ""
+          },
           "forkSyncOperation": {
             "href": ""
           }
-        }
+        },
+        "isFork": "",
+        "sshUrl": "",
+        "webUrl": "",
+        "project": {
+          "id": "",
+          "url": "",
+          "name": "",
+          "state": "",
+          "revision": "",
+          "visibility": "",
+          "lastUpdateTime": ""
+        },
+        "remoteUrl": "",
+        "isDisabled": "",
+        "creationDate": "",
+        "isInMaintenance": ""
       },
       "parameters": [
         {
@@ -2200,8 +2231,8 @@
           "required": false,
           "editable": true,
           "type": "text",
-          "tooltip": "Specify the source ref to create a fork syncing only the provided refs. e.g. refs/heads/main ",
-          "description": "Specify the source ref to create a fork syncing only the provided refs. e.g. refs/heads/main "
+          "tooltip": "Specify the source ref to create a fork syncing only the provided refs. e.g. refs/heads/main Note: This works only when a Parent Repository ID is specified",
+          "description": "Specify the source ref to create a fork syncing only the provided refs. e.g. refs/heads/main Note: This works only when a Parent Repository ID is specified"
         }
       ]
     },
@@ -2214,19 +2245,25 @@
       "enabled": true,
       "output_schema": {
         "id": "",
-        "name": "",
-        "RenamedRepository": "",
-        "isDisabled": "",
         "url": "",
+        "name": "",
+        "size": "",
+        "sshUrl": "",
+        "webUrl": "",
         "project": {
           "id": "",
-          "name": "",
           "url": "",
-          "state": ""
+          "name": "",
+          "state": "",
+          "revision": "",
+          "visibility": "",
+          "lastUpdateTime": ""
         },
-        "defaultBranch": "",
         "remoteUrl": "",
-        "type": ""
+        "isDisabled": "",
+        "creationDate": "",
+        "defaultBranch": "",
+        "isInMaintenance": ""
       },
       "parameters": [
         {
@@ -2283,59 +2320,85 @@
       "annotation": "push_changes",
       "enabled": true,
       "output_schema": {
-        "commits": [
-          {
-            "treeId": "",
-            "commitId": "",
-            "author": {
-              "name": "",
-              "email": "",
-              "date": ""
-            },
-            "committer": {
-              "name": "",
-              "email": "",
-              "date": ""
-            },
-            "comment": "",
-            "parents": [],
-            "url": ""
-          }
-        ],
-        "refUpdates": [
-          {
-            "repositoryId": "",
-            "name": "",
-            "oldObjectId": "",
-            "newObjectId": ""
-          }
-        ],
-        "pushedBy": {
-          "id": "",
-          "displayName": "",
-          "uniqueName": "",
-          "url": "",
-          "imageUrl": ""
-        },
-        "pushId": "",
-        "date": "",
         "url": "",
+        "date": "",
         "_links": {
+          "refs": {
+            "href": ""
+          },
           "self": {
-            "href": ""
-          },
-          "repository": {
-            "href": ""
-          },
-          "commits": {
             "href": ""
           },
           "pusher": {
             "href": ""
           },
-          "refs": {
+          "commits": {
+            "href": ""
+          },
+          "repository": {
             "href": ""
           }
+        },
+        "pushId": "",
+        "commits": [
+          {
+            "url": "",
+            "author": {
+              "date": "",
+              "name": "",
+              "email": ""
+            },
+            "treeId": "",
+            "comment": "",
+            "parents": [],
+            "commitId": "",
+            "committer": {
+              "date": "",
+              "name": "",
+              "email": ""
+            }
+          }
+        ],
+        "pushedBy": {
+          "id": "",
+          "url": "",
+          "_links": {
+            "avatar": {
+              "href": ""
+            }
+          },
+          "imageUrl": "",
+          "descriptor": "",
+          "uniqueName": "",
+          "displayName": ""
+        },
+        "refUpdates": [
+          {
+            "name": "",
+            "newObjectId": "",
+            "oldObjectId": "",
+            "repositoryId": ""
+          }
+        ],
+        "repository": {
+          "id": "",
+          "url": "",
+          "name": "",
+          "size": "",
+          "sshUrl": "",
+          "webUrl": "",
+          "project": {
+            "id": "",
+            "url": "",
+            "name": "",
+            "state": "",
+            "revision": "",
+            "visibility": "",
+            "lastUpdateTime": ""
+          },
+          "remoteUrl": "",
+          "isDisabled": "",
+          "isInMaintenance": ""
         }
       },
       "parameters": [
@@ -2409,59 +2472,85 @@
       "annotation": "create_branch",
       "enabled": true,
       "output_schema": {
-        "commits": [
-          {
-            "treeId": "",
-            "commitId": "",
-            "author": {
-              "name": "",
-              "email": "",
-              "date": ""
-            },
-            "committer": {
-              "name": "",
-              "email": "",
-              "date": ""
-            },
-            "comment": "",
-            "parents": [],
-            "url": ""
-          }
-        ],
-        "refUpdates": [
-          {
-            "repositoryId": "",
-            "name": "",
-            "oldObjectId": "",
-            "newObjectId": ""
-          }
-        ],
-        "pushedBy": {
-          "id": "",
-          "displayName": "",
-          "uniqueName": "",
-          "url": "",
-          "imageUrl": ""
-        },
-        "pushId": "",
-        "date": "",
         "url": "",
+        "date": "",
         "_links": {
+          "refs": {
+            "href": ""
+          },
           "self": {
-            "href": ""
-          },
-          "repository": {
-            "href": ""
-          },
-          "commits": {
             "href": ""
           },
           "pusher": {
             "href": ""
           },
-          "refs": {
+          "commits": {
+            "href": ""
+          },
+          "repository": {
             "href": ""
           }
+        },
+        "pushId": "",
+        "commits": [
+          {
+            "url": "",
+            "author": {
+              "date": "",
+              "name": "",
+              "email": ""
+            },
+            "treeId": "",
+            "comment": "",
+            "parents": [],
+            "commitId": "",
+            "committer": {
+              "date": "",
+              "name": "",
+              "email": ""
+            }
+          }
+        ],
+        "pushedBy": {
+          "id": "",
+          "url": "",
+          "_links": {
+            "avatar": {
+              "href": ""
+            }
+          },
+          "imageUrl": "",
+          "descriptor": "",
+          "uniqueName": "",
+          "displayName": ""
+        },
+        "refUpdates": [
+          {
+            "name": "",
+            "newObjectId": "",
+            "oldObjectId": "",
+            "repositoryId": ""
+          }
+        ],
+        "repository": {
+          "id": "",
+          "url": "",
+          "name": "",
+          "size": "",
+          "sshUrl": "",
+          "webUrl": "",
+          "project": {
+            "id": "",
+            "url": "",
+            "name": "",
+            "state": "",
+            "revision": "",
+            "visibility": "",
+            "lastUpdateTime": ""
+          },
+          "remoteUrl": "",
+          "isDisabled": "",
+          "isInMaintenance": ""
         }
       },
       "parameters": [
@@ -2590,18 +2679,60 @@
       "enabled": true,
       "output_schema": {
         "id": "",
-        "parentCommentId": "",
-        "author": {
-          "id": "",
-          "displayName": "",
-          "uniqueName": "",
-          "url": "",
-          "imageUrl": ""
+        "_links": {
+          "self": {
+            "href": ""
+          },
+          "repository": {
+            "href": ""
+          }
         },
-        "content": "",
+        "status": "",
+        "comments": [
+          {
+            "id": "",
+            "_links": {
+              "self": {
+                "href": ""
+              },
+              "threads": {
+                "href": ""
+              },
+              "repository": {
+                "href": ""
+              },
+              "pullRequests": {
+                "href": ""
+              }
+            },
+            "author": {
+              "id": "",
+              "url": "",
+              "_links": {
+                "avatar": {
+                  "href": ""
+                }
+              },
+              "imageUrl": "",
+              "descriptor": "",
+              "uniqueName": "",
+              "displayName": ""
+            },
+            "content": "",
+            "commentType": "",
+            "publishedDate": "",
+            "lastUpdatedDate": "",
+            "parentCommentId": "",
+            "lastContentUpdatedDate": ""
+          }
+        ],
+        "isDeleted": "",
+        "identities": "",
+        "properties": "",
         "publishedDate": "",
+        "threadContext": "",
         "lastUpdatedDate": "",
-        "commentType": ""
+        "pullRequestThreadContext": ""
       },
       "parameters": [
         {
@@ -2663,21 +2794,69 @@
       "category": "investigation",
       "annotation": "list_pull_request_comment",
       "enabled": true,
-      "output_schema": [{
-        "id": "",
-        "parentCommentId": "",
-        "author": {
-          "id": "",
-          "displayName": "",
-          "uniqueName": "",
-          "url": "",
-          "imageUrl": ""
-        },
-        "content": "",
-        "publishedDate": "",
-        "lastUpdatedDate": "",
-        "commentType": ""
-      }],
+      "output_schema": {
+        "count": "",
+        "value": [
+          {
+            "id": "",
+            "_links": {
+              "self": {
+                "href": ""
+              },
+              "repository": {
+                "href": ""
+              }
+            },
+            "status": "",
+            "comments": [
+              {
+                "id": "",
+                "_links": {
+                  "self": {
+                    "href": ""
+                  },
+                  "threads": {
+                    "href": ""
+                  },
+                  "repository": {
+                    "href": ""
+                  },
+                  "pullRequests": {
+                    "href": ""
+                  }
+                },
+                "author": {
+                  "id": "",
+                  "url": "",
+                  "_links": {
+                    "avatar": {
+                      "href": ""
+                    }
+                  },
+                  "imageUrl": "",
+                  "descriptor": "",
+                  "uniqueName": "",
+                  "displayName": ""
+                },
+                "content": "",
+                "usersLiked": [],
+                "commentType": "",
+                "publishedDate": "",
+                "lastUpdatedDate": "",
+                "parentCommentId": "",
+                "lastContentUpdatedDate": ""
+              }
+            ],
+            "isDeleted": "",
+            "identities": "",
+            "properties": "",
+            "publishedDate": "",
+            "threadContext": "",
+            "lastUpdatedDate": "",
+            "pullRequestThreadContext": ""
+          }
+        ]
+      },
       "parameters": [
         {
           "title": "Repository ID",
@@ -2780,280 +2959,8 @@
           "required": false,
           "editable": true,
           "type": "text",
-          "tooltip": "Specify a comma separated list of user subject subtypes to reduce the retrieved results, e.g. msa’, ‘aad’, ‘svc’ (service identity), ‘imp’ (imported identity), etc.",
-          "description": "Specify a comma separated list of user subject subtypes to reduce the retrieved results, e.g. msa’, ‘aad’, ‘svc’ (service identity), ‘imp’ (imported identity), etc."
-        }
-      ]
-    },
-    {
-      "operation": "get_release",
-      "title": "Get Release Details",
-      "description": "Retrieve details of a specific release based on the input parameters you have specified.",
-      "category": "investigation",
-      "annotation": "get_release",
-      "enabled": true,
-      "output_schema": {
-        "id": "",
-        "name": "",
-        "status": "",
-        "createdOn": "",
-        "modifiedOn": "",
-        "modifiedBy": {
-          "id": "",
-          "displayName": "",
-          "uniqueName": "",
-          "url": "",
-          "imageUrl": ""
-        },
-        "createdBy": {
-          "id": "",
-          "displayName": "",
-          "uniqueName": "",
-          "url": "",
-          "imageUrl": ""
-        },
-        "environments": [
-          {
-            "id": "",
-            "releaseId": "",
-            "name": "",
-            "status": "",
-            "variables": {},
-            "preDeployApprovals": [],
-            "postDeployApprovals": [],
-            "preApprovalsSnapshot": {
-              "approvals": [
-                {
-                  "rank": "",
-                  "isAutomated": "",
-                  "isNotificationOn": "",
-                  "approver": {
-                    "id": "",
-                    "displayName": "",
-                    "uniqueName": "",
-                    "url": "",
-                    "imageUrl": ""
-                  },
-                  "id": ""
-                }
-              ],
-              "approvalOptions": {
-                "requiredApproverCount": "",
-                "releaseCreatorCanBeApprover": "",
-                "autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped": "",
-                "enforceIdentityRevalidation": "",
-                "timeoutInMintues": ""
-              }
-            },
-            "postApprovalsSnapshot": {
-              "approvals": [
-                {
-                  "rank": "",
-                  "isAutomated": "",
-                  "isNotificationOn": "",
-                  "id": ""
-                }
-              ]
-            },
-            "deploySteps": [],
-            "rank": "",
-            "definitionEnvironmentId": "",
-            "environmentOptions": {
-              "emailNotificationType": "",
-              "emailRecipients": "",
-              "skipArtifactsDownload": "",
-              "timeoutInMinutes": "",
-              "enableAccessToken": "",
-              "publishDeploymentStatus": ""
-            },
-            "demands": [],
-            "conditions": [],
-            "workflowTasks": [],
-            "deployPhasesSnapshot": [
-              {
-                "deploymentInput": {
-                  "parallelExecution": {
-                    "parallelExecutionType": ""
-                  },
-                  "skipArtifactsDownload": "",
-                  "timeoutInMinutes": "",
-                  "queueId": "",
-                  "demands": [],
-                  "enableAccessToken": ""
-                },
-                "rank": "",
-                "phaseType": "",
-                "name": "",
-                "workflowTasks": [
-                  {
-                    "taskId": "",
-                    "version": "",
-                    "name": "",
-                    "enabled": "",
-                    "alwaysRun": "",
-                    "continueOnError": "",
-                    "timeoutInMinutes": "",
-                    "definitionType": "",
-                    "inputs": {
-                      "scriptType": "",
-                      "scriptName": "",
-                      "arguments": "",
-                      "inlineScript": "",
-                      "workingFolder": "",
-                      "failOnStandardError": ""
-                    }
-                  }
-                ]
-              }
-            ],
-            "owner": {
-              "id": "",
-              "displayName": "",
-              "uniqueName": "",
-              "url": "",
-              "imageUrl": ""
-            },
-            "schedules": [],
-            "release": {
-              "id": "",
-              "name": "",
-              "url": "",
-              "_links": {
-                "web": {
-                  "href": ""
-                },
-                "self": {
-                  "href": ""
-                }
-              }
-            },
-            "releaseDefinition": {
-              "id": "",
-              "name": "",
-              "url": "",
-              "_links": {
-                "web": {
-                  "href": ""
-                },
-                "self": {
-                  "href": ""
-                }
-              }
-            },
-            "releaseCreatedBy": {
-              "id": "",
-              "displayName": ""
-            },
-            "triggerReason": ""
-          }
-        ],
-        "variables": {},
-        "variableGroups": [],
-        "artifacts": [
-          {
-            "sourceId": "",
-            "type": "",
-            "alias": "",
-            "definitionReference": {
-              "artifactSourceDefinitionUrl": {
-                "id": "",
-                "name": ""
-              },
-              "defaultVersionBranch": {
-                "id": "",
-                "name": ""
-              },
-              "defaultVersionSpecific": {
-                "id": "",
-                "name": ""
-              },
-              "defaultVersionTags": {
-                "id": "",
-                "name": ""
-              },
-              "defaultVersionType": {
-                "id": "",
-                "name": ""
-              },
-              "definition": {
-                "id": "",
-                "name": ""
-              },
-              "project": {
-                "id": "",
-                "name": ""
-              },
-              "version": {
-                "id": "",
-                "name": ""
-              },
-              "artifactSourceVersionUrl": {
-                "id": "",
-                "name": ""
-              },
-              "branch": {
-                "id": "",
-                "name": ""
-              }
-            },
-            "isPrimary": ""
-          }
-        ],
-        "releaseDefinition": {
-          "id": "",
-          "name": "",
-          "url": "",
-          "_links": {
-            "self": {
-              "href": ""
-            },
-            "web": {
-              "href": ""
-            }
-          }
-        },
-        "description": "",
-        "reason": "",
-        "releaseNameFormat": "",
-        "keepForever": "",
-        "definitionSnapshotRevision": "",
-        "logsContainerUrl": "",
-        "url": "",
-        "_links": {
-          "self": {
-            "href": ""
-          },
-          "web": {
-            "href": ""
-          }
-        },
-        "tags": [],
-        "projectReference": {
-          "id": "",
-          "name": ""
-        },
-        "properties": {}
-      },
-      "parameters": [
-        {
-          "title": "Project",
-          "name": "project",
-          "visible": true,
-          "required": true,
-          "editable": true,
-          "type": "text",
-          "tooltip": "Specify the name or ID of the project from which to retrieve the release details.",
-          "description": "Specify the name or ID of the project from which to retrieve the release details."
-        },
-        {
-          "title": "Release ID",
-          "name": "releaseId",
-          "visible": true,
-          "required": true,
-          "editable": true,
-          "type": "integer",
-          "tooltip": "Specify the ID of the release whose details is to be retrieved.",
-          "description": "Specify the ID of the release whose details is to be retrieved."
+          "tooltip": "Specify a comma separated list of user subject subtypes to reduce the retrieved results, e.g. \"msa\", \"aad\", \"svc\" (service identity), \"imp\" (imported identity), etc.",
+          "description": "Specify a comma separated list of user subject subtypes to reduce the retrieved results, e.g. \"msa\", \"aad\", \"svc\" (service identity), \"imp\" (imported identity), etc."
         }
       ]
     },
@@ -3065,23 +2972,30 @@
       "annotation": "get_file_from_repository",
       "enabled": true,
       "output_schema": {
-          "objectId": "",
-          "gitObjectType": "",
-          "commitId": "",
-          "path": "",
-          "content": "",
-          "url": "",
-          "_links": {
-              "self": {
-                  "href": ""
-              },
-              "repository": {
-                  "href": ""
-              },
-              "blob": {
-                  "href": ""
-              }
+        "url": "",
+        "path": "",
+        "_links": {
+          "blob": {
+            "href": ""
+          },
+          "self": {
+            "href": ""
+          },
+          "repository": {
+            "href": ""
           }
+        },
+        "content": "",
+        "commitId": "",
+        "objectId": "",
+        "gitObjectType": "",
+        "contentMetadata": {
+          "vsLink": "",
+          "encoding": "",
+          "fileName": "",
+          "extension": "",
+          "contentType": ""
+        }
       },
       "parameters": [
         {
@@ -3135,304 +3049,6 @@
           "name": "includeContentMetadata",
           "description": "Set to true to include content metadata. Default is false.",
           "tooltip": "Set to true to include content metadata. Default is false."
-        }
-      ]
-    },
-    {
-      "operation": "create_release",
-      "title": "Create Release",
-      "description": "Creates a new release based on the input parameters that you have specified.",
-      "category": "investigation",
-      "annotation": "create_release",
-      "enabled": true,
-      "output_schema": {
-        "id": "",
-        "name": "",
-        "status": "",
-        "createdOn": "",
-        "modifiedOn": "",
-        "modifiedBy": {
-          "id": "",
-          "displayName": "",
-          "uniqueName": "",
-          "url": "",
-          "imageUrl": ""
-        },
-        "createdBy": {
-          "id": "",
-          "displayName": "",
-          "uniqueName": "",
-          "url": "",
-          "imageUrl": ""
-        },
-        "environments": [
-          {
-            "id": "",
-            "releaseId": "",
-            "name": "",
-            "status": "",
-            "variables": {},
-            "preDeployApprovals": [],
-            "postDeployApprovals": [],
-            "preApprovalsSnapshot": {
-              "approvals": [
-                {
-                  "rank": "",
-                  "isAutomated": "",
-                  "isNotificationOn": "",
-                  "approver": {
-                    "id": "",
-                    "displayName": "",
-                    "uniqueName": "",
-                    "url": "",
-                    "imageUrl": ""
-                  },
-                  "id": ""
-                }
-              ],
-              "approvalOptions": {
-                "requiredApproverCount": "",
-                "releaseCreatorCanBeApprover": "",
-                "autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped": "",
-                "enforceIdentityRevalidation": "",
-                "timeoutInMintues": ""
-              }
-            },
-            "postApprovalsSnapshot": {
-              "approvals": [
-                {
-                  "rank": "",
-                  "isAutomated": "",
-                  "isNotificationOn": "",
-                  "id": ""
-                }
-              ]
-            },
-            "deploySteps": [],
-            "rank": "",
-            "definitionEnvironmentId": "",
-            "environmentOptions": {
-              "emailNotificationType": "",
-              "emailRecipients": "",
-              "skipArtifactsDownload": "",
-              "timeoutInMinutes": "",
-              "enableAccessToken": "",
-              "publishDeploymentStatus": ""
-            },
-            "demands": [],
-            "conditions": [],
-            "workflowTasks": [],
-            "deployPhasesSnapshot": [
-              {
-                "deploymentInput": {
-                  "parallelExecution": {
-                    "parallelExecutionType": ""
-                  },
-                  "skipArtifactsDownload": "",
-                  "timeoutInMinutes": "",
-                  "queueId": "",
-                  "demands": [],
-                  "enableAccessToken": ""
-                },
-                "rank": "",
-                "phaseType": "",
-                "name": "",
-                "workflowTasks": [
-                  {
-                    "taskId": "",
-                    "version": "",
-                    "name": "",
-                    "enabled": "",
-                    "alwaysRun": "",
-                    "continueOnError": "",
-                    "timeoutInMinutes": "",
-                    "definitionType": "",
-                    "inputs": {
-                      "scriptType": "",
-                      "scriptName": "",
-                      "arguments": "",
-                      "inlineScript": "",
-                      "workingFolder": "",
-                      "failOnStandardError": ""
-                    }
-                  }
-                ]
-              }
-            ],
-            "owner": {
-              "id": "",
-              "displayName": "",
-              "uniqueName": "",
-              "url": "",
-              "imageUrl": ""
-            },
-            "schedules": [],
-            "release": {
-              "id": "",
-              "name": "",
-              "url": "",
-              "_links": {
-                "web": {
-                  "href": ""
-                },
-                "self": {
-                  "href": ""
-                }
-              }
-            },
-            "releaseDefinition": {
-              "id": "",
-              "name": "",
-              "url": "",
-              "_links": {
-                "web": {
-                  "href": ""
-                },
-                "self": {
-                  "href": ""
-                }
-              }
-            },
-            "releaseCreatedBy": {
-              "id": "",
-              "displayName": ""
-            },
-            "triggerReason": ""
-          }
-        ],
-        "variables": {},
-        "variableGroups": [],
-        "artifacts": [
-          {
-            "sourceId": "",
-            "type": "",
-            "alias": "",
-            "definitionReference": {
-              "artifactSourceDefinitionUrl": {
-                "id": "",
-                "name": ""
-              },
-              "defaultVersionBranch": {
-                "id": "",
-                "name": ""
-              },
-              "defaultVersionSpecific": {
-                "id": "",
-                "name": ""
-              },
-              "defaultVersionTags": {
-                "id": "",
-                "name": ""
-              },
-              "defaultVersionType": {
-                "id": "",
-                "name": ""
-              },
-              "definition": {
-                "id": "",
-                "name": ""
-              },
-              "project": {
-                "id": "",
-                "name": ""
-              },
-              "version": {
-                "id": "",
-                "name": ""
-              },
-              "artifactSourceVersionUrl": {
-                "id": "",
-                "name": ""
-              }
-            },
-            "isPrimary": ""
-          }
-        ],
-        "releaseDefinition": {
-          "id": "",
-          "name": "",
-          "url": "",
-          "_links": {
-            "self": {
-              "href": ""
-            },
-            "web": {
-              "href": ""
-            }
-          }
-        },
-        "description": "",
-        "reason": "",
-        "releaseNameFormat": "",
-        "keepForever": "",
-        "definitionSnapshotRevision": "",
-        "logsContainerUrl": "",
-        "url": "",
-        "_links": {
-          "self": {
-            "href": ""
-          },
-          "web": {
-            "href": ""
-          }
-        },
-        "tags": [],
-        "projectReference": {
-          "id": "",
-          "name": ""
-        },
-        "properties": {}
-      },
-      "parameters": [
-        {
-          "title": "Project",
-          "name": "project",
-          "visible": true,
-          "required": true,
-          "editable": true,
-          "type": "text",
-          "tooltip": "Specify the name or ID of the project for which to create the release.",
-          "description": "Specify the name or ID of the project for which to create the release."
-        },
-        {
-          "title": "Definition ID",
-          "name": "definitionId",
-          "visible": true,
-          "required": true,
-          "editable": true,
-          "type": "integer",
-          "tooltip": "Specify the definition ID to create a release.",
-          "description": "Specify the definition ID to create a release."
-        },
-        {
-          "title": "Artifact Metadata",
-          "tooltip": "Specify list of artifact in the JSON format to create a release.",
-          "description": "Specify list of artifact in the JSON format to create a release.",
-          "required": true,
-          "editable": true,
-          "visible": true,
-          "type": "json",
-          "name": "artifacts"
-        },
-        {
-          "title": "Description",
-          "required": false,
-          "editable": true,
-          "visible": true,
-          "type": "text",
-          "name": "description",
-          "description": "Specify the description to create a release.",
-          "tooltip": "Specify the description to create a release."
-        },
-        {
-          "title": "Other Fields",
-          "tooltip": "Specify other fields in the JSON format.",
-          "description": "Specify other fields in the JSON format. For more information about other fields, see https://learn.microsoft.com/en-us/rest/api/azure/devops/release/releases/create?view=azure-devops-rest-7.1&tabs=HTTP.",
-          "required": false,
-          "editable": true,
-          "visible": true,
-          "type": "json",
-          "name": "other_fields"
         }
       ]
     },
@@ -3501,59 +3117,85 @@
       "annotation": "create_new_file_in_repository",
       "enabled": true,
       "output_schema": {
-        "commits": [
-          {
-            "treeId": "",
-            "commitId": "",
-            "author": {
-              "name": "",
-              "email": "",
-              "date": ""
-            },
-            "committer": {
-              "name": "",
-              "email": "",
-              "date": ""
-            },
-            "comment": "",
-            "parents": [],
-            "url": ""
-          }
-        ],
-        "refUpdates": [
-          {
-            "repositoryId": "",
-            "name": "",
-            "oldObjectId": "",
-            "newObjectId": ""
-          }
-        ],
-        "pushedBy": {
-          "id": "",
-          "displayName": "",
-          "uniqueName": "",
-          "url": "",
-          "imageUrl": ""
-        },
-        "pushId": "",
-        "date": "",
         "url": "",
+        "date": "",
         "_links": {
+          "refs": {
+            "href": ""
+          },
           "self": {
-            "href": ""
-          },
-          "repository": {
-            "href": ""
-          },
-          "commits": {
             "href": ""
           },
           "pusher": {
             "href": ""
           },
-          "refs": {
+          "commits": {
+            "href": ""
+          },
+          "repository": {
             "href": ""
           }
+        },
+        "pushId": "",
+        "commits": [
+          {
+            "url": "",
+            "author": {
+              "date": "",
+              "name": "",
+              "email": ""
+            },
+            "treeId": "",
+            "comment": "",
+            "parents": [],
+            "commitId": "",
+            "committer": {
+              "date": "",
+              "name": "",
+              "email": ""
+            }
+          }
+        ],
+        "pushedBy": {
+          "id": "",
+          "url": "",
+          "_links": {
+            "avatar": {
+              "href": ""
+            }
+          },
+          "imageUrl": "",
+          "descriptor": "",
+          "uniqueName": "",
+          "displayName": ""
+        },
+        "refUpdates": [
+          {
+            "name": "",
+            "newObjectId": "",
+            "oldObjectId": "",
+            "repositoryId": ""
+          }
+        ],
+        "repository": {
+          "id": "",
+          "url": "",
+          "name": "",
+          "size": "",
+          "sshUrl": "",
+          "webUrl": "",
+          "project": {
+            "id": "",
+            "url": "",
+            "name": "",
+            "state": "",
+            "revision": "",
+            "visibility": "",
+            "lastUpdateTime": ""
+          },
+          "remoteUrl": "",
+          "isDisabled": "",
+          "isInMaintenance": ""
         }
       },
       "parameters": [
@@ -3637,59 +3279,85 @@
       "annotation": "update_file_in_repository",
       "enabled": true,
       "output_schema": {
-        "commits": [
-          {
-            "treeId": "",
-            "commitId": "",
-            "author": {
-              "name": "",
-              "email": "",
-              "date": ""
-            },
-            "committer": {
-              "name": "",
-              "email": "",
-              "date": ""
-            },
-            "comment": "",
-            "parents": [],
-            "url": ""
-          }
-        ],
-        "refUpdates": [
-          {
-            "repositoryId": "",
-            "name": "",
-            "oldObjectId": "",
-            "newObjectId": ""
-          }
-        ],
-        "pushedBy": {
-          "id": "",
-          "displayName": "",
-          "uniqueName": "",
-          "url": "",
-          "imageUrl": ""
-        },
-        "pushId": "",
-        "date": "",
         "url": "",
+        "date": "",
         "_links": {
+          "refs": {
+            "href": ""
+          },
           "self": {
-            "href": ""
-          },
-          "repository": {
-            "href": ""
-          },
-          "commits": {
             "href": ""
           },
           "pusher": {
             "href": ""
           },
-          "refs": {
+          "commits": {
+            "href": ""
+          },
+          "repository": {
             "href": ""
           }
+        },
+        "pushId": "",
+        "commits": [
+          {
+            "url": "",
+            "author": {
+              "date": "",
+              "name": "",
+              "email": ""
+            },
+            "treeId": "",
+            "comment": "",
+            "parents": [],
+            "commitId": "",
+            "committer": {
+              "date": "",
+              "name": "",
+              "email": ""
+            }
+          }
+        ],
+        "pushedBy": {
+          "id": "",
+          "url": "",
+          "_links": {
+            "avatar": {
+              "href": ""
+            }
+          },
+          "imageUrl": "",
+          "descriptor": "",
+          "uniqueName": "",
+          "displayName": ""
+        },
+        "refUpdates": [
+          {
+            "name": "",
+            "newObjectId": "",
+            "oldObjectId": "",
+            "repositoryId": ""
+          }
+        ],
+        "repository": {
+          "id": "",
+          "url": "",
+          "name": "",
+          "size": "",
+          "sshUrl": "",
+          "webUrl": "",
+          "project": {
+            "id": "",
+            "url": "",
+            "name": "",
+            "state": "",
+            "revision": "",
+            "visibility": "",
+            "lastUpdateTime": ""
+          },
+          "remoteUrl": "",
+          "isDisabled": "",
+          "isInMaintenance": ""
         }
       },
       "parameters": [
@@ -3787,59 +3455,85 @@
       "annotation": "delete_existing_file_in_repository",
       "enabled": true,
       "output_schema": {
-        "commits": [
-          {
-            "treeId": "",
-            "commitId": "",
-            "author": {
-              "name": "",
-              "email": "",
-              "date": ""
-            },
-            "committer": {
-              "name": "",
-              "email": "",
-              "date": ""
-            },
-            "comment": "",
-            "parents": [],
-            "url": ""
-          }
-        ],
-        "refUpdates": [
-          {
-            "repositoryId": "",
-            "name": "",
-            "oldObjectId": "",
-            "newObjectId": ""
-          }
-        ],
-        "pushedBy": {
-          "id": "",
-          "displayName": "",
-          "uniqueName": "",
-          "url": "",
-          "imageUrl": ""
-        },
-        "pushId": "",
-        "date": "",
         "url": "",
+        "date": "",
         "_links": {
+          "refs": {
+            "href": ""
+          },
           "self": {
-            "href": ""
-          },
-          "repository": {
-            "href": ""
-          },
-          "commits": {
             "href": ""
           },
           "pusher": {
             "href": ""
           },
-          "refs": {
+          "commits": {
+            "href": ""
+          },
+          "repository": {
             "href": ""
           }
+        },
+        "pushId": "",
+        "commits": [
+          {
+            "url": "",
+            "author": {
+              "date": "",
+              "name": "",
+              "email": ""
+            },
+            "treeId": "",
+            "comment": "",
+            "parents": [],
+            "commitId": "",
+            "committer": {
+              "date": "",
+              "name": "",
+              "email": ""
+            }
+          }
+        ],
+        "pushedBy": {
+          "id": "",
+          "url": "",
+          "_links": {
+            "avatar": {
+              "href": ""
+            }
+          },
+          "imageUrl": "",
+          "descriptor": "",
+          "uniqueName": "",
+          "displayName": ""
+        },
+        "refUpdates": [
+          {
+            "name": "",
+            "newObjectId": "",
+            "oldObjectId": "",
+            "repositoryId": ""
+          }
+        ],
+        "repository": {
+          "id": "",
+          "url": "",
+          "name": "",
+          "size": "",
+          "sshUrl": "",
+          "webUrl": "",
+          "project": {
+            "id": "",
+            "url": "",
+            "name": "",
+            "state": "",
+            "revision": "",
+            "visibility": "",
+            "lastUpdateTime": ""
+          },
+          "remoteUrl": "",
+          "isDisabled": "",
+          "isInMaintenance": ""
         }
       },
       "parameters": [
@@ -3904,6 +3598,62 @@
           "tooltip": "Specify the commit message for deleting the file."
         }
       ]
+    },
+    {
+      "operation": "execute_an_api_request",
+      "title": "Execute an API Request",
+      "annotation": "execute_an_api_request",
+      "description": "Sends an API request to any Azure DevOps API endpoint based on specified HTTP method, endpoint, and other input parameters that you have specified, enabling flexible API interactions tailored to user needs. ",
+      "category": "investigation",
+      "visible": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "method",
+          "title": "HTTP Method",
+          "type": "select",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "description": "Select an HTTP action for the request. You can select from the following options:  \n\nDELETE \n\nGET \n\nPATCH \n\nPOST \n\nPUT ",
+          "options": [
+            "GET",
+            "POST",
+            "PUT",
+            "PATCH",
+            "DELETE"
+          ]
+        },
+        {
+          "title": "Endpoint",
+          "name": "endpoint",
+          "tooltip": "Specify the target API URL path for example: /_apis/projects",
+          "description": "Specify the target API URL path for the request. For example, if the website is https://example.com and URL path is https://example.com/_apis/projects, the endpoint would be /_apis/projects. ",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Query Parameters",
+          "name": "query_params",
+          "description": "(Optional) Specify any optional parameters to add to the URL and refine the request. ",
+          "type": "json",
+          "visible": true,
+          "editable": true,
+          "required": false
+        },
+        {
+          "name": "payload",
+          "title": "Request Payload",
+          "type": "json",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "description": "(Optional) Specify data, as JSON, to be sent as the request payload (typically for POST or PUT requests). "
+        }
+      ],
+      "output_schema": {}
     }
   ]
 }

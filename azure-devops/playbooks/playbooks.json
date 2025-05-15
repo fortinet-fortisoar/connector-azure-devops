@@ -1230,7 +1230,7 @@
           "name": "Create Repository",
           "tag": "#Azure DevOps",
           "recordTags": [
-            "Azure",
+            "Microsoft",
             "azure-devops"
           ],
           "isActive": false,
@@ -1307,7 +1307,7 @@
           "name": "Update Repository",
           "tag": "#Azure DevOps",
           "recordTags": [
-            "Azure",
+            "Microsoft",
             "azure-devops"
           ],
           "isActive": false,
@@ -1352,10 +1352,7 @@
               "arguments": {
                 "name": "Azure DevOps",
                 "config": "",
-                "params": {
-                  "isDisabled": false,
-                  "isInMaintenance": false
-                },
+                "params": [],
                 "version": "2.0.0",
                 "connector": "azure-devops",
                 "operation": "update_repository",
@@ -1387,7 +1384,7 @@
           "name": "Push Changes",
           "tag": "#Azure DevOps",
           "recordTags": [
-            "Azure",
+            "Microsoft",
             "azure-devops"
           ],
           "isActive": false,
@@ -1464,7 +1461,7 @@
           "name": "Create Branch",
           "tag": "#Azure DevOps",
           "recordTags": [
-            "Azure",
+            "Microsoft",
             "azure-devops"
           ],
           "isActive": false,
@@ -1541,7 +1538,7 @@
           "name": "Delete Branch",
           "tag": "#Azure DevOps",
           "recordTags": [
-            "Azure",
+            "Microsoft",
             "azure-devops"
           ],
           "isActive": false,
@@ -1618,7 +1615,7 @@
           "name": "Create Pull Request Comment",
           "tag": "#Azure DevOps",
           "recordTags": [
-            "Azure",
+            "Microsoft",
             "azure-devops"
           ],
           "isActive": false,
@@ -1695,7 +1692,7 @@
           "name": "Get Pull Request Comment List",
           "tag": "#Azure DevOps",
           "recordTags": [
-            "Azure",
+            "Microsoft",
             "azure-devops"
           ],
           "isActive": false,
@@ -1772,7 +1769,7 @@
           "name": "Get User List",
           "tag": "#Azure DevOps",
           "recordTags": [
-            "Azure",
+            "Microsoft",
             "azure-devops"
           ],
           "isActive": false,
@@ -1842,83 +1839,6 @@
         },
         {
           "@type": "Workflow",
-          "uuid": "7842b818-ae8c-4578-94c7-b7c524393782",
-          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
-          "triggerLimit": null,
-          "description": "Retrieve details of a specific release.",
-          "name": "Get Release Details",
-          "tag": "#Azure DevOps",
-          "recordTags": [
-            "Azure",
-            "azure-devops"
-          ],
-          "isActive": false,
-          "debug": false,
-          "singleRecordExecution": false,
-          "parameters": [],
-          "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/d33097b4-f941-4452-a08e-fe593c53e825",
-          "steps": [
-            {
-              "uuid": "d33097b4-f941-4452-a08e-fe593c53e825",
-              "@type": "WorkflowStep",
-              "name": "Start",
-              "description": null,
-              "status": null,
-              "arguments": {
-                "route": "702cfdd7-bdca-4490-94bb-bc894d7fcfed",
-                "title": "Azure DevOps: Get Release Details",
-                "resources": [
-                  "alerts"
-                ],
-                "inputVariables": [],
-                "step_variables": {
-                  "input": {
-                    "records": "{{vars.input.records[0]}}"
-                  }
-                },
-                "singleRecordExecution": false,
-                "noRecordExecution": true,
-                "executeButtonText": "Execute"
-              },
-              "left": "20",
-              "top": "20",
-              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
-            },
-            {
-              "uuid": "c65a31f6-6f67-4b0d-8e8b-e9c3a366231c",
-              "@type": "WorkflowStep",
-              "name": "Get Release Details",
-              "description": null,
-              "status": null,
-              "arguments": {
-                "name": "Azure DevOps",
-                "config": "",
-                "params": [],
-                "version": "2.0.0",
-                "connector": "azure-devops",
-                "operation": "get_release",
-                "operationTitle": "Get Release Details"
-              },
-              "left": "188",
-              "top": "120",
-              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
-            }
-          ],
-          "routes": [
-            {
-              "@type": "WorkflowRoute",
-              "uuid": "9ea70d9e-49c7-4788-b463-4d4c3c1e5b2d",
-              "label": null,
-              "isExecuted": false,
-              "name": "Start-> Get Release Details",
-              "sourceStep": "/api/3/workflow_steps/d33097b4-f941-4452-a08e-fe593c53e825",
-              "targetStep": "/api/3/workflow_steps/c65a31f6-6f67-4b0d-8e8b-e9c3a366231c"
-            }
-          ]
-        },
-        {
-          "@type": "Workflow",
           "uuid": "0649a3e5-14d4-4604-ba8b-42cfdedb3677",
           "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
           "triggerLimit": null,
@@ -1926,7 +1846,7 @@
           "name": "Get File",
           "tag": "#Azure DevOps",
           "recordTags": [
-            "Azure",
+            "Microsoft",
             "azure-devops"
           ],
           "isActive": false,
@@ -1999,83 +1919,6 @@
         },
         {
           "@type": "Workflow",
-          "uuid": "b30231df-fb2a-4b5e-8b1d-3cdc31ec4c93",
-          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
-          "triggerLimit": null,
-          "description": "Creates a new release based on the input parameters that you have specified.",
-          "name": "Create Release",
-          "tag": "#Azure DevOps",
-          "recordTags": [
-            "Azure",
-            "azure-devops"
-          ],
-          "isActive": false,
-          "debug": false,
-          "singleRecordExecution": false,
-          "parameters": [],
-          "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/2c6557b8-79e5-495c-809a-71583cefb107",
-          "steps": [
-            {
-              "uuid": "2c6557b8-79e5-495c-809a-71583cefb107",
-              "@type": "WorkflowStep",
-              "name": "Start",
-              "description": null,
-              "status": null,
-              "arguments": {
-                "route": "623db843-7dbb-4aec-bc0e-bbd159102b3a",
-                "title": "Azure DevOps: Create Release",
-                "resources": [
-                  "alerts"
-                ],
-                "inputVariables": [],
-                "step_variables": {
-                  "input": {
-                    "records": "{{vars.input.records[0]}}"
-                  }
-                },
-                "singleRecordExecution": false,
-                "noRecordExecution": true,
-                "executeButtonText": "Execute"
-              },
-              "left": "20",
-              "top": "20",
-              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
-            },
-            {
-              "uuid": "56c2427f-94dc-4a0c-8fdf-291169904bd2",
-              "@type": "WorkflowStep",
-              "name": "Create Release",
-              "description": null,
-              "status": null,
-              "arguments": {
-                "name": "Azure DevOps",
-                "config": "",
-                "params": [],
-                "version": "2.0.0",
-                "connector": "azure-devops",
-                "operation": "create_release",
-                "operationTitle": "Create Release"
-              },
-              "left": "188",
-              "top": "120",
-              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
-            }
-          ],
-          "routes": [
-            {
-              "@type": "WorkflowRoute",
-              "uuid": "919d9b43-2677-459c-8d20-7b0dfcaa9d35",
-              "label": null,
-              "isExecuted": false,
-              "name": "Start-> Create Release",
-              "sourceStep": "/api/3/workflow_steps/2c6557b8-79e5-495c-809a-71583cefb107",
-              "targetStep": "/api/3/workflow_steps/56c2427f-94dc-4a0c-8fdf-291169904bd2"
-            }
-          ]
-        },
-        {
-          "@type": "Workflow",
           "uuid": "3aa4ba90-1f4e-4ffc-b75e-fe62e5aa2e47",
           "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
           "triggerLimit": null,
@@ -2083,7 +1926,7 @@
           "name": "Create Merge Request",
           "tag": "#Azure DevOps",
           "recordTags": [
-            "Azure",
+            "Microsoft",
             "azure-devops"
           ],
           "isActive": false,
@@ -2160,7 +2003,7 @@
           "name": "Create File",
           "tag": "#Azure DevOps",
           "recordTags": [
-            "Azure",
+            "Microsoft",
             "azure-devops"
           ],
           "isActive": false,
@@ -2237,7 +2080,7 @@
           "name": "Update File",
           "tag": "#Azure DevOps",
           "recordTags": [
-            "Azure",
+            "Microsoft",
             "azure-devops"
           ],
           "isActive": false,
@@ -2314,7 +2157,7 @@
           "name": "Delete File",
           "tag": "#Azure DevOps",
           "recordTags": [
-            "Azure",
+            "Microsoft",
             "azure-devops"
           ],
           "isActive": false,
@@ -2379,6 +2222,83 @@
               "name": "Start-> Delete File",
               "sourceStep": "/api/3/workflow_steps/1ee19534-9c48-49e8-81a7-89e0c8bb0db5",
               "targetStep": "/api/3/workflow_steps/5336aab6-fd1a-4e2d-aa1a-433ed0ee7120"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "68c28b56-fe32-443e-921e-5a94f1e4da6b",
+          "collection": "/api/3/workflow_collections/4c95e9f3-3b01-4f98-b729-cb257317c472",
+          "triggerLimit": null,
+          "description": "Sends an API request to any Azure DevOps API endpoint based on specified HTTP method, endpoint, and other input parameters that you have specified, enabling flexible API interactions tailored to user needs. ",
+          "name": "Execute an API Request",
+          "tag": "#Azure DevOps",
+          "recordTags": [
+            "Microsoft",
+            "azure-devops"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/dc24e292-078d-43dd-9d21-9ea3d640a3b6",
+          "steps": [
+            {
+              "uuid": "dc24e292-078d-43dd-9d21-9ea3d640a3b6",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "2073af16-7a93-4c65-a4fc-9afb5da31bdf",
+                "title": "Azure DevOps: Execute an API Request",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "a3b0f4f6-f24b-4e9f-a3a0-7b1574bf14ae",
+              "@type": "WorkflowStep",
+              "name": "Execute an API Request",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Azure DevOps",
+                "config": "",
+                "params": [],
+                "version": "2.0.0",
+                "connector": "azure-devops",
+                "operation": "execute_an_api_request",
+                "operationTitle": "Execute an API Request"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "c749d215-0f33-4804-8a78-278257a63a13",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Execute an API Request",
+              "sourceStep": "/api/3/workflow_steps/dc24e292-078d-43dd-9d21-9ea3d640a3b6",
+              "targetStep": "/api/3/workflow_steps/a3b0f4f6-f24b-4e9f-a3a0-7b1574bf14ae"
             }
           ]
         }

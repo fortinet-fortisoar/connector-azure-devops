@@ -14,7 +14,6 @@
     - Get Pull Request Comment List
     - Push Changes
     - Create Merge Request
-    - Create Release
-    - Get Release Details
+    - Execute an API Request
 
-- Added a new configuration parameter `Username`.
+- Added a new configuration parameter `Principal Name`.

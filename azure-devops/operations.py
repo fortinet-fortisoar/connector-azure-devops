@@ -88,11 +88,19 @@ class AzureDevOps:
         raise ConnectorError(response.text)
 
 
+def is_principal_name_exists(user_list, config):
+    target_name = config.get('principalName')
+    return any(user.get('principalName') == target_name for user in user_list)
+
+
 def _check_health(config):
     try:
         if config.get('auth_type') == 'On behalf of User - Delegate Permission':
             check(config, config.get('connector_info'))
         list_projects(config, {"$top": 1})
+        user_list = list_users(config, {})['value']
+        if not is_principal_name_exists(user_list, config):
+            raise ConnectorError("Invalid Principal Name")
         return True
     except Exception as err:
         logger.exception(str(err))
@@ -361,8 +369,6 @@ def update_repository(config, params):
     repositoryId = params.pop('repositoryId', '')
     endpoint = "/_apis/git/repositories/{0}".format(repositoryId)
     payload = _build_payload(params)
-    if params.get('isDisabled'):
-        payload.update({"isDisabled": params.pop('isDisabled') == "True"})
     return client.make_request(endpoint, method='PATCH', data=json.dumps(payload))
 
 
@@ -544,12 +550,6 @@ def list_users(config, params):
     return client.make_request(endpoint, params=payload, is_url=True)
 
 
-def get_release(config, params):
-    client = AzureDevOps(config)
-    endpoint = 'https://vsrm.dev.azure.com/{0}/{1}/_apis/release/releases/{2}'.format(config.get('organization'), params.get('project'), params.get('releaseId'))
-    return client.make_request(endpoint, is_url=True)
-
-
 def get_file_from_repository(config, params):
     client = AzureDevOps(config)
     endpoint = '/_apis/git/repositories/{0}/items'.format(params.pop('repositoryId'))
@@ -574,24 +574,6 @@ def create_merge_request(config, params):
       "comment": params.pop('comment', '')
     }
     return client.make_request(endpoint, method='POST', data=json.dumps(payload))
-
-
-def create_release(config, params):
-    client = AzureDevOps(config)
-    project = params.pop('project', '')
-    definitionId = params.pop('definitionId', '')
-    endpoint = "https://vsrm.dev.azure.com/{0}/{1}/_apis/release/releases".format(config.get('organization'), project)
-    params = _build_payload(params)
-    payload = {
-      "definitionId": definitionId,
-      "artifacts": params.pop('artifacts'),
-      "reason": "none"
-    }
-    if params.get('description'):
-        payload['description'] = params.pop('description')
-    if params.get('other_fields'):
-        payload.update(params.pop('other_fields'))
-    return client.make_request(endpoint, method='POST', data=json.dumps(payload), is_url=True)
 
 
 def create_new_file_in_repository(config, params):
@@ -683,6 +665,19 @@ def delete_existing_file_in_repository(config, params):
     return client.make_request(endpoint, method='POST', data=json.dumps(payload))
 
 
+def execute_an_api_request(config, params):
+    try:
+        client = AzureDevOps(config)
+        endpoint = params.get("endpoint")
+        http_method = params.get("method")
+        query_params = params.get("query_params") or {}
+        payload = json.dumps(params.get("payload")) if params.get("payload") else None
+        return client.make_request(endpoint, method=http_method, data=payload, params=query_params)
+    except Exception as err:
+        logger.exception("{0}".format(str(err)))
+        raise ConnectorError("{0}".format(str(err)))
+
+
 operations = {
     'list_pipelines': list_pipelines,
     'list_pipeline_runs': list_pipeline_runs,
@@ -708,12 +703,11 @@ operations = {
     'create_pull_request_comment': create_pull_request_comment,
     'list_pull_request_comment': list_pull_request_comment,
     'list_users': list_users,
-    'get_release': get_release,
     'get_file_from_repository': get_file_from_repository,
     'create_merge_request': create_merge_request,
-    'create_release': create_release,
     'create_new_file_in_repository': create_new_file_in_repository,
     'update_file_in_repository': update_file_in_repository,
     'delete_existing_file_in_repository': delete_existing_file_in_repository,
+    'execute_an_api_request': execute_an_api_request,
     'check_health': _check_health
 }
