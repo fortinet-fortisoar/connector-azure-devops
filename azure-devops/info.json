@@ -9,7 +9,7 @@
   "category": "Source Code Management",
   "icon_small_name": "small.png",
   "icon_large_name": "large.png",
-  "help_online": "",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/2.0.0/azure-devops/1074/azure-devops-v2-0-0",
   "configuration": {
     "fields": [
       {
@@ -40,8 +40,8 @@
         "required": true,
         "editable": true,
         "visible": true,
-        "tooltip": "Specify the principal name used to access the Azure DevOps server to connect and perform the automated operations.",
-        "description": "Specify the principal name used to access the Azure DevOps server to connect and perform the automated operations."
+        "tooltip": "Specify the primary email address associated with the Azure DevOps account. ",
+        "description": "Specify the primary email address associated with the Azure DevOps account. "
       },
       {
         "title": "Auth Type",
@@ -55,8 +55,8 @@
         ],
         "name": "auth_type",
         "value": "Access Token",
-        "description": "Select the authentication method to access the security graph APIs. You can choose from the following options: Access Token, On behalf of User - Delegate Permission",
-        "tooltip": "Select the method using which you will get authentication tokens used to access the security graph APIs.",
+        "description": "Select the authentication method to access the Azure DevOps Services REST API. You can choose from the following options: Access Token, On behalf of User - Delegate Permission",
+        "tooltip": "Select the method using which you will get authentication tokens used to access the Azure DevOps Services REST API.",
         "onchange": {
           "On behalf of User - Delegate Permission": [
             {
@@ -81,7 +81,7 @@
             },
             {
               "title": "Client Secret",
-              "description": "Specify the Unique Client Secret of the Azure Active Directory application that is used to create an authentication token required to access the API. For information on how to get the secret key, see https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/exposed-apis-create-app-webapp.",
+              "description": "Specify the Unique Client Secret of the Azure Active Directory application that is used to create an authentication token required to access the API. For information on how to get the secret key, see Get started with Azure DevOps OAuth on Microsoft's Azure DevOps documentation. ",
               "required": true,
               "editable": true,
               "visible": true,
@@ -119,8 +119,8 @@
               "required": true,
               "editable": true,
               "visible": true,
-              "tooltip": "Access Token that is provided to you by a Azure DevOps administrator that you will use to access the Azure DevOps REST API.",
-              "description": "Access Token that is provided to you by a Azure DevOps administrator that you will use to access the Azure DevOps REST API. For information on generating access tokens, refer https://docs.Azure DevOps.com/ee/user/profile/personal_access_tokens.html."
+              "tooltip": "Access Token that is provided to you by an Azure DevOps administrator that you will use to access the Azure DevOps REST API.",
+              "description": "Access Token that is provided to you by an Azure DevOps administrator that you will use to access the Azure DevOps REST API. For information on generating access tokens, refer to Creating a PAT on Microsoft's Azure DevOps documentation. "
             }
           ]
         }
@@ -2202,7 +2202,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the ID of the project to create a repository within. ",
-          "description": "Specify the ID of the project to create a repository within. "
+          "description": "Specify the ID of the project within which to create the repository. "
         },
         {
           "title": "Repository Name",
@@ -2222,7 +2222,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the ID of the parent repository to create a fork of. ",
-          "description": "Specify the ID of the parent repository to create a fork of. "
+          "description": "(Optional) Specify the ID of the parent repository from which to create a fork. "
         },
         {
           "title": "Source Ref",
@@ -2232,7 +2232,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the source ref to create a fork syncing only the provided refs. e.g. refs/heads/main Note: This works only when a Parent Repository ID is specified",
-          "description": "Specify the source ref to create a fork syncing only the provided refs. e.g. refs/heads/main Note: This works only when a Parent Repository ID is specified"
+          "description": "(Optional) Specify the source ref to create a fork syncing only the provided refs. For example: refs/heads/main  \n\nNote: The value specified in this parameter takes effect only when a Parent Repository ID is specified. "
         }
       ]
     },
@@ -2274,7 +2274,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the ID of the repository to update.",
-          "description": "Specify the ID of the repository to update."
+          "description": "Specify the ID of the repository whose details are to be updated. "
         },
         {
           "title": "Repository Name",
@@ -2284,7 +2284,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the new name of the repository.",
-          "description": "Specify the new name of the repository."
+          "description": "(Optional) Specify a name to be updated as the new name of the repository. "
         },
         {
           "title": "Default Branch",
@@ -2294,7 +2294,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the new default branch of the repository.",
-          "description": "Specify the new default branch of the repository."
+          "description": "(Optional) Specify the branch name to be updated as the default branch for this repository. "
         },
         {
           "title": "Disable Repository",
@@ -2308,7 +2308,7 @@
             "False"
           ],
           "tooltip": "Specifies whether to disable the repository. You can select from the following options: True, False",
-          "description": "Specifies whether to disable the repository. You can select from the following options: True, False"
+          "description": "(Optional) Select whether to enable or disable the repository. You can select from the following options:  \n\nTrue \n\nFalse "
         }
       ]
     },
@@ -2440,7 +2440,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the previous commit ID of the branch in which to push the changes.",
-          "description": "Specify the previous commit ID of the branch in which to push the changes."
+          "description": "Specify the previous commit ID after which to push the changes. "
         },
         {
           "title": "Commit Message",
@@ -2561,7 +2561,7 @@
           "visible": true,
           "type": "text",
           "name": "project",
-          "description": "Specify the ID of the project to create a new branch within.",
+          "description": "Specify the ID of the project within which to create a new branch. ",
           "tooltip": "Specify the ID of the project to create a new branch within."
         },
         {
@@ -2571,7 +2571,7 @@
           "visible": true,
           "type": "text",
           "name": "repositoryId",
-          "description": "Specify the ID of the repository to create a new branch within.",
+          "description": "Specify the ID of the repository within which to create a new branch. ",
           "tooltip": "Specify the ID of the repository to create a new branch within."
         },
         {
@@ -2582,7 +2582,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the name of the branch to create.",
-          "description": "Specify the name of the branch to create."
+          "description": "Specify the name of the branch to be created. "
         },
         {
           "title": "Commit Message",
@@ -2602,7 +2602,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the reference previous commit SHA you want to use to create branch from.",
-          "description": "Specify the reference previous commit SHA you want to use to create branch from."
+          "description": "(Optional) Specify the previous commit SHA as reference from which to create the branch. "
         }
       ]
     },
@@ -2635,7 +2635,7 @@
           "visible": true,
           "type": "text",
           "name": "project",
-          "description": "Specify the ID or name of the project that contains the branch.",
+          "description": "Specify the ID or name of the project that contains the branch that is to be deleted. ",
           "tooltip": "Specify the ID or name of the project that contains the branch."
         },
         {
@@ -2645,7 +2645,7 @@
           "visible": true,
           "type": "text",
           "name": "repositoryId",
-          "description": "Specify the ID or name of the repository that contains the branch.",
+          "description": "Specify the ID or name of the repository that contains the branch that is to be deleted. ",
           "tooltip": "Specify the ID or name of the repository that contains the branch."
         },
         {
@@ -2666,7 +2666,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the previous commit SHA of the branch to delete.",
-          "description": "Specify the previous commit SHA of the branch to delete."
+          "description": "Specify the previous commit SHA of the branch to be deleted. "
         }
       ]
     },
@@ -2742,7 +2742,7 @@
           "visible": true,
           "type": "text",
           "name": "repositoryId",
-          "description": "Specify the ID of the repository to create a new PR comment within.",
+          "description": "Specify the ID of the repository within which to create a new pull request comment. ",
           "tooltip": "Specify the ID of the repository to create a new PR comment within."
         },
         {
@@ -2753,7 +2753,7 @@
           "editable": true,
           "type": "integer",
           "tooltip": "Specify the ID of the pull request to create a pull request comment.",
-          "description": "Specify the ID of the pull request to create a pull request comment."
+          "description": "Specify the ID of the pull request in which to create the comment. "
         },
         {
           "title": "Content",
@@ -2763,7 +2763,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the comment content.",
-          "description": "Specify the comment content."
+          "description": "Specify the content of the comment to add in the pull request. "
         },
         {
           "title": "Thread ID",
@@ -2772,7 +2772,7 @@
           "visible": true,
           "type": "integer",
           "name": "threadId",
-          "description": "Specify the ID of the thread that the desired comment is in.",
+          "description": "(Optional) Specify the ID of the thread in which to insert the comment. ",
           "tooltip": "Specify the ID of the thread that the desired comment is in."
         },
         {
@@ -2782,7 +2782,7 @@
           "visible": true,
           "type": "integer",
           "name": "parentCommentId",
-          "description": "Specify the ID of the parent comment. This is used for replies.",
+          "description": "(Optional) Specify the ID of the parent comment to send this comment as reply. ",
           "tooltip": "Specify the ID of the parent comment. This is used for replies."
         }
       ]
@@ -2865,7 +2865,7 @@
           "visible": true,
           "type": "text",
           "name": "repositoryId",
-          "description": "Specify the ID of the repository to retrieve PR comments.",
+          "description": "Specify the ID of the repository whose pull request (PR) comments are to be retrieved. ",
           "tooltip": "Specify the ID of the repository to retrieve PR comments."
         },
         {
@@ -2876,7 +2876,7 @@
           "editable": true,
           "type": "integer",
           "tooltip": "Specify the ID of the pull request to retrieve comments.",
-          "description": "Specify the ID of the pull request to retrieve comments."
+          "description": "Specify the ID of the pull request from which to retrieve comments. "
         },
         {
           "title": "Thread ID",
@@ -2885,7 +2885,7 @@
           "visible": true,
           "type": "integer",
           "name": "threadId",
-          "description": "Specify the ID of the thread to retrieve comments.",
+          "description": "(Optional) Specify the ID of the comment thread to retrieve comments. ",
           "tooltip": "Specify the ID of the thread to retrieve comments."
         }
       ]
@@ -2940,7 +2940,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify a non-default scope (collection, project) to search for users.",
-          "description": "Specify a non-default scope (collection, project) to search for users."
+          "description": "(Optional) Specify a non-default scope (collection, project) in which to search for users. "
         },
         {
           "title": "Continuation Token",
@@ -2950,7 +2950,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the continuation token from a previous request, to retrieve the next page of results.",
-          "description": "Specify the continuation token from a previous request to retrieve the next page of results."
+          "description": "(Optional) Specify the continuation token from a previous request to retrieve the next page of results."
         },
         {
           "title": "Subject Subtypes",
@@ -2960,7 +2960,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify a comma separated list of user subject subtypes to reduce the retrieved results, e.g. \"msa\", \"aad\", \"svc\" (service identity), \"imp\" (imported identity), etc.",
-          "description": "Specify a comma separated list of user subject subtypes to reduce the retrieved results, e.g. \"msa\", \"aad\", \"svc\" (service identity), \"imp\" (imported identity), etc."
+          "description": "(Optional) Specify a comma separated list of user subject subtypes to filter the retrieved results. For example: msa, aad, svc (service identity), imp (imported identity), etc. "
         }
       ]
     },
@@ -3005,7 +3005,7 @@
           "visible": true,
           "type": "text",
           "name": "repositoryId",
-          "description": "Specify the name or ID of the repository from which the file is to be retrieved.",
+          "description": "Specify the name or ID of the repository from to retrieve the file. ",
           "tooltip": "Specify the name or ID of the repository from which the file is to be retrieved."
         },
         {
@@ -3016,7 +3016,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the name of the branch from which the file is to be retrieved.",
-          "description": "Specify the name of the branch from which the file is to be retrieved."
+          "description": "Specify the name of the branch from to retrieve the file. "
         },
         {
           "title": "File Path",
@@ -3025,7 +3025,7 @@
           "visible": true,
           "type": "text",
           "name": "path",
-          "description": "Specify the path of the file to retrieve.",
+          "description": "Specify the path from to retrieve the file. ",
           "tooltip": "Specify the path of the file to retrieve."
         },
         {
@@ -3037,7 +3037,7 @@
           "type": "checkbox",
           "name": "includeContent",
           "tooltip": "Set to true to include file content. Default is false.",
-          "description": "Set to true to include file content. Default is false."
+          "description": "(Optional) Select to include file content. Default is false. "
         },
         {
           "title": "Include Content Metadata",
@@ -3047,7 +3047,7 @@
           "value": false,
           "type": "checkbox",
           "name": "includeContentMetadata",
-          "description": "Set to true to include content metadata. Default is false.",
+          "description": "(Optional) Select to include content metadata. Default is false. ",
           "tooltip": "Set to true to include content metadata. Default is false."
         }
       ]
@@ -3094,8 +3094,8 @@
           "required": true,
           "editable": true,
           "type": "text",
-          "tooltip": "Specify an enumeration of the parent commit IDs for the merge commit. e.g. <commit-sha>, <commit-sha>",
-          "description": "Specify an enumeration of the parent commit IDs for the merge commit. e.g. <commit-sha>, <commit-sha>"
+          "tooltip": "Specify a comma-separated list of the parent commit IDs for the merge commit. e.g. <commit-sha>, <commit-sha>",
+          "description": "Specify the parent commit IDs as a list of the branches being merged, to create the merge commit. For example: <commit-sha>, <commit-sha> "
         },
         {
           "title": "Comment",
@@ -3207,7 +3207,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the name or ID of the project within which the file is to be created.",
-          "description": "Specify the name or ID of the project within which the file is to be created."
+          "description": "Specify the name or ID of the project within which to create the file. "
         },
         {
           "title": "Repository",
@@ -3216,7 +3216,7 @@
           "visible": true,
           "type": "text",
           "name": "repo_name",
-          "description": "Specify the name or ID of the repository within which the file is to be created.",
+          "description": "Specify the name or ID of the repository within which to create the file. ",
           "tooltip": "Specify the name or ID of the repository within which the file is to be created."
         },
         {
@@ -3246,7 +3246,7 @@
           "visible": true,
           "type": "text",
           "name": "file_path",
-          "description": "Specify the full path of the file to create.",
+          "description": "Specify the full path in which to create the file. ",
           "tooltip": "Specify the full path of the file to create."
         },
         {
@@ -3408,7 +3408,7 @@
           "visible": true,
           "type": "text",
           "name": "file_path",
-          "description": "Specify the full path of the file to update.",
+          "description": "Specify the full path of the file to be updated. ",
           "tooltip": "Specify the full path of the file to update."
         },
         {
@@ -3429,7 +3429,7 @@
           "visible": true,
           "type": "select",
           "name": "operation",
-          "description": "Select the operation you want to perform. You can choose from the following options: Append, Overwrite.",
+          "description": "Select the operation you want to perform. You can select from the following options: Append, Overwrite.",
           "options": [
             "Append",
             "Overwrite"
@@ -3564,7 +3564,7 @@
           "visible": true,
           "type": "text",
           "name": "branch",
-          "description": "Specify the name of the branch in which to delete the file.",
+          "description": "Specify the name of the branch in which the file is to be deleted. ",
           "tooltip": "Specify the name of the branch in which to delete the file."
         },
         {
@@ -3575,7 +3575,7 @@
           "editable": true,
           "type": "text",
           "tooltip": "Specify the previous commit ID of the branch in which to delete the file.",
-          "description": "Specify the previous commit ID of the branch in which to delete the file."
+          "description": "Specify the previous commit ID of the branch in which the file is to be deleted. "
         },
         {
           "title": "File Path",
@@ -3584,7 +3584,7 @@
           "visible": true,
           "type": "text",
           "name": "file_path",
-          "description": "Specify the full path of the file to delete.",
+          "description": "Specify the full path of the file to be deleted. ",
           "tooltip": "Specify the full path of the file to delete."
         },
         {
@@ -3628,7 +3628,7 @@
           "title": "Endpoint",
           "name": "endpoint",
           "tooltip": "Specify the target API URL path for example: /_apis/projects",
-          "description": "Specify the target API URL path for the request. For example, if the website is https://example.com and URL path is https://example.com/_apis/projects, the endpoint would be /_apis/projects. ",
+          "description": "Specify the target API URL path for the request. For example, if the website is https://example.com and URL path is https://example.com/images/pic.jpg, the endpoint would be /images/pic.jpg. ",
           "type": "text",
           "visible": true,
           "editable": true,

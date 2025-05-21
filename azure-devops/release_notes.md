@@ -1,6 +1,7 @@
 #### What's Improved
 
-- Added following actions and its playbooks:
+Following enhancements have been made to the Azure DevOps connector in version 2.0.0: 
+- Added the following actions and playbooks:
     - Create Repository
     - Update Repository
     - Create Branch
